@@ -1,6 +1,5 @@
 class RecipeAdapter{
 
-
   constructor(baseAdapter){
       this.baseAdapter = baseAdapter
       this.baseURL = this.baseAdapter.baseURL
@@ -13,6 +12,27 @@ class RecipeAdapter{
   get headers(){
       return this.baseAdapter.headers
   }
+
+  // Create record
+  async createRecipe(params){
+    const { name, servings, recipe_ingredients_attributes, id} = params
+    const url = `${this.baseURL}/recipes`
+    const body = {
+        recipe: {
+            name, 
+            servings,
+            recipe_ingredients_attributes,
+        }
+    }
+    const res = await fetch(url, {
+        method: 'POST',
+        headers: this.headers,
+        body: JSON.stringify(body)
+    })
+    await this.baseAdapter.checkStatus(res)
+    return await res.json()
+  }
+
 
   // Update record
   async updateRecipe(params){
