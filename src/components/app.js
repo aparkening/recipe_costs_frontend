@@ -13,9 +13,9 @@ class App{
     // Screens
     this.router = new Router({
         'welcome': new WelcomePage(this.pageContainer, this.adapter),
-        'login': new LoginPage(this.pageContainer, this.adapter),
-        'signup': new SignupPage(this.pageContainer, this.adapter),
-        'profile': new ProfilePage(this.pageContainer, this.adapter)
+        'recipes': new RecipesPage(this.pageContainer, this.adapter),
+        'recipe': new RecipePage(this.pageContainer, this.adapter),
+        'ingredients': new IngredientsPage(this.pageContainer, this.adapter)
     })
 
     // Instantiate Navbar
