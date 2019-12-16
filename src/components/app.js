@@ -11,9 +11,7 @@ class App{
     this.container = document.querySelector('#container')
     this.navbarContainer = document.querySelector('#navbar-container')
     this.pageContainer = document.querySelector('#page-container')
-    this.alertsContainer = document.querySelector('#alerts-container')
-
-
+    this.alertsContainer = document.querySelector('#alert-container')
   }
 
   // Renderer
