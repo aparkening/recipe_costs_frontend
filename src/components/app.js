@@ -5,8 +5,6 @@ class App{
     this.adapter = new BaseAdapter()
     this.initBindingsandEventListeners()
 
-    this.renderPage(new PageTypeSpecificClass(this.pageContainer))
-
     // Instantiate Alert Manager
     this.alertManager = new Alert(this.alertContainer)
 
