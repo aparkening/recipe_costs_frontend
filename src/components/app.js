@@ -2,8 +2,32 @@ class App{
 
   // Initialize
   constructor(){
+    this.adapter = new baseAdapter()
     this.initBindingsandEventListeners()
+
     this.renderPage(new PageTypeSpecificClass(this.pageContainer))
+
+    // Instantiate Alert Manager
+    this.alertManager = new Alert(this.alertContainer)
+
+    // Screens
+    this.router = new Router({
+        'welcome': new WelcomePage(this.pageContainer, this.adapter),
+        'login': new LoginPage(this.pageContainer, this.adapter),
+        'signup': new SignupPage(this.pageContainer, this.adapter),
+        'profile': new ProfilePage(this.pageContainer, this.adapter)
+    })
+
+    // Instantiate Navbar
+    const navbar = new Navbar(this.navbarContainer, this.adapter)
+
+    // Assign Alert, Navbar, and Redirect
+    this.router.assignAlertHanlder(this.handleAlert.bind(this))
+    this.router.assignNavbar(navbar)
+    this.router.assignRedirect(this.pageManagerRedirect.bind(this))
+
+    // Render initial screen
+    this.renderPage('welcome')
   }
 
   // Bindings and Listeners
@@ -14,10 +38,19 @@ class App{
     this.alertsContainer = document.querySelector('#alert-container')
   }
 
-  // Renderer
-  renderPage(page){
-    page.render()
+  // Render Alerts
+  handleAlert(msg, type, timeout = 5000){
+    this.alertManager.render(msg, type, timeout)
+  }
 
+  // Redirect
+  pageManagerRedirect(page){
+      this.renderPage(page)
+  }
+
+  // Render Page
+  renderPage(page){
+      this.router.render(page)
   }
 
 }
