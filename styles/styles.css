@@ -1,0 +1,64 @@
+body {
+  padding-top: 5rem;
+}
+h1 {
+  margin-bottom: 1rem;  
+}
+
+/* Navbar */
+.navbar-brand {
+  margin-right: 0;
+}
+.navbar-brand img {
+  height: 1.5rem;
+  width: 1.5rem;
+}
+/* @include media-breakpoint-up(md) {
+  .navbar-brand {
+    padding-right: 1rem !important;
+    border-right: 1px solid #dee2e6 !important;
+    margin-right: 0.5rem;
+  }
+} */
+
+/* Sidebar  */
+.sidebar img {
+  height: 0.85rem;
+  width: 0.85rem;
+  vertical-align: middle;
+}
+.nav-link {
+  padding: 0.5rem 0rem;
+}
+
+/* Login styles */
+.form-signin .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="text"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 1rem;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+img.google-signin {
+  width: 200px;
+  display: block;
+  margin: 0.5rem 0 1rem;
+}
+
+/* Helper Links */
+.helper_links a {
+  color: #6c757d;
+}
