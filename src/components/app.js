@@ -2,7 +2,7 @@ class App{
 
   // Initialize
   constructor(){
-    this.adapter = new baseAdapter()
+    this.adapter = new BaseAdapter()
     this.initBindingsandEventListeners()
 
     this.renderPage(new PageTypeSpecificClass(this.pageContainer))
