@@ -22,7 +22,7 @@ class Navbar extends PageManager{
   get staticHTML(){
     return (`
       <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top" id="navbar-container">
-        <a class="navbar-brand" href="#" aria-label="Home" title="Home"><img src="images/open-iconic/svg/spreadsheet.svg" alt="Home"> Recipe Costs</a>
+        <a class="navbar-brand" href="#" aria-label="Home" title="Home" id="home-link"><img src="images/open-iconic/svg/spreadsheet.svg" alt="Home"> Recipe Costs</a>
       
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars" aria-controls="navbars" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
