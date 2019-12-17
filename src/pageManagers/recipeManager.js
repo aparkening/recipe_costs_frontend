@@ -8,19 +8,44 @@ class RecipePage extends PageManager{
 
   // Set links and actions
   initBindingsAndEventListeners(){
-    // this.recipesLink = this.container.querySelector('a#recipes')
-    // this.ingredientsLink = this.container.querySelector('a#ingredients')
+    this.alertLink = this.container.querySelector('a#alert')
+
+    this.alertLink.addEventListener('click', this.handleRecipesClick.bind(this))
+
 
     // this.recipesLink.addEventListener('click', this.handleRecipesClick.bind(this))
     // this.ingredientsLink.addEventListener('click', this.handleIngredientsClick.bind(this))
-    return null
+    // return null
   }
 
   // // Go to recipes screen
-  // handleRecipesClick(e){
-  //     e.preventDefault()
-  //     this.redirect('recipes')
+  handleRecipesClick(e){
+    e.preventDefault()
+
+    this.handleAlert({
+      type: "danger",
+      msg: "Recipe not found"
+    }) 
+    // this.handleAlert("404 Not Found", "Recipe not found") 
+  }
+
+  // async fetchAndRenderPageResources(){
+  //   try{
+  //       console.log("fetching recipe")
+  //       const recipeObj = await this.adapter.getRecipe()
+  //       console.log(recipeObj)
+  //       this.recipe = new Recipe(recipeObj)
+  //       console.log(this.recipe)
+  //       this.renderRecipe()
+  //   }catch(err){
+  //       // this.handleError(err)
+  //       console.log(err)
+  //   }
   // }
+
+  renderRecipe(){
+    this.container.innerHTML = this.recipe.showHTML
+  }
 
   // // Go to ingredients screen
   // handleIngredientsClick(e){
@@ -31,7 +56,9 @@ class RecipePage extends PageManager{
   // Render initial html
   get staticHTML(){
     return (`
-      <div>this is the recipes page
+      <div>
+        this is the recipes page
+        <p><a href="#" id="alert">alert</a></p>
       </div>
     `)
   }
