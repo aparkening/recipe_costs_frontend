@@ -13,52 +13,30 @@ h1 {
   height: 1.5rem;
   width: 1.5rem;
 }
-/* @include media-breakpoint-up(md) {
+@media (min-width: 768px) {
   .navbar-brand {
     padding-right: 1rem !important;
     border-right: 1px solid #dee2e6 !important;
     margin-right: 0.5rem;
   }
-} */
-
-/* Sidebar  */
-.sidebar img {
-  height: 0.85rem;
-  width: 0.85rem;
-  vertical-align: middle;
-}
-.nav-link {
-  padding: 0.5rem 0rem;
-}
-
-/* Login styles */
-.form-signin .form-control {
-  position: relative;
-  box-sizing: border-box;
-  height: auto;
-  padding: 10px;
-  font-size: 16px;
-}
-.form-signin .form-control:focus {
-  z-index: 2;
-}
-.form-signin input[type="text"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-.form-signin input[type="password"] {
-  margin-bottom: 1rem;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
-img.google-signin {
-  width: 200px;
-  display: block;
-  margin: 0.5rem 0 1rem;
 }
 
 /* Helper Links */
 .helper_links a {
   color: #6c757d;
+}
+
+/* Load spinner */
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
