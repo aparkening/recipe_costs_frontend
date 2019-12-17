@@ -11,10 +11,9 @@ class App{
     // Map routes with stringId: pageManager
     this.router = new Router({
         'welcome': new WelcomePage(this.pageContainer, this.adapter),
-        'recipes': new RecipePage(this.pageContainer, this.adapter)
-        // ,
+        'recipes': new RecipePage(this.pageContainer, this.adapter),
         // 'recipe': new RecipePage(this.pageContainer, this.adapter),
-        // 'ingredients': new IngredientsPage(this.pageContainer, this.adapter)
+        'ingredients': new IngredientPage(this.pageContainer, this.adapter)
     })
 
     // Instantiate Navbar
