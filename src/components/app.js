@@ -10,10 +10,11 @@ class App{
 
     // Screens
     this.router = new Router({
-        'welcome': new WelcomePage(this.pageContainer, this.adapter),
-        'recipes': new RecipesPage(this.pageContainer, this.adapter),
-        'recipe': new RecipePage(this.pageContainer, this.adapter),
-        'ingredients': new IngredientsPage(this.pageContainer, this.adapter)
+        'welcome': new WelcomePage(this.pageContainer, this.adapter)
+        // 'recipe': new RecipePage(this.pageContainer, this.adapter)
+        // ,
+        // 'recipe': new RecipePage(this.pageContainer, this.adapter),
+        // 'ingredients': new IngredientsPage(this.pageContainer, this.adapter)
     })
 
     // Instantiate Navbar
