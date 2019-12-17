@@ -17,6 +17,7 @@ class BaseAdapter{
   async checkStatus(res){
     if (res.status < 200 || res.status > 299){
       const msg = await res.json()
+      // Show rails error detail
       let errorMsg = msg.error.detail
       if(!errorMsg){ errorMsg = msg.error }
       throw {
