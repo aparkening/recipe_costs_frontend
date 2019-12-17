@@ -24,6 +24,7 @@ class BaseAdapter{
           msg: errorMsg
       }
     }
+    // console.log(res.status)
   }
 
 }
