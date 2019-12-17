@@ -9,13 +9,10 @@ class Ingredient{
       // this.recipes = recipes.map(r => new Recipe(r))
   }
 
-  get ingredientHTML(){
+  get showHTML(){
       return (`
-          <h2>Welcome ${this.name}! </h2>
-          <h3>Your dogs:</h3>
-          <ul>
-              ${this.dogs.map(d => d.liAndLinkHTML).join('')}
-          </ul>
+      <h2>${this.name}</h2>
+      <h4>${this.cost}</h4>
       `)
   }
 }
