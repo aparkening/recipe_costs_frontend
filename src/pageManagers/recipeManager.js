@@ -1,5 +1,11 @@
 class RecipePage extends PageManager{
 
+  constructor(container, adapter){
+    super(container)
+    this.adapter = new RecipeAdapter(adapter)
+    this.recipe = null
+  }
+
   // Set links and actions
   initBindingsAndEventListeners(){
     // this.recipesLink = this.container.querySelector('a#recipes')
@@ -7,6 +13,7 @@ class RecipePage extends PageManager{
 
     // this.recipesLink.addEventListener('click', this.handleRecipesClick.bind(this))
     // this.ingredientsLink.addEventListener('click', this.handleIngredientsClick.bind(this))
+    return null
   }
 
   // Go to recipes screen
