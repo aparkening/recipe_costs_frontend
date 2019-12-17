@@ -57,16 +57,14 @@ class RecipeAdapter{
 
   // Fetch all records
   async getRecipes(){
-
-      const res = await fetch(`${this.baseURL}/recipes`, {
-          headers: this.headers
-      })
-      await this.baseAdapter.checkStatus(res)
-      return await res.json()
-
+    const res = await fetch(`${this.baseURL}/recipes`, {
+        headers: this.headers
+    })
+    await this.baseAdapter.checkStatus(res)
+    return await res.json()
   }
 
-  // Fetch record
+  // Fetch single record
   async getRecipe(){
     const res = await fetch(`${this.baseURL}/recipes/31`, {
       headers: this.headers
@@ -74,7 +72,5 @@ class RecipeAdapter{
     await this.baseAdapter.checkStatus(res)
     return await res.json()
   }
-
-
 
 }
