@@ -2,9 +2,11 @@ class WelcomePage extends PageManager{
 
   // Set links and actions
   initBindingsAndEventListeners(){
+    // Define links
     this.recipesLink = this.container.querySelector('a#recipes')
     this.ingredientsLink = this.container.querySelector('a#ingredients')
 
+    // Listen for link clicks
     this.recipesLink.addEventListener('click', this.handleRecipesClick.bind(this))
     this.ingredientsLink.addEventListener('click', this.handleIngredientsClick.bind(this))
   }
