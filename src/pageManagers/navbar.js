@@ -37,6 +37,10 @@ class Navbar extends PageManager{
                 <a class="nav-link" id="ingredients-link" href="#">Ingredients</a>
               </li>       
           </ul>
+          <form class="form-inline my-2 my-lg-0" action="recipes" accept-charset="UTF-8" method="get">
+            <input type="text" name="search" id="search" placeholder="Find Recipes" class="form-control mr-sm-2">  
+            <input type="submit" value="Search" class="btn btn-secondary" data-disable-with="Search">
+          </form>
         </div>
     `)
   }
