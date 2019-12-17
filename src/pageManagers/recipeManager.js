@@ -16,17 +16,17 @@ class RecipePage extends PageManager{
     return null
   }
 
-  // Go to recipes screen
-  handleRecipesClick(e){
-      e.preventDefault()
-      this.redirect('recipes')
-  }
+  // // Go to recipes screen
+  // handleRecipesClick(e){
+  //     e.preventDefault()
+  //     this.redirect('recipes')
+  // }
 
-  // Go to ingredients screen
-  handleIngredientsClick(e){
-      e.preventDefault()
-      this.redirect('ingredients')
-  }
+  // // Go to ingredients screen
+  // handleIngredientsClick(e){
+  //     e.preventDefault()
+  //     this.redirect('ingredients')
+  // }
 
   // Render initial html
   get staticHTML(){
