@@ -21,7 +21,7 @@ class App{
     const navbar = new Navbar(this.navbarContainer, this.adapter)
 
     // Assign Alert, Navbar
-    this.router.assignAlertHanlder(this.handleAlert.bind(this))
+    this.router.assignAlertHandler(this.handleAlert.bind(this))
     this.router.assignNavbar(navbar)
 
     // Define redirect passed to pageManager
