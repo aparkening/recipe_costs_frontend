@@ -13,6 +13,7 @@ class Router{
   // Render page via the pageManager's render method
   render(page){
       this.routes[page].render()
+      // Render nav with each page if it exists
       if(this.navbar){ this.navbar.render() }
       this.currentPage = page
   }
