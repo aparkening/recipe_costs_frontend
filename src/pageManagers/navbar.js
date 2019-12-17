@@ -1,15 +1,15 @@
 class Navbar extends PageManager{
 
   constructor(container, adapter){
-      super(container)
-      this.adapter = adapter
+    super(container)
+    this.adapter = adapter
   }
 
   initBindingsAndEventListeners(){
-      this.container.addEventListener('click', this.handleClick.bind(this))
+    this.container.addEventListener('click', this.handleClick.bind(this))
   }
 
-  // Take action when clicking A tag
+  // Take action on any A tag
   handleClick(e){
     if(e.target.tagName === "A"){
       e.preventDefault()
