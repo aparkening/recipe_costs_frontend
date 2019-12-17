@@ -3,7 +3,7 @@ class RecipePage extends PageManager{
   constructor(container, adapter){
     super(container)
     this.adapter = new RecipeAdapter(adapter)
-    this.recipe = null
+    // this.recipe = null
   }
 
   // Set links and actions
