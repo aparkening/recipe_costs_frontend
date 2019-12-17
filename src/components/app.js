@@ -20,7 +20,7 @@ class App{
     const navbar = new Navbar(this.navbarContainer, this.adapter)
     this.router.assignNavbar(navbar)
 
-    // Assign Alert, Navbar
+    // Assign Alert
     this.router.assignAlertHandler(this.handleAlert.bind(this))
 
     // Define redirect passed to pageManager
@@ -35,12 +35,12 @@ class App{
     this.container = document.querySelector('#container')
     this.navbarContainer = document.querySelector('#navbar-container')
     this.pageContainer = document.querySelector('#page-container')
-    this.alertsContainer = document.querySelector('#alert-container')
+    this.alertContainer = document.querySelector('#alert-container')
   }
 
-  // Render Alerts
-  handleAlert(msg, type, timeout = 5000){
-    this.alertManager.render(msg, type, timeout)
+  // Render Alerts and set timeout for 5 secondes
+  handleAlert(alertObj, timeout = 5000){
+    this.alertManager.render(alertObj, timeout)
   }
 
   // Redirect based on router callback
