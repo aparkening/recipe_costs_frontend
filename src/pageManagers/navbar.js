@@ -22,7 +22,9 @@ class Navbar extends PageManager{
   get staticHTML(){
     return (`
       <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top" id="navbar-container">
-        <a class="navbar-brand" href="#" aria-label="Home" title="Home" id="home-link"><img src="images/open-iconic/svg/spreadsheet.svg" alt="Home"> Recipe Costs</a>
+        <a class="navbar-brand" href="#" aria-label="Home" title="Home" id="welcome-link">
+          <img src="images/open-iconic/svg/spreadsheet.svg" alt="Home"> Recipe Costs
+        </a>
       
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars" aria-controls="navbars" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -30,12 +32,12 @@ class Navbar extends PageManager{
     
         <div class="collapse navbar-collapse" id="navbars">
           <ul class="navbar-nav mr-auto">  
-              <li class="nav-item">
-                  <a class="nav-link" id="recipes-link" href="#">Recipes</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" id="ingredients-link" href="#">Ingredients</a>
-              </li>       
+            <li class="nav-item">
+              <a class="nav-link" id="recipes-link" href="#">Recipes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="ingredients-link" href="#">Ingredients</a>
+            </li>       
           </ul>
           <form class="form-inline my-2 my-lg-0" action="recipes" accept-charset="UTF-8" method="get">
             <input type="text" name="search" id="search" placeholder="Find Recipes" class="form-control mr-sm-2">  
