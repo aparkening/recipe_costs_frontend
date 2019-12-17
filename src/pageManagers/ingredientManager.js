@@ -36,11 +36,11 @@ class IngredientPage extends PageManager{
 
         // this.ingredients = ingredientObj.map(ing => new Ingredient(ing))
         // console.log(this.recipe)
-        console.log(ingredientObj.ingredients)
+        // console.log(ingredientObj.ingredients)
         
-        // const newIngredients = ingredientObj.ingredients.forEach(ing => new Ingredient(ing))
+        const newIngredients = ingredientObj.ingredients.map(ing => new Ingredient(ing))
 
-        // console.log(ingredients)
+        console.log(newIngredients)
 
         // this.renderIngredients()
     }catch(err){
