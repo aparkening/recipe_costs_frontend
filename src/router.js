@@ -1,35 +1,42 @@
 class Router{
 
-  // Set dynamic routes
+  // Set dynamic routes as stringId: pageManager
   constructor(kvpairs){
       this.routes = kvpairs
   }
 
+  // Set main page
   set rootPage(rootPageKey){
       this.rootPage = this.routes[rootPageKey]
   }
 
+  // Render page via the pageManager's render method
   render(page){
       this.routes[page].render()
       if(this.navbar){ this.navbar.render() }
       this.currentPage = page
   }
   
+  // Set callbacks for use in redirects, alerts, etc.
+  assignCallback(callback, name){
+    // For each key in route's kvpair, set callback
+    for(let route in this.routes){
+        this.routes[route][name] = callback
+    }
+    if(this.navbar){ this.navbar.redirect = callback }
+  }
+
+  // Define redirects via assignCallback()
   assignRedirect(callback){
       this.assignCallback(callback, 'redirect')
   }
 
-  assignAlertHanlder(callback){
+  // Define alerts via assignCallback()
+  assignAlertHandler(callback){
       this.assignCallback(callback, 'handleAlert')
   }
 
-  assignCallback(callback, name){
-      for(let route in this.routes){
-          this.routes[route][name] = callback
-      }
-      if(this.navbar){ this.navbar.redirect = callback }
-  }
-
+  // Define navbar for each page
   assignNavbar(navbar){
       this.navbar = navbar
       this.navbar.currentPage = () => {
