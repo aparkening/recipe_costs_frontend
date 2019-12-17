@@ -40,6 +40,7 @@ class Router{
   // Define navbar for each page
   assignNavbar(navbar){
       this.navbar = navbar
+      // Track currentPage for navbar manager
       this.navbar.currentPage = () => {
           return this.currentPage
       }
