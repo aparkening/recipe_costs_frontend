@@ -16,12 +16,12 @@ class App{
         'ingredients': new IngredientPage(this.pageContainer, this.adapter)
     })
 
-    // Instantiate Navbar
+    // Instantiate and assign Navbar
     const navbar = new Navbar(this.navbarContainer, this.adapter)
+    this.router.assignNavbar(navbar)
 
     // Assign Alert, Navbar
     this.router.assignAlertHandler(this.handleAlert.bind(this))
-    this.router.assignNavbar(navbar)
 
     // Define redirect passed to pageManager
     this.router.assignRedirect(this.pageManagerRedirect.bind(this))
