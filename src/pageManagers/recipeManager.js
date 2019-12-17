@@ -29,19 +29,31 @@ class RecipePage extends PageManager{
     // this.handleAlert("404 Not Found", "Recipe not found") 
   }
 
-  // async fetchAndRenderPageResources(){
-  //   try{
-  //       console.log("fetching recipe")
-  //       const recipeObj = await this.adapter.getRecipe()
-  //       console.log(recipeObj)
-  //       this.recipe = new Recipe(recipeObj)
-  //       console.log(this.recipe)
-  //       this.renderRecipe()
-  //   }catch(err){
-  //       // this.handleError(err)
-  //       console.log(err)
-  //   }
-  // }
+  async fetchAndRenderPageResources(){
+    try{
+
+
+      // Single recipe
+        // console.log("fetching recipe")
+        const recipeObj = await this.adapter.getRecipe()
+        // console.log(recipeObj)
+        this.recipe = new Recipe(recipeObj)
+        // console.log(this.recipe)
+        this.renderRecipe()
+
+
+    }catch(err){
+        // this.handleError(err)
+        console.log(err)
+    }
+  }
+
+  // Render add recipe button
+  renderAddRecipe(){
+    return (`
+      <div class="mt-3 mb-3"><a class="btn btn-primary" href="#" role="button" id="new-button">Add new recipe</a></div>
+    `)
+  }
 
   renderRecipe(){
     this.container.innerHTML = this.recipe.showHTML
