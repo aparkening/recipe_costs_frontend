@@ -8,7 +8,7 @@ class App{
     // Instantiate Alert Manager
     this.alertManager = new Alert(this.alertContainer)
 
-    // Screens
+    // Map routes with stringId: pageManager
     this.router = new Router({
         'welcome': new WelcomePage(this.pageContainer, this.adapter)
         // 'recipe': new RecipePage(this.pageContainer, this.adapter)
@@ -20,9 +20,11 @@ class App{
     // Instantiate Navbar
     const navbar = new Navbar(this.navbarContainer, this.adapter)
 
-    // Assign Alert, Navbar, and Redirect
+    // Assign Alert, Navbar
     this.router.assignAlertHanlder(this.handleAlert.bind(this))
     this.router.assignNavbar(navbar)
+
+    // Define redirect passed to pageManager
     this.router.assignRedirect(this.pageManagerRedirect.bind(this))
 
     // Render initial screen
@@ -42,12 +44,12 @@ class App{
     this.alertManager.render(msg, type, timeout)
   }
 
-  // Redirect
+  // Redirect based on router callback
   pageManagerRedirect(page){
       this.renderPage(page)
   }
 
-  // Render Page
+  // Render page via router
   renderPage(page){
       this.router.render(page)
   }
