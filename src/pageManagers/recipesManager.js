@@ -30,7 +30,7 @@ class RecipesPage extends PageManager{
     // Bind and listen after form load
     recipeFormBindingsAndEventListeners(){
       const form = this.container.querySelector('form')
-      // form.addEventListener('submit', this.handleUpdateRecipe.bind(this))
+      form.addEventListener('submit', this.handleUpdateSubmit.bind(this))
     }
 
 
@@ -41,7 +41,9 @@ class RecipesPage extends PageManager{
 
       // Get recipe id and recipe object
       const recipeId = e.target.dataset.id
-      this.recipe = this.recipes.find(r => r.id == recipeId)
+      // this.recipe = this.recipes.find(r => r.id == recipeId)
+      this.recipe = this.getRecipeById(recipeId)
+      
 
       // console.log(recipeId)
       // console.log(this.recipe)
@@ -54,6 +56,7 @@ class RecipesPage extends PageManager{
           break;
         case 'edit':
           console.log('edit clicked!');
+          this.handleRecipeUpdate(recipeId)
           break;
         case 'delete':
           // console.log('delete clicked!')
@@ -73,29 +76,11 @@ class RecipesPage extends PageManager{
     handleRecipeEditClick(e){
       e.preventDefault()
 
-      // Get recipe id and recipe object
-      const recipeId = e.target.parentNode.dataset.id
-      // console.log(recipeId)
-      const foundRecipe = this.recipes.find(r => r.id == recipeId)
-      // console.log(this.recipe.id)
-
-      // console.log(recipeId)
-      // console.log(this.recipe)
-
       console.log('edit clicked!');
 
-      // if id matches this.recipe.id, display edit form
-      if(foundRecipe && foundRecipe.id === this.recipe.id){
-        console.log("They match!")
-          this.container.innerHTML = Recipe.recipeForm(this.recipe)
-          this.recipeFormBindingsAndEventListeners()
-      }else{
-          // else throw error
-          this.handleError({
-              type: "404 Not Found",
-              msg: "Recipe was not found"
-          })
-      }
+      // Get recipe id and recipe object
+      const recipeId = e.target.parentNode.dataset.id
+      this.handleRecipeUpdate(recipeId)
 
     }
 
@@ -119,6 +104,42 @@ class RecipesPage extends PageManager{
       // else throw error
     }
 
+    handleRecipeUpdate(recipeId){
+      // console.log(recipeId)
+
+      // Place in try catch?
+      // const foundRecipe = this.recipes.find(r => r.id == recipeId)
+      // const foundRecipe = this.getRecipeById(recipeId)
+      
+      // Set this.recipe to edit
+
+      // console.log(this.recipe.id)
+
+      // console.log(recipeId)
+      // console.log(this.recipe)
+
+   
+      // if id matches this.recipe.id, display edit form
+      // if(foundRecipe && foundRecipe.id === this.recipe.id){
+
+      // Find existing recipe by id
+      const foundRecipe = this.getRecipeById(recipeId)
+
+      // If recipe from id exists, render form and call new bindings and event listeners
+      if (foundRecipe) {
+        console.log("Real recipe!")
+        console.log(foundRecipe)
+        this.recipe = foundRecipe
+        this.container.innerHTML = Recipe.recipeForm(foundRecipe)
+        this.recipeFormBindingsAndEventListeners()
+      }else{
+        // else throw error
+        this.handleError({
+            type: "404 Not Found",
+            msg: "Recipe was not found"
+        })
+      }
+    }
 
     // // Go to edit recipe screen
     // handleEditClick(e){
@@ -126,8 +147,78 @@ class RecipesPage extends PageManager{
     //   this.redirect('edit-recipe')
     // }
 
+    // Handle form submit
+    async handleUpdateSubmit(e){
+      e.preventDefault()
+
+// console.log(e.target.querySelectorAll('input'))
+
+      // Set recipe variables for params
+      // const [id, name, servings, recipe_ingredients_attributes] = Array.from(e.target.querySelectorAll('input')).map(i => i.value)
+
+      const id = e.target.querySelector('input[name="recipe-id"]').value
+      const name = e.target.querySelector('input[name="name"]').value
+      const servings = e.target.querySelector('input[name="servings"]').value
+
+      console.log(id)
+      console.log(name)
+      console.log(servings)
+      
+      
+
+      // Set object for this
+      // const recipe_ingredients_attributes = Array.from(e.target.querySelectorAll('form-ingredient')).map(i => i.value)
+
+      // query select for tag
+      // query select all for rest
+
+      const formIngredients = Array.from(e.target.querySelectorAll('form-ingredient'))
+
+      // const recipe_ingredients_attributes = Array.from(e.target.querySelectorAll('form-ingredient')).map(i => i.value)
+      console.log(formIngredients)
 
 
+// grab selectors with options
+
+
+
+      // Set ingredient params
+      // const notes = e.target.querySelector('textarea').value
+
+      // // Set params
+      const params = { name, servings, id }
+      
+      // Establish recipe object and set old data
+      const recipe = this.getRecipeById(id)
+      // const oldRecipe = new Recipe({id, name, servings, totalCost, costPerServing, ingredients})
+      
+      const oldRecipe = new Recipe({id, name, servings, recipe_ingredients_attributes})
+
+      // Set params and optimistically render
+      this.recipe.name = name
+      recipe.servings = servings
+      // recipe.totalCost = totalCost
+      // recipe.costPerServing = costPerServing
+      recipe.ingredients = recipe_ingredients_attributes
+
+      this.renderRecipe()
+
+      // // If recipe doesn't update, reset this.recipe to old 
+      // try{
+      //     const {name, servings, recipe_ingredients_attributes, id} = await this.adapter.updateRecipe(params)
+      // }catch(err){
+      //     this.recipe.name = oldRecipe.name
+      //     this.recipe.servings = oldRecipe.servings
+      //     this.recipe.totalCost = oldRecipe.totalCost
+      //     this.recipe.costPerServing = oldRecipe.costPerServing
+      //     this.recipe.ingredients = oldRecipe.ingredients
+      //     this.renderDog(dog)
+      
+      // re-render old info
+      //     this.handleError(err)
+      // }
+      
+  }
 
 
   // Fetch recipes and render page
@@ -210,4 +301,12 @@ class RecipesPage extends PageManager{
         </div>
       `)
     }
+
+
+  /* ---- Helpers ---- */
+    // Grab recipe object from id
+    getRecipeById(id){
+      return this.recipes.find(r => r.id == id)
+    }
+
 }
