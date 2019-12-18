@@ -7,12 +7,21 @@ class RecipesPage extends PageManager{
 
   // Set links and actions
   initBindingsAndEventListeners(){
+    return null
+  }
+
+  // Bind and listen after recipes loaded
+  recipesBindingsAndEventListeners(){
     // this.editLink = this.container.querySelector('a#edit')
     // this.deleteLink = this.container.querySelector('a#delete')
 
     // this.editLink.addEventListener('click', this.handleEditClick.bind(this))
     // this.deleteLink.addEventListener('click', this.handleDeleteClick.bind(this))
+
+    const recipetable = this.container.querySelector('table')
+    recipetable.addEventListener('click', this.handleEditClick.bind(this))
   }
+
 
   // Go to edit recipe screen
   handleEditClick(e){
