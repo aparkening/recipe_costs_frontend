@@ -43,13 +43,13 @@ class RecipeAdapter{
     }
   */
   async updateRecipe(params){
-      const { name, servings, recipe_ingredients_attributes, id} = params
+      const { name, servings, recipeIngredientsAttributes, id} = params
       const url = `${this.baseURL}/recipes/${id}`
       const body = {
           recipe: {
               name, 
               servings,
-              recipe_ingredients_attributes
+              recipe_ingredients_attributes: recipeIngredientsAttributes
           }
       }
       const res = await fetch(url, {
