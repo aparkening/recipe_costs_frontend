@@ -26,9 +26,9 @@ class RecipesPage extends PageManager{
     this.redirect('edit-recipe')
   }
 
+  // Fetch recipes and render page
   async fetchAndRenderPageResources(){
     try{
-      // All recipes
       const recipeObj = await this.adapter.getRecipes()
       // console.log(recipeObj.recipes)
 
@@ -37,15 +37,16 @@ class RecipesPage extends PageManager{
       
       this.renderRecipes()
     }catch(err){
-        // this.handleError(err)
-        console.log(err)
+      this.handleError(err)
+      // console.log(err)
     }
   }
 
+  // Render multiple recipes
   renderRecipes(){
     const title = "<h1>Recipes</h1>"
 
-    const addButton = `<div class="mt-3 mb-3"><a class="btn btn-primary" href="#" role="button" id="new-button">Add new recipe</a></div>`
+    const addButton = `<div class="mt-3 mb-3"><a class="btn btn-primary" href="#" role="button" id="new-resource">Add new recipe</a></div>`
 
     const tableTop = `
     <table class="table table-striped">
@@ -58,23 +59,14 @@ class RecipesPage extends PageManager{
     </thead>
     <tbody>`
 
-    let tableBottom = `
+    const tableBottom = `
       </tbody>
     </table>
     `
-    let recipeTrString = this.recipes.map(recipe => recipe.renderTr).join('')
+    let recipeRows = this.recipes.map(recipe => recipe.renderTr).join('')
 
-    this.container.innerHTML = title + addButton + tableTop + recipeTrString + tableBottom
-  }
-
-
-  // Render add recipe button
-  // renderAddRecipe(){
-  //   `<div class="mt-3 mb-3"><a class="btn btn-primary" href="#" role="button" id="new-button">Add new recipe</a></div>`
-  // }
-
-  renderRecipe(){
-    this.container.innerHTML = this.recipe.showHTML
+    // Stitch together title, button, table, rows
+    this.container.innerHTML = title + addButton + tableTop + recipeRows + tableBottom
   }
 
   // // Go to ingredients screen
@@ -83,10 +75,10 @@ class RecipesPage extends PageManager{
   //     this.redirect('ingredients')
   // }
 
-  // Render initial html
+  // Render initial html. Use "loader" to display loading spinner.
   get staticHTML(){
     return (`
-      <div>
+      <div class="loader">
         <p>Default Recipes page</p>
         <p><a href="#" id="edit">Edit</a> | <a href="#" id="delete">Delete</a></p>
       </div>
