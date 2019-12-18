@@ -90,7 +90,7 @@ class Recipe{
   }
 
   // Show new and edit recipe form (class method)
-  static recipeForm(recipe){
+  static recipeForm(recipe = null){
     return (`
     <h1>${recipe ? 'Edit' : 'New'} Recipe</h1>
     <form id="${recipe ? 'edit' : 'new'}-recipe-form">
