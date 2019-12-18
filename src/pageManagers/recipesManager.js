@@ -63,7 +63,7 @@ class RecipesPage extends PageManager{
       </tbody>
     </table>
     `
-    let recipeRows = this.recipes.map(recipe => recipe.renderTr).join('')
+    let recipeRows = this.recipes.map(recipe => recipe.showRecipeTr).join('')
 
     // Stitch together title, button, table, rows
     this.container.innerHTML = title + addButton + tableTop + recipeRows + tableBottom

@@ -56,7 +56,7 @@ class RecipePage extends PageManager{
   }
 
   renderRecipe(){
-    this.container.innerHTML = this.recipe.showHTML
+    this.container.innerHTML = this.recipe.showRecipe
   }
 
   // // Go to ingredients screen
