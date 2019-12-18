@@ -158,6 +158,8 @@ class RecipesPage extends PageManager{
 
       const id = e.target.querySelector('input[name="recipe-id"]').value
       const name = e.target.querySelector('input[name="name"]').value
+      console.log("Name")
+      console.log(name)
       const servings = e.target.querySelector('input[name="servings"]').value
 
       // console.log(id)
@@ -168,10 +170,9 @@ class RecipesPage extends PageManager{
       // query select for tag
       // query select all for rest
 
+      // Get form ingredients and map to array
       const formIngArray = Array.from(e.target.querySelectorAll('div.form-ingredient'))
-      
-      
-      let ingredientObj = formIngArray.map(el => {
+      let recipeIngredientsAttributes = formIngArray.map(el => {
         let s = el.querySelector('select')
         let ingAmount = el.querySelector('input.ingredient_amount').value
         let ingUnit = el.querySelector('input.ingredient_unit').value
@@ -180,62 +181,45 @@ class RecipesPage extends PageManager{
           ingredient_id: s.options[s.selectedIndex].value,
           ingredient_amount: ingAmount,
           ingredient_unit: ingUnit,
-          _destroy: 0,
-          id: 13
+          _destroy: 0
         }
-
       })
-      console.log(ingredientObj)
-
+      console.log(recipeIngredientsAttributes)
 
       // recipe_ingredients_attributes: {
       //   0: {ingredient_id: 13, ingredient_amount:5, ingredient_unit:"lb", _destroy: 1, id: 11}, 
 
+      // Set params
+      const params = { name, servings, recipeIngredientsAttributes, id }
+      console.log(params)
 
 
-      // const recipe_ingredients_attributes = Array.from(e.target.querySelectorAll('form-ingredient')).map(i => i.value)
-      // console.log(formIngredients)
-
-
-// grab selectors with options
-
-
-
-      // Set ingredient params
-      // const notes = e.target.querySelector('textarea').value
-
-      // // Set params
-      const params = { name, servings, id }
-      
       // Establish recipe object and set old data
       const recipe = this.getRecipeById(id)
       // const oldRecipe = new Recipe({id, name, servings, totalCost, costPerServing, ingredients})
-      
-      const oldRecipe = new Recipe({id, name, servings, recipe_ingredients_attributes})
+      // const oldRecipe = new Recipe({id, name, servings, recipe_ingredients_attributes})
+      const oldRecipe = this.getRecipeById(id)
 
       // Set params and optimistically render
-      this.recipe.name = name
+      recipe.name = name
       recipe.servings = servings
-      // recipe.totalCost = totalCost
-      // recipe.costPerServing = costPerServing
-      recipe.ingredients = recipe_ingredients_attributes
+      recipe.ingredients = recipeIngredientsAttributes
+      this.renderRecipe(recipe)
 
-      this.renderRecipe()
-
-      // // If recipe doesn't update, reset this.recipe to old 
-      // try{
-      //     const {name, servings, recipe_ingredients_attributes, id} = await this.adapter.updateRecipe(params)
-      // }catch(err){
-      //     this.recipe.name = oldRecipe.name
-      //     this.recipe.servings = oldRecipe.servings
-      //     this.recipe.totalCost = oldRecipe.totalCost
-      //     this.recipe.costPerServing = oldRecipe.costPerServing
-      //     this.recipe.ingredients = oldRecipe.ingredients
-      //     this.renderDog(dog)
-
-      // re-render old info
-      //     this.handleError(err)
-      // }
+      // Send fetch. If error, reset this.recipe to old 
+      try{
+          const {name, servings, recipeIngredientsAttributes, id} = await this.adapter.updateRecipe(params)
+      }catch(err){
+          // this.recipe.name = oldRecipe.name
+          // this.recipe.servings = oldRecipe.servings
+          // this.recipe.totalCost = oldRecipe.totalCost
+          // this.recipe.costPerServing = oldRecipe.costPerServing
+          // this.recipe.ingredients = oldRecipe.ingredients
+          console.log("Old Recipe!")
+          console.log(oldRecipe)
+          this.renderRecipe(oldRecipe)
+          this.handleError(err)
+      }
       
   }
 
@@ -269,9 +253,10 @@ class RecipesPage extends PageManager{
 
   /* ---- Renderers ---- */
     // Render single recipe
-    renderRecipe(){
-      if(this.recipe){
+    renderRecipe(recipe = this.recipe){
+      if(recipe){
           // console.log(this.recipe)
+          this.recipe = recipe
           this.container.innerHTML = this.recipe.showRecipe
           this.recipeBindingsAndEventListeners()
       }else{
