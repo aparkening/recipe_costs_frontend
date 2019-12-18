@@ -24,7 +24,7 @@ class Navbar extends PageManager{
   // Set initial html
   get staticHTML(){
     return (`
-      <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top" id="navbar-container">
+      <nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top" id="navbar-container">
         <a class="navbar-brand" href="#" aria-label="Home" title="Home" id="welcome-link">
           <img src="images/open-iconic/svg/spreadsheet.svg" alt="Home"> Recipe Costs
         </a>
@@ -42,10 +42,6 @@ class Navbar extends PageManager{
               <a class="nav-link" id="ingredients-link" href="#">Ingredients</a>
             </li>       
           </ul>
-          <form class="form-inline my-2 my-lg-0" action="recipes" accept-charset="UTF-8" method="get">
-            <input type="text" name="search" id="search" placeholder="Find Recipes" class="form-control mr-sm-2">  
-            <input type="submit" value="Search" class="btn btn-secondary" data-disable-with="Search">
-          </form>
         </div>
     `)
   }
