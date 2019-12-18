@@ -13,7 +13,14 @@ h1 {
   height: 1.5rem;
   width: 1.5rem;
 }
-@media (min-width: 768px) {
+/* .navbar-expand-md .navbar-nav {
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+.mr-auto, .mx-auto {
+  margin-right: auto!important;
+} */
+@media (min-width: 576px) {
   .navbar-brand {
     padding-right: 1rem !important;
     border-right: 1px solid #dee2e6 !important;
