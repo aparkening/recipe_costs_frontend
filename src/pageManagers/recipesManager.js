@@ -3,6 +3,7 @@ class RecipesPage extends PageManager{
   constructor(container, adapter){
     super(container)
     this.adapter = new RecipeAdapter(adapter)
+    this.recipe = null
   }
 
   // Set links and actions
@@ -22,18 +23,36 @@ class RecipesPage extends PageManager{
     rTable.addEventListener('click', this.handleRecipeClick.bind(this))
   }
 
-  // Handle edit or delete
+  // Bind and listen after single recipe loaded
+  recipeBindingsAndEventListeners(){
+    // this.editLink = this.container.querySelector('a#edit')
+    // this.deleteLink = this.container.querySelector('a#delete')
+
+    // this.editLink.addEventListener('click', this.handleEditClick.bind(this))
+    // this.deleteLink.addEventListener('click', this.handleDeleteClick.bind(this))
+
+    // const rTable = this.container.querySelector('table')
+    // rTable.addEventListener('click', this.handleRecipeClick.bind(this))
+  }
+
+
+  // Handle show, edit, and delete
   handleRecipeClick(e){
     e.preventDefault()
 
     // Get recipe id
     const recipeId = e.target.dataset.id
+    this.recipe = this.recipes.find(r => r.id == recipeId)
+    // console.log('Recipe is')
+    // console.log(this.recipe)
+  
     // console.log(recipeId)
 
     switch (e.target.id) {
       case 'show':
-        console.log('show clicked!');
-        // this.redirect('ingredients')
+        // console.log('show clicked!');
+        console.log(this.recipe)
+        // this.redirect('recipes')
         break;
       case 'edit':
         console.log('edit clicked!');
@@ -62,18 +81,46 @@ class RecipesPage extends PageManager{
   // Fetch recipes and render page
   async fetchAndRenderPageResources(){
     try{
-      const recipeObj = await this.adapter.getRecipes()
-      // console.log(recipeObj.recipes)
 
-      this.recipes = recipeObj.recipes.map(recipe => new Recipe(recipe))
-      // console.log(this.recipes)
-      
-      this.renderRecipes()
+// console.log(this.recipe)
+
+      if (this.recipe){
+        // const recipeObj = await this.adapter.getRecipe()
+        // // console.log(recipeObj)
+        // this.recipe = new Recipe(recipeObj)
+        // // console.log(this.recipe)
+        this.renderRecipe()
+      } else {
+        const recipeObj = await this.adapter.getRecipes()
+        // console.log(recipeObj.recipes)
+
+        this.recipes = recipeObj.recipes.map(recipe => new Recipe(recipe))
+        // console.log(this.recipes)
+        
+        this.renderRecipes()
+      }
     }catch(err){
       this.handleError(err)
       // console.log(err)
     }
   }
+
+  // Render single recipe
+  // renderRecipe(){
+  //   this.container.innerHTML = this.recipe.showRecipe
+  // }
+  renderRecipe(){
+    if(this.recipe){
+        this.container.innerHTML = this.recipe.showRecipe
+        this.recipeBindingsAndEventListeners()
+    }else{
+        this.handleError({
+            type: "404 Not Found",
+            msg: "Dog was not found"
+        })
+    } 
+  }
+
 
   // Render multiple recipes
   renderRecipes(){
