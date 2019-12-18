@@ -10,17 +10,16 @@ class RecipeIngredient{
     this.ingredient = new Ingredient(ingredient)
   }
 
-}
+  // Render recipe ingredients row
+  get showIngTr(){
+    return (`
+      <tr data-id="${this.id}">
+        <td>$${this.totalCost}</td>
+        <th scope="row">${this.name}</th>
+        <td>${this.amount}</td>
+        <td>${this.amountUnit}</td>
+      </tr>  
+    `)
+  }
 
-
-// Render recipe ingredients row
-this.showIngTr(){
-  return (`
-    <tr data-id="${ing.id}">
-      <td>$${ing.totalCost}</td>
-      <th scope="row">${ing.name}</th>
-      <td>${ing.amount}</td>
-      <td>${ing.amountUnit}</td>
-    </tr>  
-  `)
 }
