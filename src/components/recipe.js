@@ -113,6 +113,7 @@ class Recipe{
       <option value="1">seaweed</option>
       <option value="2">all-purpose flour</option>
       <option value="3">bread flour</option>
+            </select>
       
             <label for="recipe_ingredients_attributes_0_ingredient_amount">Size</label>
             <input placeholder="example: 5" type="text" value="2.0" name="recipe_ingredients_attributes[0][ingredient_amount]" id="recipe_ingredients_attributes_0_ingredient_amount">
@@ -121,6 +122,23 @@ class Recipe{
             <input placeholder="example: lb" type="text" value="lb" name="recipe_ingredients_attributes[0][ingredient_unit]" id="recipe_ingredients_attributes_0_ingredient_unit">
           </div><!-- / form-ingredient -->
         </div>
+
+
+        <div class="form-ingredient">
+        <select name="recipe_ingredients_attributes[1][ingredient_id]" id="recipe_ingredients_attributes_01_ingredient_id"><option value=""></option>
+  <option value="1">seaweed</option>
+  <option value="2">all-purpose flour</option>
+  <option value="3">bread flour</option>
+        </select>
+  
+        <label for="recipe_ingredients_attributes_1_ingredient_amount">Size</label>
+        <input placeholder="example: 5" type="text" value="2.0" name="recipe_ingredients_attributes[1][ingredient_amount]" id="recipe_ingredients_attributes_1_ingredient_amount">
+        
+        <label for="recipe_ingredients_attributes_1_ingredient_unit">Unit</label>
+        <input placeholder="example: lb" type="text" value="lb" name="recipe_ingredients_attributes[1][ingredient_unit]" id="recipe_ingredients_attributes_1_ingredient_unit">
+      </div><!-- / form-ingredient -->
+    </div>
+
 
         <div class="form-group">
           <button type="submit" name="commit" class="btn btn-lg btn-primary btn-block">${recipe ? 'Update' : 'Create'} Recipe</button>
