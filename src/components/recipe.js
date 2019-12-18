@@ -98,11 +98,11 @@ class Recipe{
 
         <div class="form-group">
           <label for="recipe_name">Name*</label>
-          <input class="form-control" required="required" type="text" value=${recipe ? recipe.name : ''} name="name" id="recipe_name">
+          <input class="form-control" required="required" type="text" value="${recipe ? recipe.name : ''}" name="name" id="recipe_name">
         </div>
         <div class="form-group">
           <label for="recipe_servings">Servings</label>
-          <input class="form-control" type="text" value=${recipe ? recipe.servings : ''} name="servings" id="recipe_servings">
+          <input class="form-control" type="text" value="${recipe ? recipe.servings : ''}" name="servings" id="recipe_servings">
         </div>
       
         <div class="form-group">
