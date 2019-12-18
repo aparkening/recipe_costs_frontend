@@ -32,6 +32,8 @@ class RecipePage extends PageManager{
   async fetchAndRenderPageResources(){
     try{
 
+console.log(this)
+
 
       // Single recipe
         // console.log("fetching recipe")
