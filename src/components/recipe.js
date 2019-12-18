@@ -67,7 +67,7 @@ class Recipe{
   get showRecipeTr(){
     let html = `
       <tr data-id="${this.id}">
-        <th scope="row"><a href="" id="show">${this.name}</a></th>
+        <th scope="row"><a href="#" id="show">${this.name}</a></th>
         <td>
       `
 
