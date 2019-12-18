@@ -18,22 +18,42 @@ class RecipesPage extends PageManager{
     // this.editLink.addEventListener('click', this.handleEditClick.bind(this))
     // this.deleteLink.addEventListener('click', this.handleDeleteClick.bind(this))
 
-    const recipetable = this.container.querySelector('table')
-    recipetable.addEventListener('click', this.handleEditClick.bind(this))
+    const rTable = this.container.querySelector('table')
+    rTable.addEventListener('click', this.handleRecipeClick.bind(this))
   }
 
-
-  // Go to edit recipe screen
-  handleEditClick(e){
+  // Handle edit or delete
+  handleRecipeClick(e){
     e.preventDefault()
-    this.redirect('edit-recipe')
+
+    switch (e.target.id) {
+      case 'show':
+        console.log('show clicked!');
+        // this.redirect('ingredients')
+        break;
+      case 'edit':
+        console.log('edit clicked!');
+        break;
+      case 'delete':
+        console.log('delete clicked!')
+        //console.log(e.target.parentNode.parentNode.parentNode);
+        // e.target.parentNode.parentNode.parentNode.remove();
+        // Send delete to server
+        break;
+      default:
+        console.log('Invalid item');
+        break;
+    }
+
+    // console.log(e.target.parentNode.parentNode.parentNode)
   }
 
-  // Go to delete recipe screen
-  handleDeleteClick(e){
-    e.preventDefault()
-    this.redirect('edit-recipe')
-  }
+
+  // // Go to edit recipe screen
+  // handleEditClick(e){
+  //   e.preventDefault()
+  //   this.redirect('edit-recipe')
+  // }
 
   // Fetch recipes and render page
   async fetchAndRenderPageResources(){
@@ -80,12 +100,6 @@ class RecipesPage extends PageManager{
     // Bind and listen to new html
     this.recipesBindingsAndEventListeners()
   }
-
-  // // Go to ingredients screen
-  // handleIngredientsClick(e){
-  //     e.preventDefault()
-  //     this.redirect('ingredients')
-  // }
 
   // Render initial html. Use "loader" to display loading spinner.
   get staticHTML(){
