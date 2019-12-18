@@ -14,7 +14,7 @@ class Recipe{
   // Render single recipe page
   get showRecipe(){
     let html = `
-      <h1>${this.name}</h1>
+      <h1>${this.name} (<small class="helper_links" data-id="${this.id}"><a href="#" id="edit">Edit </a> | <a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="#">Delete</a></small>)</h1>
       <h2>Total Cost: $${this.totalCost}</h2>
     `
     // Display cost per serving if servings and cost per serving > than 0
