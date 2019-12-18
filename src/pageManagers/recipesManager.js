@@ -40,7 +40,7 @@ class RecipesPage extends PageManager{
   handleRecipeClick(e){
     e.preventDefault()
 
-    // Get recipe id
+    // Get recipe id and recipe object
     const recipeId = e.target.dataset.id
     this.recipe = this.recipes.find(r => r.id == recipeId)
     // console.log('Recipe is')
@@ -51,8 +51,9 @@ class RecipesPage extends PageManager{
     switch (e.target.id) {
       case 'show':
         // console.log('show clicked!');
-        console.log(this.recipe)
+        // console.log(this.recipe)
         // this.redirect('recipes')
+        this.renderRecipe()
         break;
       case 'edit':
         console.log('edit clicked!');
@@ -84,13 +85,13 @@ class RecipesPage extends PageManager{
 
 // console.log(this.recipe)
 
-      if (this.recipe){
-        // const recipeObj = await this.adapter.getRecipe()
-        // // console.log(recipeObj)
-        // this.recipe = new Recipe(recipeObj)
-        // // console.log(this.recipe)
-        this.renderRecipe()
-      } else {
+      // if (this.recipe){
+      //   // const recipeObj = await this.adapter.getRecipe()
+      //   // // console.log(recipeObj)
+      //   // this.recipe = new Recipe(recipeObj)
+      //   // // console.log(this.recipe)
+      //   this.renderRecipe()
+      // } else {
         const recipeObj = await this.adapter.getRecipes()
         // console.log(recipeObj.recipes)
 
@@ -98,7 +99,7 @@ class RecipesPage extends PageManager{
         // console.log(this.recipes)
         
         this.renderRecipes()
-      }
+
     }catch(err){
       this.handleError(err)
       // console.log(err)
