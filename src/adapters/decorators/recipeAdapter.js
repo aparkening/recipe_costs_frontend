@@ -30,6 +30,12 @@ class RecipeAdapter{
     return await res.json()
   }
 
+// Current parameters
+//  {"recipe"=>{"name"=>"White Bread", "servings"=>"8", "recipe_ingredients_attributes"=>[{"ingredient_id"=>"", "ingredient_amount"=>"2.0", "ingredient_unit"=>"lb", "_destroy"=>0}, {"ingredient_id"=>"", "ingredient_amount"=>"2.0", "ingredient_unit"=>"lb", "_destroy"=>0}]}, "controller"=>"api/v1/recipes", "action"=>"update", "id"=>"19"} permitted: false>
+
+// Working parameters
+
+
 
   // Update recipe
   /* Stringify this format:
