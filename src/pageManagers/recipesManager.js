@@ -160,22 +160,41 @@ class RecipesPage extends PageManager{
       const name = e.target.querySelector('input[name="name"]').value
       const servings = e.target.querySelector('input[name="servings"]').value
 
-      console.log(id)
-      console.log(name)
-      console.log(servings)
+      // console.log(id)
+      // console.log(name)
+      // console.log(servings)
       
       
-
-      // Set object for this
-      // const recipe_ingredients_attributes = Array.from(e.target.querySelectorAll('form-ingredient')).map(i => i.value)
-
       // query select for tag
       // query select all for rest
 
-      const formIngredients = Array.from(e.target.querySelectorAll('form-ingredient'))
+      const formIngArray = Array.from(e.target.querySelectorAll('div.form-ingredient'))
+      
+      
+      let ingredientObj = formIngArray.map(el => {
+        let s = el.querySelector('select')
+        let ingAmount = el.querySelector('input.ingredient_amount').value
+        let ingUnit = el.querySelector('input.ingredient_unit').value
+        //recipeIngredientId
+        return {
+          ingredient_id: s.options[s.selectedIndex].value,
+          ingredient_amount: ingAmount,
+          ingredient_unit: ingUnit,
+          _destroy: 0,
+          id: 13
+        }
+
+      })
+      console.log(ingredientObj)
+
+
+      // recipe_ingredients_attributes: {
+      //   0: {ingredient_id: 13, ingredient_amount:5, ingredient_unit:"lb", _destroy: 1, id: 11}, 
+
+
 
       // const recipe_ingredients_attributes = Array.from(e.target.querySelectorAll('form-ingredient')).map(i => i.value)
-      console.log(formIngredients)
+      // console.log(formIngredients)
 
 
 // grab selectors with options
@@ -213,7 +232,7 @@ class RecipesPage extends PageManager{
       //     this.recipe.costPerServing = oldRecipe.costPerServing
       //     this.recipe.ingredients = oldRecipe.ingredients
       //     this.renderDog(dog)
-      
+
       // re-render old info
       //     this.handleError(err)
       // }
