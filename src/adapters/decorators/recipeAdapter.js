@@ -58,7 +58,7 @@ class RecipeAdapter{
   // Fetch all records
   async getRecipes(){
     const res = await fetch(`${this.baseURL}/recipes`, {
-        headers: this.headers
+      headers: this.headers
     })
     await this.baseAdapter.checkStatus(res)
     return await res.json()
