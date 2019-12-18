@@ -25,11 +25,11 @@ class RecipesPage extends PageManager{
 
   // Bind and listen after single recipe loaded
   recipeBindingsAndEventListeners(){
-    // this.editLink = this.container.querySelector('a#edit')
-    // this.deleteLink = this.container.querySelector('a#delete')
+    this.recipeEditLink = this.container.querySelector('a#edit')
+    this.recipeDeleteLink = this.container.querySelector('a#delete')
 
-    // this.editLink.addEventListener('click', this.handleEditClick.bind(this))
-    // this.deleteLink.addEventListener('click', this.handleDeleteClick.bind(this))
+    this.recipeEditLink.addEventListener('click', this.handleRecipeEditClick.bind(this))
+    this.recipeDeleteLink.addEventListener('click', this.handleRecipeDeleteClick.bind(this))
 
     // const rTable = this.container.querySelector('table')
     // rTable.addEventListener('click', this.handleRecipeClick.bind(this))
@@ -69,6 +69,49 @@ class RecipesPage extends PageManager{
 
     // console.log(e.target.parentNode.parentNode.parentNode)
   }
+
+  // Handle recipe edit
+  handleRecipeEditClick(e){
+    e.preventDefault()
+
+    // Get recipe id and recipe object
+    const recipeId = e.target.parentNode.dataset.id
+    console.log(recipeId)
+    // this.recipe = this.recipes.find(r => r.id == recipeId)
+    console.log(this.recipe.id)
+
+    // console.log(recipeId)
+    // console.log(this.recipe)
+
+    console.log('edit clicked!');
+
+    // if id matches this.recipe.id, go to edit
+
+    // else throw error
+  }
+
+  // Handle recipe edit
+  handleRecipeDeleteClick(e){
+    e.preventDefault()
+
+    // Get recipe id and recipe object
+    const recipeId = e.target.parentNode.dataset.id
+    console.log(recipeId)
+    // this.recipe = this.recipes.find(r => r.id == recipeId)
+    console.log(this.recipe.id)
+
+    // console.log(recipeId)
+    // console.log(this.recipe)
+
+    console.log('delete clicked!');
+
+    // if id matches this.recipe.id, go to edit
+
+    // else throw error
+  }
+
+
+
 
 
   // // Go to edit recipe screen
