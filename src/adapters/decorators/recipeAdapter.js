@@ -32,6 +32,16 @@ class RecipeAdapter{
 
 
   // Update recipe
+  /* Stringify this format:
+    name: 'Green Bread',
+    servings: 6,
+    recipe_ingredients_attributes: {
+      0: {ingredient_id: 13, ingredient_amount:5, ingredient_unit:"lb", _destroy: 1, id: 11}, 
+      1: {ingredient_id: 21, ingredient_amount:1, ingredient_unit:"oz", _destroy: 0, id: 12}, 
+      2: {ingredient_id: 16, ingredient_amount:1, ingredient_unit:"lb", _destroy: 0, id: 13}, 
+      3: {ingredient_id: 18, ingredient_amount:12, ingredient_unit:"oz", _destroy: 0, id: 14},
+    }
+  */
   async updateRecipe(params){
       const { name, servings, recipe_ingredients_attributes, id} = params
       const url = `${this.baseURL}/recipes/${id}`
