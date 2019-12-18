@@ -16,7 +16,8 @@ class Navbar extends PageManager{
       const route = e.target.id.split('-')[0]
 
       // Only redirect if clicking for new screen
-      if(route !== this.currentPage()) { this.redirect(route) } 
+      // if(route !== this.currentPage()) { this.redirect(route) } 
+      this.redirect(route)
     }
   }
 
