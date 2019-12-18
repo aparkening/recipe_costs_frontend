@@ -26,6 +26,10 @@ class RecipesPage extends PageManager{
   handleRecipeClick(e){
     e.preventDefault()
 
+    // Get recipe id
+    const recipeId = e.target.dataset.id
+    // console.log(recipeId)
+
     switch (e.target.id) {
       case 'show':
         console.log('show clicked!');
@@ -35,8 +39,8 @@ class RecipesPage extends PageManager{
         console.log('edit clicked!');
         break;
       case 'delete':
-        console.log('delete clicked!')
-        //console.log(e.target.parentNode.parentNode.parentNode);
+        // console.log('delete clicked!')
+        console.log(e.target.parentNode.parentNode.parentNode);
         // e.target.parentNode.parentNode.parentNode.remove();
         // Send delete to server
         break;
