@@ -11,56 +11,60 @@ class Recipe{
     this.ingredients = ingredients.map(ing => new RecipeIngredient(ing))
   }
 
-  get showHTML(){
+  // Render single recipe page
+  get showRecipe(){
     let html = `
       <h1>${this.name}</h1>
       <h2>Total Cost: $${this.totalCost}</h2>
     `
-
-    if (this.servings !== null){
+    // Display cost per serving if servings and cost per serving > than 0
+    if (this.servings !== null && this.costPerServing !== 0){
       html = html + `<h4>Serves ${this.servings} | Cost per serving: $${this.costPerServing}</h4>`
     }
 
-    const ingTableTop = `
-   <h3 class="mt-3">Ingredients</h3>
-    <table class="table table-striped">
-      <thead class="thead-dark">
-        <tr>
-          <th>Cost</th>
-          <th>Name</th>
-          <th>Amount</th>
-          <th>Amount Unit</th>
-        </tr>
-      </thead>
-      <tbody>
+    const tableTop = `
+      <h3 class="mt-3">Ingredients</h3>
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>Cost</th>
+            <th>Name</th>
+            <th>Amount</th>
+            <th>Amount Unit</th>
+          </tr>
+        </thead>
+        <tbody>
     `
 
-    const ingTableBottom = `
-      </tbody>  
-    </table>
+    const tableBottom = `
+        </tbody>  
+      </table>
     `
 
-    const ingHTML = this.ingredients.map(ing => {
-      return (`
+    // Render recipe ingredient rows and join into string
+    let ingRows = this.ingredients.map(ing => recipe.showIngTr).join('')
+
+    // Stitch together html, table, rows
+    html = html + tableTop + ingRows + tableBottom
+
+    return html
+  }
+
+  // Render recipe ingredients row
+  get showIngTr(){
+    return (`
       <tr>
         <td>$${ing.totalCost}</td>
         <th scope="row">${ing.name}</th>
         <td>${ing.amount}</td>
         <td>${ing.amountUnit}</td>
       </tr>  
-      `)
-    }).join('')
-    // const ingHTML = 'testing'
-
-    // html = html + this.ingredients
-    html = html + ingTableTop + ingHTML + ingTableBottom
-
-    return html
+    `)
   }
 
-  // Render recipes table
+  // Render recipes table row
   // Get data-id with .dataset.id
-  get renderTr(){
+  get showRecipeTr(){
     let html = `
       <tr data-id="${this.id}">
         <th scope="row"><a href="" id="show">${this.name}</a></th>
