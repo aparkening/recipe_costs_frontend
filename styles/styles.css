@@ -41,7 +41,6 @@ a:not([href]):not([tabindex]) {
   text-decoration: none;
 }
 
-
 /* Buttons */
 .btn-primary {
   color: #fff;
@@ -75,8 +74,8 @@ a:not([href]):not([tabindex]) {
 
 /* Load spinner */
 .loader {
-  border: 16px solid #f3f3f3; /* Light grey */
-  border-top: 16px solid #3498db; /* Blue */
+  border: 16px solid #f8f9fa; /* Light grey */
+  border-top: 16px solid #002180; /* Blue */
   border-radius: 50%;
   width: 120px;
   height: 120px;
