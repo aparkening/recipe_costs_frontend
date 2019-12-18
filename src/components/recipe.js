@@ -8,7 +8,7 @@ class Recipe{
     this.totalCost = recipe.total_cost
     this.costPerServing = recipe.cost_per_serving
 
-    this.ingredients = ingredients.map(ing => new Ingredient(ing.ingredient))
+    this.ingredients = ingredients.map(ing => new RecipeIngredient(ing))
   }
 
   get showHTML(){
@@ -39,15 +39,13 @@ class Recipe{
     </table>
     `
 
-console.log(this.ingredients)
-
     const ingHTML = this.ingredients.map(ing => {
       return (`
       <tr>
-        <td>$${ing.cost}</td>
+        <td>$${ing.totalCost}</td>
         <th scope="row">${ing.name}</th>
-        <td>Amount</td>
-        <td>Amount Unit</td>
+        <td>${ing.amount}</td>
+        <td>${ing.amountUnit}</td>
       </tr>  
       `)
     }).join('')
