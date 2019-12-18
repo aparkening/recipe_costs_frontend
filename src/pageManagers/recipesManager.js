@@ -43,14 +43,12 @@ class RecipesPage extends PageManager{
     // Get recipe id and recipe object
     const recipeId = e.target.dataset.id
     this.recipe = this.recipes.find(r => r.id == recipeId)
-    // console.log('Recipe is')
-    // console.log(this.recipe)
-  
+
     // console.log(recipeId)
+    // console.log(this.recipe)
 
     switch (e.target.id) {
       case 'show':
-        // console.log('show clicked!');
         // console.log(this.recipe)
         // this.redirect('recipes')
         this.renderRecipe()
@@ -107,11 +105,9 @@ class RecipesPage extends PageManager{
   }
 
   // Render single recipe
-  // renderRecipe(){
-  //   this.container.innerHTML = this.recipe.showRecipe
-  // }
   renderRecipe(){
     if(this.recipe){
+        // console.log(this.recipe)
         this.container.innerHTML = this.recipe.showRecipe
         this.recipeBindingsAndEventListeners()
     }else{
