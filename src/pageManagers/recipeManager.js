@@ -49,11 +49,11 @@ class RecipePage extends PageManager{
   }
 
   // Render add recipe button
-  renderAddRecipe(){
-    return (`
-      <div class="mt-3 mb-3"><a class="btn btn-primary" href="#" role="button" id="new-button">Add new recipe</a></div>
-    `)
-  }
+  // renderAddRecipe(){
+  //   return (`
+  //     <div class="mt-3 mb-3"><a class="btn btn-primary" href="#" role="button" id="new-button">Add new recipe</a></div>
+  //   `)
+  // }
 
   renderRecipe(){
     this.container.innerHTML = this.recipe.showRecipe
