@@ -67,7 +67,7 @@ class Recipe{
   get showRecipeTr(){
     let html = `
       <tr data-id="${this.id}">
-        <th scope="row"><a href="#" id="show">${this.name}</a></th>
+        <th scope="row"><a href="#" id="show" data-id="${this.id}">${this.name}</a></th>
         <td>
       `
 
@@ -82,7 +82,7 @@ class Recipe{
     }
 
     html = html + `
-        &nbsp;</td><td><small><a class="text-muted" href="#" id="edit">Edit</a> | <a class="text-muted" data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="#" id="delete">Delete</a></small></td>
+        &nbsp;</td><td><small><a class="text-muted" href="#" id="edit" data-id="${this.id}">Edit</a> | <a class="text-muted" data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="#" id="delete" data-id="${this.id}">Delete</a></small></td>
       </tr>
     `
     return html
