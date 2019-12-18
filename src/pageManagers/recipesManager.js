@@ -76,6 +76,9 @@ class RecipesPage extends PageManager{
 
     // Stitch together title, button, table, rows
     this.container.innerHTML = title + addButton + tableTop + recipeRows + tableBottom
+
+    // Bind and listen to new html
+    this.recipesBindingsAndEventListeners()
   }
 
   // // Go to ingredients screen
