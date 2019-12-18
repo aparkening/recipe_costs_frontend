@@ -120,6 +120,8 @@ class Recipe{
             
             <label for="recipe_ingredients_attributes_0_ingredient_unit">Unit</label>
             <input placeholder="example: lb" type="text" value="lb" name="recipe_ingredients_attributes[0][ingredient_unit]" id="recipe_ingredients_attributes_0_ingredient_unit" class="ingredient_unit">
+
+            <input type="hidden" value="11" name="recipe_ingredients_attributes[0][id]" id="recipe_recipe_ingredients_attributes_0_id" class="ingredient_id">
           </div><!-- / form-ingredient -->
         </div>
 
@@ -136,6 +138,7 @@ class Recipe{
         
         <label for="recipe_ingredients_attributes_1_ingredient_unit">Unit</label>
         <input placeholder="example: lb" type="text" value="lb" name="recipe_ingredients_attributes[1][ingredient_unit]" id="recipe_ingredients_attributes_1_ingredient_unit" class="ingredient_unit">
+
       </div><!-- / form-ingredient -->
     </div>
 
