@@ -107,60 +107,19 @@ class Recipe{
       
         <div class="form-group">
           <h3>Ingredients</h3>
-          <div class="form-group">
-              
+
+          <div class="form-ingredient">
             <select name="recipe_ingredients_attributes[0][ingredient_id]" id="recipe_ingredients_attributes_0_ingredient_id"><option value=""></option>
       <option value="1">seaweed</option>
       <option value="2">all-purpose flour</option>
       <option value="3">bread flour</option>
-      <option value="4">whole wheat flour</option>
-      <option value="5">instant yeast</option>
-      <option value="6">unsalted butter</option>
-      <option selected="selected" value="7">butter</option>
-      <option value="8">milk</option>
-      <option value="9">cream</option>
-      <option value="10">baking soda</option>
-      <option value="11">baking powder</option>
-      <option value="12">sugar</option>
-      <option value="13">brown sugar</option>
-      <option value="14">powdered sugar</option>
-      <option value="15">honey</option>
-      <option value="16">molasses</option>
-      <option value="17">vegetable oil</option>
-      <option value="18">canola oil</option>
-      <option value="19">olive oil</option>
-      <option value="20">cornstarch</option>
-      <option value="21">coconut flakes</option>
-      <option value="22">vanilla extract</option>
-      <option value="23">bittersweet chocolate</option>
-      <option value="24">unsweetened chocolate</option>
-      <option value="25">chocolate chips</option>
-      <option value="26">walnuts</option>
-      <option value="27">almonds</option>
-      <option value="28">raisins</option>
-      <option value="29">pumpkin</option>
-      <option value="30">apples</option>
-      <option value="31">ginger</option>
-      <option value="32">chicken</option>
-      <option value="33">egg</option>
-      <option value="34">soy sauce</option>
-      <option value="35">teriyaki sauce</option>
-      <option value="36">dashi</option>
-      <option value="37">sushi rice</option>
-      <option value="38">nori</option>
-      <option value="39">salt</option>
-      <option value="40">thyme</option>
-      <option value="41">ground cinnamon</option>
-      <option value="42">ground cloves</option>
-      <option value="43">ground black pepper</option>
-      <option value="44">ground cardamom</option></select>
       
             <label for="recipe_ingredients_attributes_0_ingredient_amount">Size</label>
             <input placeholder="example: 5" type="text" value="2.0" name="recipe_ingredients_attributes[0][ingredient_amount]" id="recipe_ingredients_attributes_0_ingredient_amount">
             
             <label for="recipe_ingredients_attributes_0_ingredient_unit">Unit</label>
             <input placeholder="example: lb" type="text" value="lb" name="recipe_ingredients_attributes[0][ingredient_unit]" id="recipe_ingredients_attributes_0_ingredient_unit">
-          </div>
+          </div><!-- / form-ingredient -->
         </div>
 
         <div class="form-group">
