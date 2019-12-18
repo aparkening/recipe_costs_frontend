@@ -12,7 +12,7 @@ class RecipesPage extends PageManager{
   }
 
   // Bind and listen after recipes loaded
-  recipesBindingsAndEventListeners(){
+  allRecipesBindingsAndEventListeners(){
     // this.editLink = this.container.querySelector('a#edit')
     // this.deleteLink = this.container.querySelector('a#delete')
 
@@ -189,7 +189,7 @@ class RecipesPage extends PageManager{
     this.container.innerHTML = title + addButton + tableTop + recipeRows + tableBottom
 
     // Bind and listen to new html
-    this.recipesBindingsAndEventListeners()
+    this.allRecipesBindingsAndEventListeners()
   }
 
   // Render initial html. Use "loader" to display loading spinner.
