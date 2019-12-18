@@ -39,7 +39,7 @@ class RecipeAdapter{
           recipe: {
               name, 
               servings,
-              recipe_ingredients_attributes,
+              recipe_ingredients_attributes
           }
       }
       const res = await fetch(url, {

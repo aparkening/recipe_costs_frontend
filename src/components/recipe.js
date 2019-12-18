@@ -94,7 +94,7 @@ class Recipe{
     return (`
     <h1>${recipe ? 'Edit' : 'New'} Recipe</h1>
     <form id="${recipe ? 'edit' : 'new'}-recipe-form">
-        ${recipe ? '<input type="hidden" value="' + recipe.id + '">' : '' }
+        ${recipe ? '<input type="hidden" value="' + recipe.id + '" name="recipe-id">' : '' }
 
         <div class="form-group">
           <label for="recipe_name">Name*</label>
@@ -109,7 +109,7 @@ class Recipe{
           <h3>Ingredients</h3>
           <div class="form-group">
               
-            <select name="recipe_ingredients_attributes[0][ingredient_id]" id="recipe_recipe_ingredients_attributes_0_ingredient_id"><option value=""></option>
+            <select name="recipe_ingredients_attributes[0][ingredient_id]" id="recipe_ingredients_attributes_0_ingredient_id"><option value=""></option>
       <option value="1">seaweed</option>
       <option value="2">all-purpose flour</option>
       <option value="3">bread flour</option>
@@ -155,11 +155,11 @@ class Recipe{
       <option value="43">ground black pepper</option>
       <option value="44">ground cardamom</option></select>
       
-            <label for="recipe_recipe_ingredients_attributes_0_ingredient_amount">Size</label>
-            <input placeholder="example: 5" type="text" value="2.0" name="recipe[recipe_ingredients_attributes][0][ingredient_amount]" id="recipe_recipe_ingredients_attributes_0_ingredient_amount">
+            <label for="recipe_ingredients_attributes_0_ingredient_amount">Size</label>
+            <input placeholder="example: 5" type="text" value="2.0" name="recipe_ingredients_attributes[0][ingredient_amount]" id="recipe_ingredients_attributes_0_ingredient_amount">
             
-            <label for="recipe_recipe_ingredients_attributes_0_ingredient_unit">Unit</label>
-            <input placeholder="example: lb" type="text" value="lb" name="recipe[recipe_ingredients_attributes][0][ingredient_unit]" id="recipe_recipe_ingredients_attributes_0_ingredient_unit">
+            <label for="recipe_ingredients_attributes_0_ingredient_unit">Unit</label>
+            <input placeholder="example: lb" type="text" value="lb" name="recipe_ingredients_attributes[0][ingredient_unit]" id="recipe_ingredients_attributes_0_ingredient_unit">
           </div>
         </div>
 
