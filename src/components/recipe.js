@@ -42,7 +42,8 @@ class Recipe{
     `
 
     // Render recipe ingredient rows and join into string
-    let ingRows = this.ingredients.map(ing => recipe.showIngTr).join('')
+    let ingRows = this.ingredients.map(ing => ing.showIngTr).join('')
+    // let ingRows = this.ingredients.map(ing => console.log(ing))
 
     // Stitch together html, table, rows
     html = html + tableTop + ingRows + tableBottom
@@ -50,17 +51,17 @@ class Recipe{
     return html
   }
 
-  // Render recipe ingredients row
-  get showIngTr(){
-    return (`
-      <tr>
-        <td>$${ing.totalCost}</td>
-        <th scope="row">${ing.name}</th>
-        <td>${ing.amount}</td>
-        <td>${ing.amountUnit}</td>
-      </tr>  
-    `)
-  }
+  // // Render recipe ingredients row
+  // showIngTr(ing){
+  //   return (`
+  //     <tr data-id="${ing.id}">
+  //       <td>$${ing.totalCost}</td>
+  //       <th scope="row">${ing.name}</th>
+  //       <td>${ing.amount}</td>
+  //       <td>${ing.amountUnit}</td>
+  //     </tr>  
+  //   `)
+  // }
 
   // Render recipes table row
   // Get data-id with .dataset.id
