@@ -22,6 +22,7 @@ class Recipe{
     }
 
     const ingTableTop = `
+   <h3 class="mt-3">Ingredients</h3>
     <table class="table table-striped">
       <thead class="thead-dark">
         <tr>
