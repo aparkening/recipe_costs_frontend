@@ -98,18 +98,18 @@ class Recipe{
 
         <div class="form-group">
           <label for="recipe_name">Name*</label>
-          <input class="form-control" required="required" type="text" value=${recipe ? recipe.name : ''} name="recipe[name]" id="recipe_name">
+          <input class="form-control" required="required" type="text" value=${recipe ? recipe.name : ''} name="name" id="recipe_name">
         </div>
         <div class="form-group">
           <label for="recipe_servings">Servings</label>
-          <input class="form-control" type="text" value=${recipe ? recipe.servings : ''} name="recipe[servings]" id="recipe_servings">
+          <input class="form-control" type="text" value=${recipe ? recipe.servings : ''} name="servings" id="recipe_servings">
         </div>
       
         <div class="form-group">
           <h3>Ingredients</h3>
           <div class="form-group">
               
-            <select name="recipe[recipe_ingredients_attributes][0][ingredient_id]" id="recipe_recipe_ingredients_attributes_0_ingredient_id"><option value=""></option>
+            <select name="recipe_ingredients_attributes[0][ingredient_id]" id="recipe_recipe_ingredients_attributes_0_ingredient_id"><option value=""></option>
       <option value="1">seaweed</option>
       <option value="2">all-purpose flour</option>
       <option value="3">bread flour</option>
