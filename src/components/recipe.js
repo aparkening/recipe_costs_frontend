@@ -18,7 +18,7 @@ class Recipe{
     `
 
     if (this.servings !== null){
-      html = html + `<h4>Serves ${this.servings} | Cost per serving: $${this.servings}</h4>`
+      html = html + `<h4>Serves ${this.servings} | Cost per serving: $${this.costPerServing}</h4>`
     }
 
     const ingTableTop = `
@@ -59,27 +59,29 @@ class Recipe{
   }
 
   // Render recipes table
-  get showRecipes(){
-    return (`
-      <table class="table table-striped">
-        <thead class="thead-dark">
-          <tr>
-            <th>Name</th>
-            <th>Cost</th>
-            <th>Links</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row"><a href="/users/10/recipes/15">Cinnamon Raisin Bread</a></th>
-            <td>$3.05
-              &nbsp;|&nbsp; per serving: $0.38
-            </td>
-            <td><small><a class="text-muted" href="/users/10/recipes/15/edit">Edit</a> | <a class="text-muted" data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/users/10/recipes/15">Delete</a></small></td>
-          </tr>   
-        </tbody>  
-      </table>`)
+  // Get data-id with .dataset.id
+  get renderTr(){
+    let html = `
+      <tr data-id="${this.id}">
+        <th scope="row"><a href="" id="show">${this.name}</a></th>
+        <td>
+      `
 
+    // Display total cost if > 0
+    if (this.totalCost !== 0){
+      html = html + `$${this.totalCost}`
+    }
+
+    // Display cost per serving if servings and cost per serving > than 0
+    if (this.servings !== null && this.costPerServing !== 0){
+      html = html + ` &nbsp;|&nbsp; per serving: $${this.costPerServing}`
+    }
+
+    html = html + `
+        &nbsp;</td><td><small><a class="text-muted" href="#" id="edit">Edit</a> | <a class="text-muted" data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="#" id="delete">Delete</a></small></td>
+      </tr>
+    `
+    return html
   }
 
 }
