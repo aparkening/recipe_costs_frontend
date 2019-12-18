@@ -7,11 +7,11 @@ class RecipesPage extends PageManager{
 
   // Set links and actions
   initBindingsAndEventListeners(){
-    this.editLink = this.container.querySelector('a#edit')
-    this.deleteLink = this.container.querySelector('a#delete')
+    // this.editLink = this.container.querySelector('a#edit')
+    // this.deleteLink = this.container.querySelector('a#delete')
 
-    this.editLink.addEventListener('click', this.handleEditClick.bind(this))
-    this.deleteLink.addEventListener('click', this.handleDeleteClick.bind(this))
+    // this.editLink.addEventListener('click', this.handleEditClick.bind(this))
+    // this.deleteLink.addEventListener('click', this.handleDeleteClick.bind(this))
   }
 
   // Go to edit recipe screen
@@ -79,8 +79,6 @@ class RecipesPage extends PageManager{
   get staticHTML(){
     return (`
       <div class="loader">
-        <p>Default Recipes page</p>
-        <p><a href="#" id="edit">Edit</a> | <a href="#" id="delete">Delete</a></p>
       </div>
     `)
   }
