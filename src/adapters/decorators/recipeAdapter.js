@@ -5,15 +5,11 @@ class RecipeAdapter{
       this.baseURL = this.baseAdapter.baseURL
   }
 
-  // get token(){
-  //     return this.baseAdapter.token
-  // }
-
   get headers(){
       return this.baseAdapter.headers
   }
 
-  // Create record
+  // Create recipe
   async createRecipe(params){
     // Could pass in recipe obj and make params
     const { name, servings, recipe_ingredients_attributes, id} = params
@@ -35,7 +31,7 @@ class RecipeAdapter{
   }
 
 
-  // Update record
+  // Update recipe
   async updateRecipe(params){
       const { name, servings, recipe_ingredients_attributes, id} = params
       const url = `${this.baseURL}/recipes/${id}`
@@ -55,7 +51,7 @@ class RecipeAdapter{
       return await res.json()
   }
 
-  // Fetch all records
+  // Fetch all recipes
   async getRecipes(){
     const res = await fetch(`${this.baseURL}/recipes`, {
       headers: this.headers
@@ -64,7 +60,7 @@ class RecipeAdapter{
     return await res.json()
   }
 
-  // Fetch single record
+  // Fetch single recipe
   async getRecipe(){
     const res = await fetch(`${this.baseURL}/recipes/31`, {
       headers: this.headers
