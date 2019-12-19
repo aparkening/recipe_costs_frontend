@@ -214,7 +214,7 @@ document.addEventListener('DOMContentLoaded', () =>
 // .then(res => res.json())
 // .then(console.log)
 
-// // Update recipe with ingredients
+// // Delete recipe
 // fetch('http://localhost:3000/api/v1/recipes/37', {
 //   method: 'DELETE',
 //   headers: {
