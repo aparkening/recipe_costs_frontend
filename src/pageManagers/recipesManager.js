@@ -157,6 +157,19 @@ class RecipesPage extends PageManager{
 
     async handleDeleteSubmit(id){
       console.log("Handling submit.")
+      
+      // const recipe = getRecipeById(id)
+      // this.recipes = .filter
+
+      // findByIndex to get index
+      // Use index to save to this.recipes
+      // const oldRecipe = 
+      // Use splice to remove from this.recipes
+      
+
+      // Update list in place from this.recipes?
+      // rerender without db call
+
       try{
         const resp = await this.adapter.deleteRecipe(id)
 
@@ -171,6 +184,11 @@ class RecipesPage extends PageManager{
       }catch(err){
         console.log(err)
         this.handleError(err)
+
+
+// this.recipes.push(recipe found earlier)
+
+
       }
     }
 
@@ -263,9 +281,6 @@ class RecipesPage extends PageManager{
   // Fetch recipes and render main recipes page
   async fetchAndRenderPageResources(){
     try{
-
-// console.log(this.recipe)
-
       // if (this.recipe){
       //   // const recipeObj = await this.adapter.getRecipe()
       //   // // console.log(recipeObj)
