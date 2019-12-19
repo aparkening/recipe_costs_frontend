@@ -39,8 +39,8 @@ class App{
     this.alertContainer = document.querySelector('#alert-container')
   }
 
-  // Render Alerts and set timeout for 5 secondes
-  handleAlert(alertObj, timeout = 5000){
+  // Render Alerts and set timeout for 10 secondes
+  handleAlert(alertObj, timeout = 10000){
     this.alertManager.render(alertObj, timeout)
   }
 
