@@ -89,8 +89,41 @@ class Recipe{
     return html
   }
 
+  // Get ingredients and render as select list
+  async fetchAndRenderIngredients(){
+    try{
+      const ingAdapter = new IngredientAdapter(new BaseAdapter())
+      const allIngObj = await ingAdapter.getIngredients()
+      this.allIngredients = allIngObj.ingredients.map(ing => new Ingredient(ing))  
+      this.renderIngSelect()
+    }catch(err){
+      this.handleError(err)
+      // console.log(err)
+    }
+  }
+
+  // Render ingredients as select list
+  renderIngSelect(){
+    return (`
+    <select name="recipe_ingredients_attributes[1][ingredient_id]" id="recipe_ingredients_attributes_01_ingredient_id"><option value=""></option>
+    <option value="1">seaweed</option>
+    <option value="2">all-purpose flour</option>
+    <option value="3">bread flour</option>
+          </select>
+    `)
+  }
+
+
   // Show new and edit recipe form (class method)
   static recipeForm(recipe = null){
+
+    // Get all ingredients
+    // const allIngObj = await this.adapter.getRecipes()
+
+    console.log(this.fetchAndRenderIngredients())
+
+    // Render ingredients as select list
+
     return (`
     <h1>${recipe ? 'Edit' : 'New'} Recipe</h1>
     <form id="${recipe ? 'edit' : 'new'}-recipe-form">
