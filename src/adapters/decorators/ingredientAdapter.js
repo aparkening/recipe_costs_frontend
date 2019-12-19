@@ -59,13 +59,11 @@ class IngredientAdapter{
 
   // Fetch all records
   async getIngredients(){
-
-      const res = await fetch(`${this.baseURL}/ingredients`, {
-          headers: this.headers
-      })
-      await this.baseAdapter.checkStatus(res)
-      return await res.json()
-
+    const res = await fetch(`${this.baseURL}/ingredients`, {
+      headers: this.headers
+    })
+    await this.baseAdapter.checkStatus(res)
+    return await res.json()
   }
 
 }
