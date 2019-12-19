@@ -66,4 +66,15 @@ class IngredientAdapter{
     return await res.json()
   }
 
+  // Delete record
+  async deleteIngredient(id){
+    const url = `${this.baseURL}/ingredients/${id}`
+    const res = await fetch(url, {
+        method: 'DELETE',
+        headers: this.headers
+    })
+    await this.baseAdapter.checkStatus(res)
+    return await res.json()
+  }
+
 }
