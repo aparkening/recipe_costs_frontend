@@ -82,9 +82,22 @@ class RecipeAdapter{
   }
 
   // Fetch single recipe
-  async getRecipe(){
+  async getRecipe(params){
     const res = await fetch(`${this.baseURL}/recipes/31`, {
       headers: this.headers
+    })
+    await this.baseAdapter.checkStatus(res)
+    return await res.json()
+  }
+
+
+  // Delete recipe
+  async deleteRecipe(id){
+    const url = `${this.baseURL}/recipes/${id}`
+    const res = await fetch(url, {
+        method: 'DELETE',
+        headers: this.headers,
+        body: JSON.stringify(body)
     })
     await this.baseAdapter.checkStatus(res)
     return await res.json()
