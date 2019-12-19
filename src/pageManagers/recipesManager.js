@@ -158,8 +158,6 @@ class RecipesPage extends PageManager{
 
       const id = e.target.querySelector('input[name="recipe-id"]').value
       const name = e.target.querySelector('input[name="name"]').value
-      console.log("Name")
-      console.log(name)
       const servings = e.target.querySelector('input[name="servings"]').value
 
       // console.log(id)
@@ -195,29 +193,39 @@ class RecipesPage extends PageManager{
 
 
       // Establish recipe object and set old data
-      const recipe = this.getRecipeById(id)
+      // const recipe = this.getRecipeById(id)
       // const oldRecipe = new Recipe({id, name, servings, totalCost, costPerServing, ingredients})
       // const oldRecipe = new Recipe({id, name, servings, recipe_ingredients_attributes})
-      const oldRecipe = this.getRecipeById(id)
+      // const oldRecipe = this.getRecipeById(id)
 
       // Set params and optimistically render
-      recipe.name = name
-      recipe.servings = servings
-      recipe.ingredients = recipeIngredientsAttributes
-      this.renderRecipe(recipe)
+      // recipe.name = name
+      // recipe.servings = servings
+      // recipe.ingredients = recipeIngredientsAttributes
+      // this.renderRecipe(recipe)
 
       // Send fetch. If error, reset this.recipe to old 
       try{
-          const {name, servings, recipeIngredientsAttributes, id} = await this.adapter.updateRecipe(params)
+          const resp = await this.adapter.updateRecipe(params)
+          // const {name, servings, recipeIngredientsAttributes, id} = await this.adapter.updateRecipe(params)
+          console.log("Successful patch request!")
+          
+          this.recipe = new Recipe(resp)
+          console.log(this.recipe)
+          // this.recipes.This.remove()
+
+          // let updatedRecipe = this.getRecipeById(id)
+
+
       }catch(err){
           // this.recipe.name = oldRecipe.name
           // this.recipe.servings = oldRecipe.servings
           // this.recipe.totalCost = oldRecipe.totalCost
           // this.recipe.costPerServing = oldRecipe.costPerServing
           // this.recipe.ingredients = oldRecipe.ingredients
-          console.log("Old Recipe!")
-          console.log(oldRecipe)
-          this.renderRecipe(oldRecipe)
+          // console.log("Old Recipe!")
+          // console.log(oldRecipe)
+          this.renderRecipe()
           this.handleError(err)
       }
       
