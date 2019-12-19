@@ -48,6 +48,11 @@ class RecipeAdapter{
       3: {ingredient_id: 18, ingredient_amount:12, ingredient_unit:"oz", _destroy: 0, id: 14},
     }
   */
+
+  /* Current update error
+ @details={:"recipe_ingredients.ingredient"=>[{:error=>:blank}]},
+ @messages={:"recipe_ingredients.ingredient"=>["must exist"]}>
+  */
   async updateRecipe(params){
       const { name, servings, recipeIngredientsAttributes, id} = params
       const url = `${this.baseURL}/recipes/${id}`
