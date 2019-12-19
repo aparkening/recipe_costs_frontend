@@ -139,6 +139,7 @@ class IngredientPage extends PageManager{
     }
   }
 
+  // Render all ingredients table
   renderIngredients(){
     const title = "<h1>Ingredients</h1>"
 
@@ -162,8 +163,6 @@ class IngredientPage extends PageManager{
       </table>
     `
     let ingRows = this.ingredients.map(ing => ing.showIngTr).join('')
-
-// console.log("Trying to render table.")
 
     // Stitch together title, button, table, rows
     this.container.innerHTML = title + addButton + tableTop + ingRows + tableBottom
