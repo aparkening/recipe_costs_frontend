@@ -10,10 +10,10 @@ class Ingredient{
   }
 
   // Render tr for each ingredient
-  showIngTr(){
+  get showIngTr(){
     return (`
-    <tr>
-      <th><small><a class="text-muted" href="#">Edit</a> | <a class="text-muted" data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="#">Delete</a></small></th>
+    <tr data-id="${this.id}">
+      <th><small><a class="text-muted" href="#" id="edit" data-id="${this.id}">Edit</a> | <a class="text-muted" data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="#" id="delete" data-id="${this.id}">Delete</a></small></th>
       <th scope="row">${this.name}</th>
       <td>$ ${this.cost}</td>
       <td>${this.costSize}</td>
