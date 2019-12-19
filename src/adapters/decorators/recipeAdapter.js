@@ -96,8 +96,7 @@ class RecipeAdapter{
     const url = `${this.baseURL}/recipes/${id}`
     const res = await fetch(url, {
         method: 'DELETE',
-        headers: this.headers,
-        body: JSON.stringify(body)
+        headers: this.headers
     })
     await this.baseAdapter.checkStatus(res)
     return await res.json()
