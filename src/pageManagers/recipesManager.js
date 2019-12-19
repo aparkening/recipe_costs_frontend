@@ -159,8 +159,6 @@ class RecipesPage extends PageManager{
       console.log("Handling submit.")
       try{
         const resp = await this.adapter.deleteRecipe(id)
-        // const {name, servings, recipeIngredientsAttributes, id} = await this.adapter.updateRecipe(params)
-        // console.log("Successful delete request!")
 
         // Reload full recipe list
         this.fetchAndRenderPageResources()
@@ -170,8 +168,6 @@ class RecipesPage extends PageManager{
           type: "success",
           msg: "Recipe deleted"
         }) 
-
-
       }catch(err){
         console.log(err)
         this.handleError(err)
