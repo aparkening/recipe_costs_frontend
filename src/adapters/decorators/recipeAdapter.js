@@ -9,7 +9,25 @@ class RecipeAdapter{
       return this.baseAdapter.headers
   }
 
-  // Create recipe
+  // Get all records
+  async getRecipes(){
+    const res = await fetch(`${this.baseURL}/recipes`, {
+      headers: this.headers
+    })
+    await this.baseAdapter.checkStatus(res)
+    return await res.json()
+  }
+
+  // Get single record
+  async getRecipe(id){
+    const res = await fetch(`${this.baseURL}/recipes/${id}`, {
+      headers: this.headers
+    })
+    await this.baseAdapter.checkStatus(res)
+    return await res.json()
+  }
+
+  // Create record
   async createRecipe(params){
     // Could pass in recipe obj and make params
     const { name, servings, recipe_ingredients_attributes, id} = params
@@ -71,25 +89,6 @@ class RecipeAdapter{
       await this.baseAdapter.checkStatus(res)
       return await res.json()
   }
-
-  // Fetch all recipes
-  async getRecipes(){
-    const res = await fetch(`${this.baseURL}/recipes`, {
-      headers: this.headers
-    })
-    await this.baseAdapter.checkStatus(res)
-    return await res.json()
-  }
-
-  // Fetch single recipe
-  async getRecipe(params){
-    const res = await fetch(`${this.baseURL}/recipes/31`, {
-      headers: this.headers
-    })
-    await this.baseAdapter.checkStatus(res)
-    return await res.json()
-  }
-
 
   // Delete recipe
   async deleteRecipe(id){
