@@ -55,4 +55,16 @@ class Ingredient{
 
     return html
   }
+
+
+  // Render ingredients as select list
+  renderIngOptions(){
+    return (`
+    <option value=""></option>
+    <option value="1">seaweed</option>
+    <option value="2">all-purpose flour</option>
+    <option value="3">bread flour</option>
+    `)
+  }
+
 }
