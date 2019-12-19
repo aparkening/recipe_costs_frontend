@@ -232,7 +232,7 @@ class RecipesPage extends PageManager{
   }
 
 
-  // Fetch recipes and render page
+  // Fetch recipes and render main recipes page
   async fetchAndRenderPageResources(){
     try{
 
