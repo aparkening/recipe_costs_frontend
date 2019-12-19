@@ -160,12 +160,17 @@ class RecipesPage extends PageManager{
       try{
         const resp = await this.adapter.deleteRecipe(id)
         // const {name, servings, recipeIngredientsAttributes, id} = await this.adapter.updateRecipe(params)
-        console.log("Successful delete request!")
+        // console.log("Successful delete request!")
 
         // Reload full recipe list
         this.fetchAndRenderPageResources()
 
         // Alert user of success
+        this.handleAlert({
+          type: "success",
+          msg: "Recipe deleted"
+        }) 
+
 
       }catch(err){
         console.log(err)
