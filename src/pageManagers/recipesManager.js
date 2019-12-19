@@ -59,9 +59,10 @@ class RecipesPage extends PageManager{
           this.handleRecipeUpdate(recipeId)
           break;
         case 'delete':
-          // console.log('delete clicked!')
-          console.log(e.target.parentNode.parentNode.parentNode);
+          console.log('delete clicked!')
+          // console.log(e.target.parentNode.parentNode.parentNode);
           // e.target.parentNode.parentNode.parentNode.remove();
+          this.handleRecipeDelete(recipeId)
           // Send delete to server
           break;
         default:
@@ -75,33 +76,17 @@ class RecipesPage extends PageManager{
     // Handle detail recipe edit
     handleRecipeEditClick(e){
       e.preventDefault()
-
-      console.log('edit clicked!');
-
       // Get recipe id and recipe object
       const recipeId = e.target.parentNode.dataset.id
       this.handleRecipeUpdate(recipeId)
-
     }
 
     // Handle detail recipe delete
     handleRecipeDeleteClick(e){
       e.preventDefault()
-
       // Get recipe id and recipe object
       const recipeId = e.target.parentNode.dataset.id
-      console.log(recipeId)
-      // this.recipe = this.recipes.find(r => r.id == recipeId)
-      console.log(this.recipe.id)
-
-      // console.log(recipeId)
-      // console.log(this.recipe)
-
-      console.log('delete clicked!');
-
-      // if id matches this.recipe.id, go to edit
-
-      // else throw error
+      this.handleRecipeDelete(recipeId)
     }
 
     handleRecipeUpdate(recipeId){
@@ -141,11 +126,53 @@ class RecipesPage extends PageManager{
       }
     }
 
+    handleRecipeDelete(recipeId){
+      // console.log(recipeId)
+
+      // Find existing recipe by id
+      const foundRecipe = this.getRecipeById(recipeId)
+
+      // If recipe from id exists, render form and call new bindings and event listeners
+      if (foundRecipe) {
+        console.log("Real recipe!")
+        // console.log(foundRecipe)
+        // this.recipe = foundRecipe
+        this.handleDeleteSubmit(recipeId)
+      }else{
+        // else throw error
+        this.handleError({
+            type: "404 Not Found",
+            msg: "Recipe was not found"
+        })
+      }
+    }
+
+
     // // Go to edit recipe screen
     // handleEditClick(e){
     //   e.preventDefault()
     //   this.redirect('edit-recipe')
     // }
+
+
+    async handleDeleteSubmit(id){
+      console.log("Handling submit.")
+      try{
+        const resp = await this.adapter.deleteRecipe(id)
+        // const {name, servings, recipeIngredientsAttributes, id} = await this.adapter.updateRecipe(params)
+        console.log("Successful delete request!")
+
+        // Reload full recipe list
+        this.fetchAndRenderPageResources()
+
+        // Alert user of success
+
+      }catch(err){
+        console.log(err)
+        this.handleError(err)
+      }
+    }
+
 
     // Handle form submit
     async handleUpdateSubmit(e){
