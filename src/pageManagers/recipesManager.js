@@ -63,7 +63,6 @@ class RecipesPage extends PageManager{
           // console.log(e.target.parentNode.parentNode.parentNode);
           // e.target.parentNode.parentNode.parentNode.remove();
           this.handleRecipeDelete(recipeId)
-          // Send delete to server
           break;
         default:
           console.log('Invalid item');
@@ -126,26 +125,9 @@ class RecipesPage extends PageManager{
       }
     }
 
-    handleRecipeDelete(recipeId){
-      // console.log(recipeId)
-
-      // Find existing recipe by id
-      const foundRecipe = this.getRecipeById(recipeId)
-
-      // If recipe from id exists, render form and call new bindings and event listeners
-      if (foundRecipe) {
-        console.log("Real recipe!")
-        // console.log(foundRecipe)
-        // this.recipe = foundRecipe
-        this.handleDeleteSubmit(recipeId)
-      }else{
-        // else throw error
-        this.handleError({
-            type: "404 Not Found",
-            msg: "Recipe was not found"
-        })
-      }
-    }
+    // handleRecipeDelete(recipeId){
+    //   // console.log(recipeId)
+    // }
 
 
     // // Go to edit recipe screen
@@ -155,42 +137,77 @@ class RecipesPage extends PageManager{
     // }
 
 
-    async handleDeleteSubmit(id){
-      console.log("Handling submit.")
-      
-      // const recipe = getRecipeById(id)
-      // this.recipes = .filter
+    // If real recipe, delete from this.recipes
+    async handleRecipeDelete(id){      
+      // Find existing recipe by id
+      const foundRecipe = this.getRecipeById(id)
+
+      // If recipe from id exists, render form and call new bindings and event listeners
+      if (foundRecipe) {
+        // Find index of recipe to remove
+        const recipeIndex = this.recipes.findIndex(recipe => recipe.id === foundRecipe.id)
+
+        // Remove recipe and save it, in case error later
+        const savedRecipe = this.recipes.splice(recipeIndex, 1)
+        // console.log(savedRecipe)
+
+        // Remove recipe from this.recipes
+        // this.recipes = this.recipes.filter(r => r.id !== foundRecipe.id)
+        console.log("New Recipes")
+        console.log(this.recipes)
+        // set this.recipes
+
+        // console.log("Saved Recipe")
+        // console.log(savedRecipe)
+        
+        // Optimistically render new recipe list
+        this.renderRecipes()
+
 
       // findByIndex to get index
       // Use index to save to this.recipes
       // const oldRecipe = 
       // Use splice to remove from this.recipes
       
+        try{
+          const resp = await this.adapter.deleteRecipe(id)
+  
+          // Alert user of success
+          this.handleAlert({
+            type: "success",
+            msg: "Recipe deleted"
+          }) 
+        }catch(err){
+          // If failure, rerender list without db call, keeping recipe in same array location
+          this.recipes[recipeIndex] = savedRecipe
+          this.recipes = this.recipes.flat()
+          console.log("Old recipe pushed back")
+          console.log(this.recipes)
 
-      // Update list in place from this.recipes?
-      // rerender without db call
-
-      try{
-        const resp = await this.adapter.deleteRecipe(id)
-
-        // Reload full recipe list
-        this.fetchAndRenderPageResources()
-
-        // Alert user of success
-        this.handleAlert({
-          type: "success",
-          msg: "Recipe deleted"
-        }) 
-      }catch(err){
-        console.log(err)
-        this.handleError(err)
-
-
-// this.recipes.push(recipe found earlier)
-
-
+          this.renderRecipes()
+          this.handleError(err)
+        }
+      }else{
+        // Else show recipt not found
+        this.handleError({
+            type: "404 Not Found",
+            msg: "Recipe was not found"
+        })
       }
     }
+
+
+
+    // cloneObject(obj) {
+	  //   var clone = {};
+	  //   for(var i in obj) {
+	  //       if(obj[i] != null &&  typeof(obj[i])=="object")
+	  //           clone[i] = this.cloneObject(obj[i]);
+	  //       else
+	  //           clone[i] = obj[i];
+	  //   }
+	  //   return clone;
+	  // }
 
 
     // Handle form submit
