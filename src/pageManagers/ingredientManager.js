@@ -18,6 +18,12 @@ class IngredientPage extends PageManager{
     table.addEventListener('click', this.handleTableClick.bind(this))
   }
 
+  // Bind and listen after form load
+  formBindingsAndEventListeners(){
+    const form = this.container.querySelector('form')
+    form.addEventListener('submit', this.handleNewClick.bind(this))
+  }
+
 
 /* ---- Link/Click Handlers ---- */
   // Handle show, edit, and delete within recipe table
@@ -117,6 +123,14 @@ class IngredientPage extends PageManager{
     }
   }
 
+  // Handle new click
+  handleNewClick(e){
+    e.preventDefault()
+    // Get recipe id and recipe object
+    console.log('new clicked!');
+    this.renderNewForm()
+  }
+
 
 /* ---- Fetchers and Renderers ---- */
   async fetchAndRenderPageResources(){
@@ -168,6 +182,12 @@ class IngredientPage extends PageManager{
 
     // Bind and listen to new html
     this.allIngBindingsAndEventListeners()
+  }
+
+  // Render new form
+  renderNewForm(){
+    this.container.innerHTML = Ingredient.ingForm()
+    this.formBindingsAndEventListeners()
   }
 
   // Render initial html
