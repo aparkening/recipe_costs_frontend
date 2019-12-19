@@ -121,12 +121,16 @@ class IngredientPage extends PageManager{
 /* ---- Fetchers and Renderers ---- */
   async fetchAndRenderPageResources(){
     try{
-      const ingredientObj = await this.adapter.getIngredients()
-      // console.log(ingredientObj)
+      const ingObj = await this.adapter.getIngredients()
 
-      this.ingredients = ingredientObj.ingredients.map(ing => new Ingredient(ing))
-      // console.log(this.ingredients)
-        
+      // ingContainer contains ingredients and units
+      const ingContainer = ingObj.ingredients
+
+      // Map ingredients and units
+      this.ingredients = ingContainer.map(ing => new Ingredient(ing))
+      this.units = ingObj.units
+      
+      // Render table
       this.renderIngredients()
     }catch(err){
       this.handleError(err)
