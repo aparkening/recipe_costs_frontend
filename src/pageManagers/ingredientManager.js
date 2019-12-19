@@ -47,80 +47,75 @@ class IngredientPage extends PageManager{
     }
   }
 
-    // If ingredient found, allow update
-    async handleUpdate(id){      
-      // Find existing recipe by id
-      const foundIng = this.getIngById(id)
+  // If ingredient found, allow update
+  async handleUpdate(id){      
+    // Find existing recipe by id
+    const foundIng = this.getIngById(id)
 
-      if (foundIng) {
-        console.log("Ingredient found. Rendering Update.")
-      }else{
-        this.handleError({
-          type: "404 Not Found",
-          msg: "Ingredient was not found"
-        })
-      }
+    if (foundIng) {
+      console.log("Ingredient found. Rendering Update.")
+    }else{
+      this.handleError({
+        type: "404 Not Found",
+        msg: "Ingredient was not found"
+      })
     }
+  }
 
-    // If ingredient found, delete it
-    async handleDelete(id){      
-      // Find existing recipe by id
-      const foundIng = this.getIngById(id)
+  // If ingredient found, delete it
+  async handleDelete(id){      
+    // Find existing recipe by id
+    const foundObj = this.getIngById(id)
 
-      if (foundIng) {
-        console.log("Ingredient found. Rendering Delete.")
+    if (foundObj) {
+      console.log("Ingredient found. Rendering Delete.")
 
-      //   // Find index of recipe to remove
-      //   const recipeIndex = this.recipes.findIndex(recipe => recipe.id === foundRecipe.id)
+      // Find index of recipe to remove
+      const index = this.ingredients.findIndex(obj => obj.id === foundObj.id)
 
-      //   // Remove recipe and save it, in case error later
-      //   const savedRecipe = this.recipes.splice(recipeIndex, 1)
-      //   // console.log(savedRecipe)
+      // Remove recipe and save it, in case error later
+      const savedResource = this.ingredients.splice(index, 1)
+      // console.log(savedRecipe)
 
-      //   // Remove recipe from this.recipes
-      //   // this.recipes = this.recipes.filter(r => r.id !== foundRecipe.id)
-      //   console.log("New Recipes")
-      //   console.log(this.recipes)
-      //   // set this.recipes
+      // Remove recipe from this.recipes
+      // this.recipes = this.recipes.filter(r => r.id !== foundRecipe.id)
+      console.log("New Ingredients")
+      console.log(this.ingredients)
+      // set this.recipes
 
-      //   // console.log("Saved Recipe")
-      //   // console.log(savedRecipe)
-        
-      //   // Optimistically render new recipe list
-      //   this.renderRecipes()
-
-
-      // // findByIndex to get index
-      // // Use index to save to this.recipes
-      // // const oldRecipe = 
-      // // Use splice to remove from this.recipes
+      // console.log("Saved Recipe")
+      // console.log(savedRecipe)
       
-      //   try{
-      //     const resp = await this.adapter.deleteRecipe(id)
+      // Optimistically render new list
+      this.renderIngredients()
+    
+      // Try updating server recipe
+      try{
+        const resp = await this.adapter.deleteIngredient(id)
 
-      //     // Alert user of success
-      //     this.handleAlert({
-      //       type: "success",
-      //       msg: "Recipe deleted"
-      //     }) 
-      //   }catch(err){
-      //     // If failure, rerender list without db call, keeping recipe in same array location
-      //     this.recipes[recipeIndex] = savedRecipe
-      //     this.recipes = this.recipes.flat()
-      //     console.log("Old recipe pushed back")
-      //     console.log(this.recipes)
+        // Alert user of success
+        this.handleAlert({
+          type: "success",
+          msg: "Ingredient deleted"
+        }) 
+      }catch(err){
+        // If failure, rerender list without db call, keeping resource in same array location
+        this.ingredients[index] = savedResource
+        this.ingredients = this.ingredients.flat()
+        
+        console.log("Old ingredient pushed back")
+        console.log(this.ingredients)
 
-      //     this.renderRecipes()
-      //     this.handleError(err)
-      //   }
-      }else{
-        this.handleError({
-          type: "404 Not Found",
-          msg: "Ingredient was not found"
-        })
+        this.renderIngredients()
+        this.handleError(err)
       }
+    }else{
+      this.handleError({
+        type: "404 Not Found",
+        msg: "Ingredient was not found"
+      })
     }
-
+  }
 
 
 /* ---- Fetchers and Renderers ---- */
