@@ -11,18 +11,24 @@ class Alert{
   }
 
     // Render alert in bootstrap styling
-    render(alertObj, timeout){
+    render(alertObj = null, timeout){
+      // If no explicit object, set general error
+      if (alertObj){
         const { type, msg } = alertObj
-        const html = `
-        <div class="alert alert-${type}" role="alert">
-            ${msg}
-        </div>
-        `
-        this.container.innerHTML = html
-        
-        // Display alert for time set in timeout
-        this.timeout = setTimeout(() => {
-            this.container.innerHTML = ''
+      }else{
+        const type = "danger"
+        const msg = "Internal Error"
+      }
+      const html = `
+      <div class="alert alert-${type}" role="alert">
+          ${msg}
+      </div>
+      `
+      this.container.innerHTML = html
+      
+      // Display alert for time set in timeout
+      this.timeout = setTimeout(() => {
+          this.container.innerHTML = ''
         }, timeout)
     }
 
