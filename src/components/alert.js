@@ -11,14 +11,15 @@ class Alert{
   }
 
     // Render alert in bootstrap styling
-    render(alertObj = null, timeout){
+    render(alertObj = undefined, timeout){
+      let { type, msg } = alertObj
+
       // If no explicit object, set general error
-      if (alertObj){
-        const { type, msg } = alertObj
-      }else{
-        const type = "danger"
-        const msg = "Internal Error"
+      if (typeof type === "undefined"){
+        type = "danger"
+        msg = "Internal Error"
       }
+
       const html = `
       <div class="alert alert-${type}" role="alert">
           ${msg}
