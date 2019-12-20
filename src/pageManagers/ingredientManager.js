@@ -14,17 +14,18 @@ class IngredientPage extends PageManager{
 
   // Bind and listen after all resources load
   indexBindingsAndEventListeners(){
-    const newButton = this.container.querySelector('a#new-resource')
+    this.newContainer = document.querySelector('#new-resource')
+    const newButton = this.container.querySelector('#new-button')
     const table = this.container.querySelector('table')
 
-    newButton.addEventListener('click', this.handleTableClick.bind(this))
+    newButton.addEventListener('click', this.handleNewClick.bind(this))
     table.addEventListener('click', this.handleTableClick.bind(this))
   }
 
   // Bind and listen after form load
   formBindingsAndEventListeners(){
     const form = this.container.querySelector('form')
-    form.addEventListener('submit', this.handleNewClick.bind(this))
+    form.addEventListener('submit', this.handleSubmitClick.bind(this))
   }
 
 
@@ -62,6 +63,12 @@ class IngredientPage extends PageManager{
         console.log('Invalid link');
         break;
     }
+  }
+
+  // Handle form submit
+  async handleSubmitClick(e){
+    e.preventDefault()
+    console.log("Submitting form")
   }
 
   // If ingredient found, allow update
@@ -159,7 +166,7 @@ class IngredientPage extends PageManager{
   renderIngredients(){
     const title = "<h1>Ingredients</h1>"
 
-    const addButton = `<div class="mt-3 mb-3"><a class="btn btn-primary" href="#" role="button" id="new-resource">Add new ingredient</a></div>`
+    const addButton = `<div class="mt-3 mb-3" id="new-resource"><a class="btn btn-primary" href="#" role="button" id="new-button">Add new ingredient</a></div>`
 
     const tableTop = `
       <table class="table table-striped">
@@ -189,7 +196,7 @@ class IngredientPage extends PageManager{
 
   // Render new form
   renderNewForm(){
-    this.container.innerHTML = Ingredient.ingForm()
+    this.newContainer.innerHTML = Ingredient.ingForm()
     this.formBindingsAndEventListeners()
   }
 
