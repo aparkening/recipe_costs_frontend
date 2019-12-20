@@ -83,24 +83,18 @@ class Recipe{
     }
 
     html = html + `
-        &nbsp;</td><td><small><a class="text-muted" href="#" id="edit" data-id="${this.id}">Edit</a> | <a class="text-muted" data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="#" id="delete" data-id="${this.id}">Delete</a></small></td>
+        &nbsp;</td>
+        <td>
+          <small>
+            <!-- <a class="text-muted" href="#" id="edit" data-id="${this.id}">Edit</a> | -->
+            <a class="text-muted" data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="#" id="delete" data-id="${this.id}">Delete</a>
+          </small>
+        </td>
       </tr>
     `
     return html
   }
 
-  // Get ingredients and render as select list
-  async fetchAndRenderIngredients(){
-    try{
-      const ingAdapter = new IngredientAdapter(new BaseAdapter())
-      const allIngObj = await ingAdapter.getIngredients()
-      this.allIngredients = allIngObj.ingredients.map(ing => new Ingredient(ing))  
-      this.renderIngSelect()
-    }catch(err){
-      this.handleError(err)
-      // console.log(err)
-    }
-  }
 
   // Render ingredients as select list
   renderIngSelect(){
@@ -174,7 +168,6 @@ class Recipe{
 
       </div><!-- / form-ingredient -->
     </div>
-
 
         <div class="form-group">
           <button type="submit" name="commit" class="btn btn-lg btn-primary btn-block">${recipe ? 'Update' : 'Create'} Recipe</button>
