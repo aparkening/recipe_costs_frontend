@@ -62,9 +62,7 @@ class IngredientPage extends PageManager{
           this.handleUpdate(e)
           break;
         case 'delete':
-          console.log('delete clicked!')
-          // console.log(e.target.parentNode.parentNode.parentNode);
-          // e.target.parentNode.parentNode.parentNode.remove();
+          // console.log('delete clicked!')
           this.deleteIng(e)
           break;
         default:
@@ -163,20 +161,20 @@ class IngredientPage extends PageManager{
     const foundObj = this.getIngById(e.target.dataset.id)
 
     if (foundObj) {
-      console.log("Ingredient found. Rendering Delete.")
+      // console.log("Ingredient found. Rendering Delete.")
 
       // Find index of recipe to remove
       const index = this.ingredients.findIndex(obj => obj.id === foundObj.id)
 
       // Remove recipe and save it, in case error later
       const savedResource = this.ingredients.splice(index, 1)
-      console.log("Saved Ingredient")
-      console.log(savedResource)
+      // console.log("Saved Ingredient")
+      // console.log(savedResource)
 
       // Remove recipe from this.recipes
       // this.recipes = this.recipes.filter(r => r.id !== foundRecipe.id)
-      console.log("New Ingredients")
-      console.log(this.ingredients)
+      // console.log("New Ingredients")
+      // console.log(this.ingredients)
       
       // Optimistically render new list
       this.renderIngredients()
@@ -193,10 +191,9 @@ class IngredientPage extends PageManager{
       }catch(err){
         // If failure, rerender list without db call, keeping resource in same array location
         this.ingredients[index] = savedResource
-        this.ingredients = this.ingredients.flat()
-        
-        console.log("Old ingredient pushed back")
-        console.log(this.ingredients)
+        this.ingredients = this.ingredients.flat()        
+        // console.log("Old ingredient pushed back")
+        // console.log(this.ingredients)
 
         this.renderIngredients()
         this.handleError(err)
