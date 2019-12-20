@@ -59,10 +59,7 @@ class RecipesPage extends PageManager{
           this.handleRecipeUpdate(recipeId)
           break;
         case 'delete':
-          console.log('delete clicked!')
-          // console.log(e.target.parentNode.parentNode.parentNode);
-          // e.target.parentNode.parentNode.parentNode.remove();
-          this.handleRecipeDelete(recipeId)
+          this.deleteRecipe(recipeId)
           break;
         default:
           console.log('Invalid item');
@@ -85,7 +82,7 @@ class RecipesPage extends PageManager{
       e.preventDefault()
       // Get recipe id and recipe object
       const recipeId = e.target.parentNode.dataset.id
-      this.handleRecipeDelete(recipeId)
+      this.deleteRecipe(recipeId)
     }
 
     handleRecipeUpdate(recipeId){
@@ -138,7 +135,7 @@ class RecipesPage extends PageManager{
 
 
     // If real recipe, delete from this.recipes
-    async handleRecipeDelete(id){      
+    async deleteRecipe(id){      
       // Find existing recipe by id
       const foundRecipe = this.getRecipeById(id)
 
