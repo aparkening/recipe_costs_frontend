@@ -24,7 +24,10 @@ class IngredientPage extends PageManager{
 
   // Bind and listen after form load
   formBindingsAndEventListeners(){
+    const cancelButton = this.container.querySelector('#cancel')
     const form = this.container.querySelector('form')
+
+    cancelButton.addEventListener('click', this.handleCancelClick.bind(this))
     form.addEventListener('submit', this.handleSubmitClick.bind(this))
   }
 
@@ -63,6 +66,12 @@ class IngredientPage extends PageManager{
         console.log('Invalid link');
         break;
     }
+  }
+
+  // Handel form cancel click
+  handleCancelClick(e){
+    e.preventDefault()
+
   }
 
   // Handle form submit
@@ -166,7 +175,7 @@ class IngredientPage extends PageManager{
   renderIngredients(){
     const title = "<h1>Ingredients</h1>"
 
-    const addButton = `<div class="mt-3 mb-3" id="new-resource"><a class="btn btn-primary" href="#" role="button" id="new-button">Add new ingredient</a></div>`
+    const addButton = `<div class="mt-3 mb-3" id="new-resource">${this.renderNewBtn()}</div>`
 
     const tableTop = `
       <table class="table table-striped">
@@ -213,6 +222,13 @@ class IngredientPage extends PageManager{
   // Grab recipe object from id
   getIngById(id){
     return this.ingredients.find(obj => obj.id == id)
+  }
+
+  // Button HTML
+  renderNewBtn(){
+    return (`
+      <a class="btn btn-primary" href="#" role="button" id="new-button">Add new ingredient</a>
+    `)
   }
 
 }
