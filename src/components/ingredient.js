@@ -59,7 +59,8 @@ class Ingredient{
   // Show new and edit ingredient form (class method)
   static ingForm(ing = null){
     return (`
-    <h1>${ing ? 'Edit' : 'New'} Ingredient</h1>
+    <fieldset class="border border-muted rounded px-3 pt-2">
+    <h3>${ing ? 'Edit' : 'New'} Ingredient</h3>
     <form id="${ing ? 'edit' : 'new'}-ingredient-form">
         ${ing ? '<input type="hidden" value="' + ing.id + '" name="ingredient-id">' : '' }
 
@@ -88,9 +89,12 @@ class Ingredient{
       </div>
 
       <div class="form-group">
-        <button type="submit" name="commit" class="btn btn-lg btn-primary btn-block">${recipe ? 'Update' : 'Create'} Ingredient</button>
+        <button type="submit" name="commit" class="btn btn-lg btn-primary">${ing ? 'Update' : 'Create'} Ingredient</button>
+        &nbsp;&nbsp; 
+        <button type="button" name="cancel" class="btn btn-secondary btn-lg">Cancel</button>
       </div>
     </form>
+    </fieldset>
     `)
 
   }
