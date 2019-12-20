@@ -23,12 +23,16 @@ class IngredientPage extends PageManager{
   }
 
   // Bind and listen after form load
-  newFormBindingsAndEventListeners(){
+  formBindingsAndEventListeners(){
     const cancelButton = this.container.querySelector('#cancel')
     const form = this.container.querySelector('form')
+    form 
+
+    // Set listener based on form id
+    form.id === "new-ingredient-form" ?  form.addEventListener('submit', this.handleNewSubmitClick.bind(this)) : form.addEventListener('submit', this.handleUpdateSubmitClick.bind(this))
 
     cancelButton.addEventListener('click', this.handleCancelClick.bind(this))
-    form.addEventListener('submit', this.handleNewSubmitClick.bind(this))
+    // form.addEventListener('submit', this.handleNewSubmitClick.bind(this))
   }
 
 
@@ -37,7 +41,7 @@ class IngredientPage extends PageManager{
   // Handle new click
   handleNewClick(e){
     e.preventDefault()
-    console.log('new clicked!');
+    // console.log('new clicked!');
     this.renderNewForm()
   }
 
@@ -151,8 +155,8 @@ class IngredientPage extends PageManager{
 
   // Render new form
   renderNewForm(){
-    this.newContainer.innerHTML = Ingredient.ingForm("new", units)
-    this.newFormBindingsAndEventListeners()
+    this.newContainer.innerHTML = Ingredient.IngForm("new", this.units)
+    this.formBindingsAndEventListeners()
   }
 
   // Render initial html
