@@ -13,8 +13,11 @@ class IngredientPage extends PageManager{
   }
 
   // Bind and listen after all resources load
-  allIngBindingsAndEventListeners(){
+  indexBindingsAndEventListeners(){
+    const newButton = this.container.querySelector('a#new-resource')
     const table = this.container.querySelector('table')
+
+    newButton.addEventListener('click', this.handleTableClick.bind(this))
     table.addEventListener('click', this.handleTableClick.bind(this))
   }
 
@@ -26,6 +29,14 @@ class IngredientPage extends PageManager{
 
 
 /* ---- Link/Click Handlers ---- */
+
+  // Handle new click
+  handleNewClick(e){
+    e.preventDefault()
+    console.log('new clicked!');
+    this.renderNewForm()
+  }
+
   // Handle show, edit, and delete within recipe table
   handleTableClick(e){
     e.preventDefault()
@@ -123,14 +134,6 @@ class IngredientPage extends PageManager{
     }
   }
 
-  // Handle new click
-  handleNewClick(e){
-    e.preventDefault()
-    // Get recipe id and recipe object
-    console.log('new clicked!');
-    this.renderNewForm()
-  }
-
 
 /* ---- Fetchers and Renderers ---- */
   async fetchAndRenderPageResources(){
@@ -181,7 +184,7 @@ class IngredientPage extends PageManager{
     this.container.innerHTML = title + addButton + tableTop + ingRows + tableBottom
 
     // Bind and listen to new html
-    this.allIngBindingsAndEventListeners()
+    this.indexBindingsAndEventListeners()
   }
 
   // Render new form
