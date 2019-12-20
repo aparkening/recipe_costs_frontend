@@ -57,7 +57,10 @@ class Ingredient{
   }
 
   // Show new and edit ingredient form (class method)
-  static ingForm(ing = null){
+  static IngForm(ing = "new", units){
+    // If new, set ing to null for easier later logic
+    ing === "new" ? ing=null : ''
+
     return (`
     <fieldset class="border border-muted rounded px-3 pt-2">
     <h3>${ing ? 'Edit' : 'New'} Ingredient</h3>
@@ -98,6 +101,55 @@ class Ingredient{
     `)
 
   }
+
+
+/* Old combined form. May use again.
+
+  // Show new and edit ingredient form (class method)
+  static newIngForm(units){
+    return (`
+    <fieldset class="border border-muted rounded px-3 pt-2">
+    <h3>${ing ? 'Edit' : 'New'} Ingredient</h3>
+    <form id="${ing ? 'edit' : 'new'}-ingredient-form">
+        ${ing ? '<input type="hidden" value="' + ing.id + '" name="ingredient-id">' : '' }
+
+      <div class="form-group">
+        <label for="name">Name*</label>
+        <input class="form-control" required="required" type="text" value="${ing ? ing.name : ''}" name="name" id="name">
+      </div>
+
+      <div class="form-group">
+        <label for="cost">Cost</label>
+        <input class="form-control" placeholder="0.00" required="required" type="text" value="${ing ? ing.cost : ''}" name="cost" id="cost">
+        <small id="costHelp" class="form-text text-muted">No need to include $</small>
+      </div>
+
+      <div class="form-group">
+        <label for="cost_unit">Unit</label>
+        
+        <!-- make select list --> 
+
+        <input placeholder="example: lb" class="form-control" required="required" type="text" value="${ing ? ing.costUnit : ''}" name="cost_unit" id="cost_unit">
+      </div>    
+
+      <div class="form-group">
+        <label for="cost_size">Size</label>
+        <input class="form-control" placeholder="12.2" required="required" type="text" value="${ing ? ing.costSize : ''}" name="cost_size" id="cost_size">
+      </div>
+
+      <div class="form-group">
+        <button type="submit" name="commit" class="btn btn-lg btn-primary">${ing ? 'Update' : 'Create'} Ingredient</button>
+        &nbsp;&nbsp; 
+        <button type="button" name="cancel" class="btn btn-secondary btn-lg" id="cancel">Cancel</button>
+      </div>
+    </form>
+    </fieldset>
+    `)
+
+  }
+*/
+
+
 
 
   // Render ingredients as select list
