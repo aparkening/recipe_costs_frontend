@@ -112,7 +112,8 @@ class IngredientPage extends PageManager{
       // Map ingredients and units
       this.ingredients = ingContainer.map(ing => new Ingredient(ing))
       this.units = ingObj.units
-      
+      // console.log(this.units)
+
       // Render table
       this.renderIngredients()
     }catch(err){
