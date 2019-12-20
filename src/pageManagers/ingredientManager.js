@@ -156,7 +156,8 @@ class IngredientPage extends PageManager{
 
   // Render new form
   renderNewForm(){
-    this.newContainer.innerHTML = Ingredient.IngForm("new", this.units)
+    const ingredient = new Ingredient({id:'', name:'', cost:'', cost_size:'', cost_unit:''})
+    this.newContainer.innerHTML = ingredient.ingForm(this.units)
     this.formBindingsAndEventListeners()
   }
 
@@ -229,7 +230,11 @@ class IngredientPage extends PageManager{
     const name = e.target.querySelector('input[name="name"]').value.toLowerCase()
     const cost = e.target.querySelector('input[name="cost"]').value
     const cost_size = e.target.querySelector('input[name="cost_size"]').value
-    const cost_unit = e.target.querySelector('input[name="cost_unit"]').value
+    
+    let selectUnit = e.target.querySelector('select')
+    const cost_unit = selectUnit.options[selectUnit.selectedIndex].value
+
+    // const cost_unit = e.target.querySelector('input[name="cost_unit"]').value
     const params = { name, cost, cost_size, cost_unit }
 
     // Alert user submitting
