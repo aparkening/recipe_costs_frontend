@@ -53,19 +53,19 @@ class IngredientPage extends PageManager{
     if(e.target.tagName === "A"){
 
       // Get ingredient id and object
-      const ingId = e.target.dataset.id
+      // const ingId = e.target.dataset.id
       
       // Take action based on link id
       switch (e.target.id) {
         case 'edit':
           console.log('edit clicked!');
-          this.handleUpdate(ingId)
+          this.handleUpdate(e)
           break;
         case 'delete':
           console.log('delete clicked!')
           // console.log(e.target.parentNode.parentNode.parentNode);
           // e.target.parentNode.parentNode.parentNode.remove();
-          this.deleteIng(ingId)
+          this.deleteIng(e)
           break;
         default:
           console.log('Invalid link');
@@ -82,24 +82,9 @@ class IngredientPage extends PageManager{
   }
 
   // Handle form submit
-  async handleNewSubmitClick(e){
+  handleNewSubmitClick(e){
     e.preventDefault()
     this.createIng(e)
-  }
-
-  // If ingredient found, allow update
-  async handleUpdate(id){      
-    // Find existing recipe by id
-    const foundIng = this.getIngById(id)
-
-    if (foundIng) {
-      console.log("Ingredient found. Rendering Update.")
-    }else{
-      this.handleError({
-        type: "404 Not Found",
-        msg: "Ingredient was not found"
-      })
-    }
   }
 
 
@@ -172,9 +157,10 @@ class IngredientPage extends PageManager{
   }
 
   // If ingredient found, delete it
-  async deleteIng(id){      
+  async deleteIng(e){      
+
     // Find existing recipe by id
-    const foundObj = this.getIngById(id)
+    const foundObj = this.getIngById(e.target.dataset.id)
 
     if (foundObj) {
       console.log("Ingredient found. Rendering Delete.")
@@ -184,23 +170,20 @@ class IngredientPage extends PageManager{
 
       // Remove recipe and save it, in case error later
       const savedResource = this.ingredients.splice(index, 1)
-      // console.log(savedRecipe)
+      console.log("Saved Ingredient")
+      console.log(savedResource)
 
       // Remove recipe from this.recipes
       // this.recipes = this.recipes.filter(r => r.id !== foundRecipe.id)
       console.log("New Ingredients")
       console.log(this.ingredients)
-      // set this.recipes
-
-      // console.log("Saved Recipe")
-      // console.log(savedRecipe)
       
       // Optimistically render new list
       this.renderIngredients()
     
       // Try updating server recipe
       try{
-        const resp = await this.adapter.deleteIngredient(id)
+        const resp = await this.adapter.deleteIngredient(foundObj.id)
 
         // Alert user of success
         this.handleAlert({
@@ -275,6 +258,39 @@ class IngredientPage extends PageManager{
       this.handleError(err)
     }
   }
+
+
+  // Update ingredient
+  async updateIng(id){      
+
+
+    // Set params based on input
+    const name = e.target.querySelector('input[name="name"]').value.toLowerCase()
+    const cost = e.target.querySelector('input[name="cost"]').value
+    const cost_size = e.target.querySelector('input[name="cost_size"]').value
+    
+    let selectUnit = e.target.querySelector('select')
+    const cost_unit = selectUnit.options[selectUnit.selectedIndex].value
+
+    // const cost_unit = e.target.querySelector('input[name="cost_unit"]').value
+    const params = { name, cost, cost_size, cost_unit }
+
+
+
+    
+    // Find existing recipe by id
+    const foundIng = this.getIngById(id)
+
+    if (foundIng) {
+      console.log("Ingredient found. Rendering Update.")
+    }else{
+      this.handleError({
+        type: "404 Not Found",
+        msg: "Ingredient was not found"
+      })
+    }
+  }
+
 
 
 /* ---- Helpers ---- */
