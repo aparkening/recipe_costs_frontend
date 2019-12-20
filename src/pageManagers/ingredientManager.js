@@ -227,7 +227,6 @@ class IngredientPage extends PageManager{
     const cost_size = e.target.querySelector('input[name="cost_size"]').value
     const cost_unit = e.target.querySelector('input[name="cost_unit"]').value
     const params = { name, cost, cost_size, cost_unit }
-    console.log(params)
 
     // Alert user submitting
     this.handleAlert({
@@ -252,9 +251,6 @@ class IngredientPage extends PageManager{
         return 0 //default return value (no sorting)
       })
 
-      // console.log("New Ingredients List")
-      // console.log(this.ingredients)
-
       // Render new list
       this.renderIngredients()
        
@@ -268,7 +264,6 @@ class IngredientPage extends PageManager{
       this.handleError(err)
     }
   }
-
 
 
 /* ---- Helpers ---- */
