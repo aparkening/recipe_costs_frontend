@@ -71,7 +71,8 @@ class IngredientPage extends PageManager{
   // Handel form cancel click
   handleCancelClick(e){
     e.preventDefault()
-
+    this.newContainer.innerHTML = this.renderNewBtn()
+    this.indexBindingsAndEventListeners()
   }
 
   // Handle form submit
