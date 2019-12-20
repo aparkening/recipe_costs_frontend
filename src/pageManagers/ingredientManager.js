@@ -49,26 +49,28 @@ class IngredientPage extends PageManager{
   handleTableClick(e){
     e.preventDefault()
 
-    // Get ingredient id and object
-    const ingId = e.target.dataset.id
-    // this.recipe = this.recipes.find(r => r.id == recipeId)
-    // const foundIng = this.getIngById(ingId)
-    
-    // Take action based on link id
-    switch (e.target.id) {
-      case 'edit':
-        console.log('edit clicked!');
-        this.handleUpdate(ingId)
-        break;
-      case 'delete':
-        console.log('delete clicked!')
-        // console.log(e.target.parentNode.parentNode.parentNode);
-        // e.target.parentNode.parentNode.parentNode.remove();
-        this.deleteIng(ingId)
-        break;
-      default:
-        console.log('Invalid link');
-        break;
+    // If click is on href, take action
+    if(e.target.tagName === "A"){
+
+      // Get ingredient id and object
+      const ingId = e.target.dataset.id
+      
+      // Take action based on link id
+      switch (e.target.id) {
+        case 'edit':
+          console.log('edit clicked!');
+          this.handleUpdate(ingId)
+          break;
+        case 'delete':
+          console.log('delete clicked!')
+          // console.log(e.target.parentNode.parentNode.parentNode);
+          // e.target.parentNode.parentNode.parentNode.remove();
+          this.deleteIng(ingId)
+          break;
+        default:
+          console.log('Invalid link');
+          break;
+      }
     }
   }
 
