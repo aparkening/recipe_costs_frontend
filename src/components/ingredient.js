@@ -91,7 +91,7 @@ class Ingredient{
       <div class="form-group">
         <button type="submit" name="commit" class="btn btn-lg btn-primary">${ing ? 'Update' : 'Create'} Ingredient</button>
         &nbsp;&nbsp; 
-        <button type="button" name="cancel" class="btn btn-secondary btn-lg">Cancel</button>
+        <button type="button" name="cancel" class="btn btn-secondary btn-lg" id="cancel">Cancel</button>
       </div>
     </form>
     </fieldset>
