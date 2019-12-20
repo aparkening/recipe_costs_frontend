@@ -65,27 +65,27 @@ class Ingredient{
         ${ing ? '<input type="hidden" value="' + ing.id + '" name="ingredient-id">' : '' }
 
       <div class="form-group">
-        <label for="ingredient_name">Name*</label>
-        <input class="form-control" required="required" type="text" value="${ing ? ing.name : ''}" name="name" id="ingredient_name">
+        <label for="name">Name*</label>
+        <input class="form-control" required="required" type="text" value="${ing ? ing.name : ''}" name="name" id="name">
       </div>
 
       <div class="form-group">
-        <label for="ingredient_cost">Cost</label>
-        <input class="form-control" placeholder="0.00" required="required" type="text" value="${ing ? ing.cost : ''}" name="cost" id="ingredient_cost">
+        <label for="cost">Cost</label>
+        <input class="form-control" placeholder="0.00" required="required" type="text" value="${ing ? ing.cost : ''}" name="cost" id="cost">
         <small id="costHelp" class="form-text text-muted">No need to include $</small>
       </div>
 
       <div class="form-group">
-        <label for="ingredient_cost_unit">Unit</label>
+        <label for="cost_unit">Unit</label>
         
         <!-- make select list --> 
 
-        <input placeholder="example: lb" class="form-control" required="required" type="text" value="${ing ? ing.costUnit : ''}" name="cost_unit" id="ingredient_cost_unit">
+        <input placeholder="example: lb" class="form-control" required="required" type="text" value="${ing ? ing.costUnit : ''}" name="cost_unit" id="cost_unit">
       </div>    
 
       <div class="form-group">
-        <label for="ingredient_cost_size">Size</label>
-        <input class="form-control" placeholder="12.2" required="required" type="text" value="${ing ? ing.costSize : ''}" name="cost_size" id="ingredient_cost_size">
+        <label for="cost_size">Size</label>
+        <input class="form-control" placeholder="12.2" required="required" type="text" value="${ing ? ing.costSize : ''}" name="cost_size" id="cost_size">
       </div>
 
       <div class="form-group">
