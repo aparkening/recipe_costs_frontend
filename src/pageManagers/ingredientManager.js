@@ -23,12 +23,12 @@ class IngredientPage extends PageManager{
   }
 
   // Bind and listen after form load
-  formBindingsAndEventListeners(){
+  newFormBindingsAndEventListeners(){
     const cancelButton = this.container.querySelector('#cancel')
     const form = this.container.querySelector('form')
 
     cancelButton.addEventListener('click', this.handleCancelClick.bind(this))
-    form.addEventListener('submit', this.handleSubmitClick.bind(this))
+    form.addEventListener('submit', this.handleNewSubmitClick.bind(this))
   }
 
 
@@ -76,9 +76,8 @@ class IngredientPage extends PageManager{
   }
 
   // Handle form submit
-  async handleSubmitClick(e){
+  async handleNewSubmitClick(e){
     e.preventDefault()
-    console.log("Submitting form")
     this.createIng(e)
   }
 
@@ -152,8 +151,8 @@ class IngredientPage extends PageManager{
 
   // Render new form
   renderNewForm(){
-    this.newContainer.innerHTML = Ingredient.ingForm()
-    this.formBindingsAndEventListeners()
+    this.newContainer.innerHTML = Ingredient.ingForm("new", units)
+    this.newFormBindingsAndEventListeners()
   }
 
   // Render initial html
