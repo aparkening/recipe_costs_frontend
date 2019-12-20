@@ -29,7 +29,7 @@ class IngredientAdapter{
 
   // Create record
   async createIngredient(params){
-    const { name, cost, cost_size, cost_unit, id} = params
+    const { name, cost, cost_size, cost_unit } = params
     const url = `${this.baseURL}/ingredients`
     const body = {
         ingredient: {
