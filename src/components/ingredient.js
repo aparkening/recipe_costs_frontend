@@ -15,7 +15,7 @@ class Ingredient{
     <tr data-id="${this.id}">
       <th>
         <small>
-          <!-- <a class="text-muted" href="#" id="edit" data-id="${this.id}">Edit</a> | -->
+          <a class="text-muted" href="#" id="edit" data-id="${this.id}">Edit</a> &nbsp;|&nbsp;
           <a class="text-muted" data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="#" id="delete" data-id="${this.id}">Delete</a>
         </small>
       </th>
@@ -74,7 +74,7 @@ class Ingredient{
     return (`
     <fieldset class="border border-muted rounded px-3 pt-2">
     <h3>${this.id !== "" ? 'Edit' : 'New'} Ingredient</h3>
-    <form id="${this.id !== "" ? 'edit' : 'new'}-ingredient-form">
+    <form id="${this.id !== "" ? 'edit' : 'new'}-ingredient-form" method="POST">
         ${this.id !== "" ? '<input type="hidden" value="' + this.id + '" name="ingredient-id">' : '' }
 
       <div class="form-group">
