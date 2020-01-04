@@ -3,7 +3,7 @@ class IngredientPage extends PageManager{
   constructor(container, adapter){
     super(container)
     this.adapter = new IngredientAdapter(adapter)
-    // this.recipe = null
+    this.ingredient = null
   }
 
 /* ---- Bindings and Event Listeners ---- */
@@ -165,6 +165,8 @@ class IngredientPage extends PageManager{
 
     // If found, take action
     if (foundObj) {
+      // Set this.ingredient
+      this.ingredient = foundObj
       this.newContainer.innerHTML = foundObj.ingForm(this.units)
       this.formBindingsAndEventListeners()
     }else{
@@ -290,33 +292,55 @@ class IngredientPage extends PageManager{
   async updateIng(e){      
 
     // Find existing ingredient by id
-    const foundObj = this.getIngById(e.target.dataset.id)
+    // const foundObj = this.getIngById(e.target.dataset.id)
     // const foundObj = this.getIngById(81)
-    console.log(foundObj)
+    console.log(this.ingredient)
+    // console.log(this.ingredient.cost)
+    // console.log(this.ingredient.costSize)
+    // console.log(this.ingredient.costUnit)
 
-    if (foundObj) {
+    if (this.ingredient) {
+
+      // Save existing ingredient, in case error later
+      const savedResource = new Ingredient({id: this.ingredient.id, name: this.ingredient.name, cost: this.ingredient.cost, cost_size: this.ingredient.costSize, cost_unit: this.ingredient.costUnit})
+
+      console.log("Saved Ingredient")
+      console.log(savedResource)
+
+
       // Set params based on input
-      const id = foundObj.id
+      const id = this.ingredient.id
       const name = e.target.querySelector('input[name="name"]').value.toLowerCase()
-      const cost = e.target.querySelector('input[name="cost"]').value
-      const cost_size = e.target.querySelector('input[name="cost_size"]').value
+      const cost = Number(e.target.querySelector('input[name="cost"]').value)
+      const cost_size = Number(e.target.querySelector('input[name="cost_size"]').value)
       let selectUnit = e.target.querySelector('select')
       const cost_unit = selectUnit.options[selectUnit.selectedIndex].value
       const params = { name, cost, cost_size, cost_unit, id }
 
-      // // Find index of ingredient to update
+      this.ingredient.name = name
+      this.ingredient.cost = cost
+      this.ingredient.costSize = cost_size
+      this.ingredient.costUnit = cost_unit
+      console.log("Updated Ingredient")
+      console.log(this.ingredient)
+
+
+      // console.log("Saved Ingredient")
+      // console.log(savedResource)
+
+  
+      // Find index of ingredient to update
       // const index = this.ingredients.findIndex(obj => obj.id === foundObj.id)
 
       // Remove recipe and save it, in case error later
-      const savedResource = this.ingredients.splice(index, 1)
-      console.log("Saved Ingredient")
-      console.log(savedResource)
+      // const savedResource = this.ingredients.splice(index, 1)
 
-      console.log("New Ingredients")
-      console.log(this.ingredients)
+
+      // console.log("New Ingredients")
+      // console.log(this.ingredients)
 
       // Optimistically render new list
-      // this.renderIngredients()
+      this.renderIngredients()
 
     // Try updating resource
     try{
@@ -341,7 +365,7 @@ class IngredientPage extends PageManager{
       // Alert user of success
       this.handleAlert({
         type: "success",
-        msg: "Ingredient updated!"
+        msg: `${this.ingredient.name} updated!`
       }) 
     }catch(err){
       // If failure, leave form and give error alert
