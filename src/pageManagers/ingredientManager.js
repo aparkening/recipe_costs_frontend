@@ -101,7 +101,7 @@ class IngredientPage extends PageManager{
   async fetchAndRenderPageResources(){
     try{
       const ingObj = await this.adapter.getIngredients()
-
+      
       // ingContainer contains ingredients and units
       const ingContainer = ingObj.ingredients
 
@@ -185,6 +185,9 @@ class IngredientPage extends PageManager{
     `)
   }
 
+
+
+/* ---- Update Database and Display ---- */
   // If ingredient found, delete it
   async deleteIng(e){      
 
