@@ -24,14 +24,14 @@ class IngredientPage extends PageManager{
 
   // Bind and listen after form load
   formBindingsAndEventListeners(){
-    const form = this.container.querySelector('form')
+    this.form = this.container.querySelector('form')
     const cancelButton = this.container.querySelector('#cancel')
 
     // Set listener based on form id
-    if (form.id === "new-ingredient-form") {   
-      form.addEventListener('submit', this.handleNewSubmitClick.bind(this))
+    if (this.form.id === "new-ingredient-form") {   
+      this.form.addEventListener('submit', this.handleNewSubmitClick.bind(this))
     }else{ 
-      form.addEventListener('submit', this.handleUpdateSubmitClick.bind(this))
+      this.form.addEventListener('submit', this.handleUpdateSubmitClick.bind(this))
     }
 
     // this.form.addEventListener('submit', this.handleNewSubmitClick.bind(this))
@@ -315,65 +315,77 @@ class IngredientPage extends PageManager{
       const cost_size = Number(e.target.querySelector('input[name="cost_size"]').value)
       let selectUnit = e.target.querySelector('select')
       const cost_unit = selectUnit.options[selectUnit.selectedIndex].value
-      const params = { name, cost, cost_size, cost_unit, id }
 
-      this.ingredient.name = name
-      this.ingredient.cost = cost
-      this.ingredient.costSize = cost_size
-      this.ingredient.costUnit = cost_unit
-      console.log("Updated Ingredient")
-      console.log(this.ingredient)
+      // Take action if cost and cost size are numbers
+      if (!isNaN(cost) && !isNaN(cost_size)) { 
 
+        const params = { name, cost, cost_size, cost_unit, id }
 
-      // console.log("Saved Ingredient")
-      // console.log(savedResource)
-
-  
-      // Find index of ingredient to update
-      // const index = this.ingredients.findIndex(obj => obj.id === foundObj.id)
-
-      // Remove recipe and save it, in case error later
-      // const savedResource = this.ingredients.splice(index, 1)
+        this.ingredient.name = name
+        this.ingredient.cost = cost
+        this.ingredient.costSize = cost_size
+        this.ingredient.costUnit = cost_unit
+        console.log("Updated Ingredient")
+        console.log(this.ingredient)
 
 
-      // console.log("New Ingredients")
-      // console.log(this.ingredients)
+        // console.log("Saved Ingredient")
+        // console.log(savedResource)
 
-      // Optimistically render new list
-      this.renderIngredients()
+    
+        // Find index of ingredient to update
+        // const index = this.ingredients.findIndex(obj => obj.id === foundObj.id)
 
-    // Try updating resource
-    try{
-      // const resp = await this.adapter.updateIngredient(params)
-
-      // Make Ingredient from response JSON
-      // const newIng = new Ingredient(resp.ingredient)
-
-      // Add Ingredient to this.ingredients and sort alphabetically
-      // this.ingredients.push(newIng)
-      // this.ingredients.sort((a, b) => {
-      //   if (a.name < b.name) //sort string ascending
-      //       return -1 
-      //   if (b.name > a.name)
-      //       return 1
-      //   return 0 //default return value (no sorting)
-      // })
-
-      // Render new list
-      // this.renderIngredients()
-       
-      // Alert user of success
-      this.handleAlert({
-        type: "success",
-        msg: `${this.ingredient.name} updated!`
-      }) 
-    }catch(err){
-      // If failure, leave form and give error alert
-      this.handleError(err)
-    }
+        // Remove recipe and save it, in case error later
+        // const savedResource = this.ingredients.splice(index, 1)
 
 
+        // console.log("New Ingredients")
+        // console.log(this.ingredients)
 
+        // Optimistically render new list
+        this.renderIngredients()
+
+        // Try updating resource
+        try{
+          const resp = await this.adapter.updateIngredient(params)
+
+          // Update ingredient from response JSON
+          // const newIng = new Ingredient(resp.ingredient)
+          this.ingredient.name = resp.ingredient.name
+          this.ingredient.cost = resp.ingredient.cost
+          this.ingredient.costSize = resp.ingredient.cost_size
+          this.ingredient.costUnit = resp.ingredient.cost_unit
+
+          // Add Ingredient to this.ingredients and sort alphabetically
+          // this.ingredients.push(newIng)
+          // this.ingredients.sort((a, b) => {
+          //   if (a.name < b.name) //sort string ascending
+          //       return -1 
+          //   if (b.name > a.name)
+          //       return 1
+          //   return 0 //default return value (no sorting)
+          // })
+
+          // Render new list
+          // this.renderIngredients()
+          
+          // Alert user of success
+          this.handleAlert({
+            type: "success",
+            msg: `${this.ingredient.name} updated!`
+          }) 
+        }catch(err){
+          // If failure, leave form and give error alert
+          this.handleError(err)
+        }
+      }else{
+        this.handleError({
+          type: "danger",
+          msg: "Ensure Cost and Size are numbers"
+        })      
+        isNaN(cost) ? this.form.querySelector('input#cost').classList.add("is-invalid") :  this.form.querySelector('input#cost_unit').classList.add("is-invalid")
+      }
     }else{
       this.handleError({
         type: "danger",
