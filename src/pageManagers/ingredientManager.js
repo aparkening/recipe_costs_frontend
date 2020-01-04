@@ -24,15 +24,18 @@ class IngredientPage extends PageManager{
 
   // Bind and listen after form load
   formBindingsAndEventListeners(){
-    const cancelButton = this.container.querySelector('#cancel')
-    const form = this.container.querySelector('form')
-    form 
+    this.form = this.container.querySelector('form')
+    this.cancelButton = this.container.querySelector('#cancel')
 
     // Set listener based on form id
-    form.id === "new-ingredient-form" ?  form.addEventListener('submit', this.handleNewSubmitClick.bind(this)) : form.addEventListener('submit', this.handleUpdateSubmitClick.bind(this))
+    if (this.form.id === "new-ingredient-form") {   
+      this.form.addEventListener('submit', this.handleNewSubmitClick.bind(this))
+    }else{ 
+      this.form.addEventListener('submit', this.handleUpdateSubmitClick.bind(this))
+    }
 
-    cancelButton.addEventListener('click', this.handleCancelClick.bind(this))
-    // form.addEventListener('submit', this.handleNewSubmitClick.bind(this))
+    // this.form.addEventListener('submit', this.handleNewSubmitClick.bind(this))
+    this.cancelButton.addEventListener('click', this.handleCancelClick.bind(this))
   }
 
 
@@ -59,7 +62,8 @@ class IngredientPage extends PageManager{
       switch (e.target.id) {
         case 'edit':
           console.log('edit clicked!');
-          this.handleUpdate(e)
+          // this.updateIng(e)
+          this.renderEditForm(e)
           break;
         case 'delete':
           // console.log('delete clicked!')
@@ -146,6 +150,26 @@ class IngredientPage extends PageManager{
     this.formBindingsAndEventListeners()
   }
 
+  // Render edit form
+  renderEditForm(e){
+
+    // Find existing ingredient by id
+    const foundObj = this.getIngById(e.target.dataset.id)
+
+    // If found, take action
+    if (foundObj) {
+
+      this.newContainer.innerHTML = foundObj.ingForm(this.units)
+      this.formBindingsAndEventListeners()
+    }else{
+      this.handleError({
+        type: "danger",
+        msg: "Ingredient was not found"
+      })
+    }  
+  }
+
+
   // Render initial html
   get staticHTML(){
     return (`
@@ -200,7 +224,7 @@ class IngredientPage extends PageManager{
       }
     }else{
       this.handleError({
-        type: "404 Not Found",
+        type: "danger",
         msg: "Ingredient was not found"
       })
     }
@@ -212,7 +236,6 @@ class IngredientPage extends PageManager{
     const name = e.target.querySelector('input[name="name"]').value.toLowerCase()
     const cost = e.target.querySelector('input[name="cost"]').value
     const cost_size = e.target.querySelector('input[name="cost_size"]').value
-    
     let selectUnit = e.target.querySelector('select')
     const cost_unit = selectUnit.options[selectUnit.selectedIndex].value
 
@@ -260,29 +283,69 @@ class IngredientPage extends PageManager{
   // Update ingredient
   async updateIng(id){      
 
+    // Find existing ingredient by id
+    // const foundObj = this.getIngById(e.target.dataset.id)
+    const foundObj = this.getIngById(81)
+    console.log(foundObj)
 
-    // Set params based on input
-    const name = e.target.querySelector('input[name="name"]').value.toLowerCase()
-    const cost = e.target.querySelector('input[name="cost"]').value
-    const cost_size = e.target.querySelector('input[name="cost_size"]').value
-    
-    let selectUnit = e.target.querySelector('select')
-    const cost_unit = selectUnit.options[selectUnit.selectedIndex].value
+    if (foundObj) {
+      // Set params based on input
+      const name = e.target.querySelector('input[name="name"]').value.toLowerCase()
+      const cost = e.target.querySelector('input[name="cost"]').value
+      const cost_size = e.target.querySelector('input[name="cost_size"]').value
+      let selectUnit = e.target.querySelector('select')
+      const cost_unit = selectUnit.options[selectUnit.selectedIndex].value
+      const params = { name, cost, cost_size, cost_unit }
 
-    // const cost_unit = e.target.querySelector('input[name="cost_unit"]').value
-    const params = { name, cost, cost_size, cost_unit }
+      // // Find index of ingredient to update
+      // const index = this.ingredients.findIndex(obj => obj.id === foundObj.id)
+
+      // Remove recipe and save it, in case error later
+      const savedResource = this.ingredients.splice(index, 1)
+      console.log("Saved Ingredient")
+      console.log(savedResource)
+
+      console.log("New Ingredients")
+      console.log(this.ingredients)
+
+      // Optimistically render new list
+      // this.renderIngredients()
+
+    // Try updating resource
+    try{
+      // const resp = await this.adapter.updateIngredient(params)
+
+      // Make Ingredient from response JSON
+      // const newIng = new Ingredient(resp.ingredient)
+
+      // Add Ingredient to this.ingredients and sort alphabetically
+      // this.ingredients.push(newIng)
+      // this.ingredients.sort((a, b) => {
+      //   if (a.name < b.name) //sort string ascending
+      //       return -1 
+      //   if (b.name > a.name)
+      //       return 1
+      //   return 0 //default return value (no sorting)
+      // })
+
+      // Render new list
+      // this.renderIngredients()
+       
+      // Alert user of success
+      this.handleAlert({
+        type: "success",
+        msg: "Ingredient updated!"
+      }) 
+    }catch(err){
+      // If failure, leave form and give error alert
+      this.handleError(err)
+    }
 
 
 
-    
-    // Find existing recipe by id
-    const foundIng = this.getIngById(id)
-
-    if (foundIng) {
-      console.log("Ingredient found. Rendering Update.")
     }else{
       this.handleError({
-        type: "404 Not Found",
+        type: "danger",
         msg: "Ingredient was not found"
       })
     }
