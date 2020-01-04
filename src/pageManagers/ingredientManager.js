@@ -350,36 +350,36 @@ class IngredientPage extends PageManager{
         try{
           const resp = await this.adapter.updateIngredient(params)
 
-          // Update ingredient from response JSON
-          // const newIng = new Ingredient(resp.ingredient)
-          this.ingredient.name = resp.ingredient.name
-          this.ingredient.cost = resp.ingredient.cost
-          this.ingredient.costSize = resp.ingredient.cost_size
-          this.ingredient.costUnit = resp.ingredient.cost_unit
-
-          // Add Ingredient to this.ingredients and sort alphabetically
-          // this.ingredients.push(newIng)
-          // this.ingredients.sort((a, b) => {
-          //   if (a.name < b.name) //sort string ascending
-          //       return -1 
-          //   if (b.name > a.name)
-          //       return 1
-          //   return 0 //default return value (no sorting)
-          // })
-
-          // Render new list
-          // this.renderIngredients()
+          // Update JS ingredient and re-render if response JSON is different from this.ingredient
+          if ((this.ingredient.name !== resp.ingredient.name) || (this.ingredient.cost !== resp.ingredient.cost) || (this.ingredient.costSize !== resp.ingredient.cost_size) || (this.ingredient.costUnit !== resp.ingredient.cost_unit)) {
+            this.ingredient.name = resp.ingredient.name
+            this.ingredient.cost = resp.ingredient.cost
+            this.ingredient.costSize = resp.ingredient.cost_size
+            this.ingredient.costUnit = resp.ingredient.cost_unit
+            this.renderIngredients()
+          }
           
           // Alert user of success
           this.handleAlert({
             type: "success",
             msg: `${this.ingredient.name} updated!`
           }) 
+
         }catch(err){
-          // If failure, leave form and give error alert
+          // If failure, give error alert 
           this.handleError(err)
+
+          // Reset this.ingredient to saved values
+          this.ingredient.name = savedResource.name
+          this.ingredient.cost = savedResource.cost
+          this.ingredient.costSize = savedResource.costSize
+          this.ingredient.costUnit = savedResource.costUnit
+
+          // Re-render list with saved ingredient
+          this.renderIngredients()
         }
       }else{
+        // Display error and highlight field if cost and size aren't numbers
         this.handleError({
           type: "danger",
           msg: "Ensure Cost and Size are numbers"
