@@ -241,48 +241,58 @@ class IngredientPage extends PageManager{
   async createIng(e){      
     // Set params based on input
     const name = e.target.querySelector('input[name="name"]').value.toLowerCase()
-    const cost = e.target.querySelector('input[name="cost"]').value
-    const cost_size = e.target.querySelector('input[name="cost_size"]').value
+    const cost = Number(e.target.querySelector('input[name="cost"]').value)
+    const cost_size = Number(e.target.querySelector('input[name="cost_size"]').value)
     let selectUnit = e.target.querySelector('select')
     const cost_unit = selectUnit.options[selectUnit.selectedIndex].value
 
-    // const cost_unit = e.target.querySelector('input[name="cost_unit"]').value
-    const params = { name, cost, cost_size, cost_unit }
+    // Take action if cost and cost size are numbers
+    if (!isNaN(cost) && !isNaN(cost_size)){ 
+      // const cost_unit = e.target.querySelector('input[name="cost_unit"]').value
+      const params = { name, cost, cost_size, cost_unit }
 
-    // Alert user submitting
-    this.handleAlert({
-      type: "info",
-      msg: "Submitting ingredient to server..."
-    }) 
-
-    // Try creating resource
-    try{
-      const resp = await this.adapter.createIngredient(params)
-
-      // Make Ingredient from response JSON
-      const newIng = new Ingredient(resp.ingredient)
-
-      // Add Ingredient to this.ingredients and sort alphabetically
-      this.ingredients.push(newIng)
-      this.ingredients.sort((a, b) => {
-        if (a.name < b.name) //sort string ascending
-            return -1 
-        if (b.name > a.name)
-            return 1
-        return 0 //default return value (no sorting)
-      })
-
-      // Render new list
-      this.renderIngredients()
-       
-      // Alert user of success
+      // Alert user submitting
       this.handleAlert({
-        type: "success",
-        msg: "Ingredient created!"
+        type: "info",
+        msg: "Submitting ingredient to server..."
       }) 
-    }catch(err){
-      // If failure, leave form and give error alert
-      this.handleError(err)
+
+      // Try creating resource
+      try{
+        const resp = await this.adapter.createIngredient(params)
+
+        // Make Ingredient from response JSON
+        const newIng = new Ingredient(resp.ingredient)
+
+        // Add Ingredient to this.ingredients and sort alphabetically
+        this.ingredients.push(newIng)
+        this.ingredients.sort((a, b) => {
+          if (a.name < b.name) //sort string ascending
+              return -1 
+          if (b.name > a.name)
+              return 1
+          return 0 //default return value (no sorting)
+        })
+
+        // Render new list
+        this.renderIngredients()
+        
+        // Alert user of success
+        this.handleAlert({
+          type: "success",
+          msg: "Ingredient created!"
+        }) 
+      }catch(err){
+        // If failure, leave form and give error alert
+        this.handleError(err)
+      }
+    }else{
+      // Display error and highlight field if cost and size aren't numbers
+      this.handleError({
+        type: "danger",
+        msg: "Ensure Cost and Size are numbers"
+      })      
+      isNaN(cost) ? this.form.querySelector('input#cost').classList.add("is-invalid") :  this.form.querySelector('input#cost_unit').classList.add("is-invalid")
     }
   }
 
