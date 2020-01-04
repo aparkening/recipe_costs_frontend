@@ -93,6 +93,7 @@ class IngredientPage extends PageManager{
   handleUpdateSubmitClick(e){
     e.preventDefault()
     console.log("Submitting update.")
+    this.updateIng(e)
   }
 
 
@@ -286,21 +287,22 @@ class IngredientPage extends PageManager{
 
 
   // Update ingredient
-  async updateIng(id){      
+  async updateIng(e){      
 
     // Find existing ingredient by id
-    // const foundObj = this.getIngById(e.target.dataset.id)
-    const foundObj = this.getIngById(81)
+    const foundObj = this.getIngById(e.target.dataset.id)
+    // const foundObj = this.getIngById(81)
     console.log(foundObj)
 
     if (foundObj) {
       // Set params based on input
+      const id = foundObj.id
       const name = e.target.querySelector('input[name="name"]').value.toLowerCase()
       const cost = e.target.querySelector('input[name="cost"]').value
       const cost_size = e.target.querySelector('input[name="cost_size"]').value
       let selectUnit = e.target.querySelector('select')
       const cost_unit = selectUnit.options[selectUnit.selectedIndex].value
-      const params = { name, cost, cost_size, cost_unit }
+      const params = { name, cost, cost_size, cost_unit, id }
 
       // // Find index of ingredient to update
       // const index = this.ingredients.findIndex(obj => obj.id === foundObj.id)
