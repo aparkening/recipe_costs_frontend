@@ -89,6 +89,12 @@ class IngredientPage extends PageManager{
     this.createIng(e)
   }
 
+  // Handle form update submit
+  handleUpdateSubmitClick(e){
+    e.preventDefault()
+    console.log("Submitting update.")
+  }
+
 
 /* ---- Fetchers and Renderers ---- */
   async fetchAndRenderPageResources(){
@@ -158,7 +164,6 @@ class IngredientPage extends PageManager{
 
     // If found, take action
     if (foundObj) {
-
       this.newContainer.innerHTML = foundObj.ingForm(this.units)
       this.formBindingsAndEventListeners()
     }else{
