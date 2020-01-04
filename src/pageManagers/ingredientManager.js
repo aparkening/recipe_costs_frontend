@@ -24,18 +24,18 @@ class IngredientPage extends PageManager{
 
   // Bind and listen after form load
   formBindingsAndEventListeners(){
-    this.form = this.container.querySelector('form')
-    this.cancelButton = this.container.querySelector('#cancel')
+    const form = this.container.querySelector('form')
+    const cancelButton = this.container.querySelector('#cancel')
 
     // Set listener based on form id
-    if (this.form.id === "new-ingredient-form") {   
-      this.form.addEventListener('submit', this.handleNewSubmitClick.bind(this))
+    if (form.id === "new-ingredient-form") {   
+      form.addEventListener('submit', this.handleNewSubmitClick.bind(this))
     }else{ 
-      this.form.addEventListener('submit', this.handleUpdateSubmitClick.bind(this))
+      form.addEventListener('submit', this.handleUpdateSubmitClick.bind(this))
     }
 
     // this.form.addEventListener('submit', this.handleNewSubmitClick.bind(this))
-    this.cancelButton.addEventListener('click', this.handleCancelClick.bind(this))
+    cancelButton.addEventListener('click', this.handleCancelClick.bind(this))
   }
 
 
@@ -76,7 +76,7 @@ class IngredientPage extends PageManager{
     }
   }
 
-  // Handel form cancel click
+  // Clear ingredient form and load original bindings and event listeners
   handleCancelClick(e){
     e.preventDefault()
     this.newContainer.innerHTML = this.renderNewBtn()
