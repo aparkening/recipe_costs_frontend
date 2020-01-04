@@ -159,7 +159,6 @@ class IngredientPage extends PageManager{
 
   // Render edit form
   renderEditForm(e){
-
     // Find existing ingredient by id
     const foundObj = this.getIngById(e.target.dataset.id)
 
@@ -287,26 +286,18 @@ class IngredientPage extends PageManager{
     }
   }
 
-
   // Update ingredient
   async updateIng(e){      
+    // console.log(this.ingredient)
+    console.log(e.target)
 
-    // Find existing ingredient by id
-    // const foundObj = this.getIngById(e.target.dataset.id)
-    // const foundObj = this.getIngById(81)
-    console.log(this.ingredient)
-    // console.log(this.ingredient.cost)
-    // console.log(this.ingredient.costSize)
-    // console.log(this.ingredient.costUnit)
-
-    if (this.ingredient) {
+    // If submitted ingredient id matches existing ingredient, take action
+    if (this.ingredient.id == parseInt(e.target.querySelector('input[name="ingredient-id"]').value)){
 
       // Save existing ingredient, in case error later
       const savedResource = new Ingredient({id: this.ingredient.id, name: this.ingredient.name, cost: this.ingredient.cost, cost_size: this.ingredient.costSize, cost_unit: this.ingredient.costUnit})
-
-      console.log("Saved Ingredient")
-      console.log(savedResource)
-
+      // console.log("Saved Ingredient")
+      // console.log(savedResource)
 
       // Set params based on input
       const id = this.ingredient.id
@@ -318,30 +309,13 @@ class IngredientPage extends PageManager{
 
       // Take action if cost and cost size are numbers
       if (!isNaN(cost) && !isNaN(cost_size)) { 
-
         const params = { name, cost, cost_size, cost_unit, id }
-
         this.ingredient.name = name
         this.ingredient.cost = cost
         this.ingredient.costSize = cost_size
         this.ingredient.costUnit = cost_unit
-        console.log("Updated Ingredient")
-        console.log(this.ingredient)
-
-
-        // console.log("Saved Ingredient")
-        // console.log(savedResource)
-
-    
-        // Find index of ingredient to update
-        // const index = this.ingredients.findIndex(obj => obj.id === foundObj.id)
-
-        // Remove recipe and save it, in case error later
-        // const savedResource = this.ingredients.splice(index, 1)
-
-
-        // console.log("New Ingredients")
-        // console.log(this.ingredients)
+        // console.log("Updated Ingredient")
+        // console.log(this.ingredient)
 
         // Optimistically render new list
         this.renderIngredients()
