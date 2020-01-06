@@ -110,7 +110,7 @@ class RecipesPage extends PageManager{
     handleNewSubmitClick(e){
       e.preventDefault()
       console.log("Submitting new recipe.")
-      // this.createRecipe(e)
+      this.createRecipe(e)
     }
 
     // Handle form update submit
@@ -449,10 +449,11 @@ get staticHTML(){
 
     // Set params based on input
     const name = e.target.querySelector('input[name="name"]').value
-    const servings = Number(e.target.querySelector('input[name="servings"]').value)
+    // const servings = Number(e.target.querySelector('input[name="servings"]').value)
+    const servings = e.target.querySelector('input[name="servings"]').value
 
     // Take action if servings is a number
-    if (!isNaN(servings)){ 
+    // if (!isNaN(servings)){ 
 
       // Get form ingredients and map to array
       const formIngArray = Array.from(e.target.querySelectorAll('div.form-ingredient'))
@@ -485,17 +486,17 @@ get staticHTML(){
 
       // Try creating resource
       try{
-        const resp = await this.adapter.updateRecipe(params)
+        const resp = await this.adapter.createRecipe(params)
 
         // const {name, servings, recipeIngredientsAttributes, id} = await this.adapter.updateRecipe(params)
         
-        console.log("Successful patch request!")
-        
+        console.log("Successful recipe creation!")
+        console.log(resp)
         this.recipe = new Recipe(resp)
         console.log(this.recipe)
 
         // Add Recipe to this.recipes and sort alphabetically
-        // this.recipes.push(newRecipe)
+        this.recipes.push(this.recipe)
         // this.recipes.sort((a, b) => {
         //   if (a.name < b.name) //sort string ascending
         //       return -1 
@@ -513,17 +514,18 @@ get staticHTML(){
         }) 
 
       }catch(err){
+        console.log(err)
         // If failure, leave form and give error alert
         this.handleError(err)
       }
-    }else{
-      // Display error and highlight field if servings isn't a number
-      this.handleError({
-        type: "danger",
-        msg: "Ensure Servings is a number"
-      })      
-      this.form.querySelector('input#servings').classList.add("is-invalid")
-    }
+    // }else{
+    //   // Display error and highlight field if servings isn't a number
+    //   this.handleError({
+    //     type: "danger",
+    //     msg: "Ensure Servings is a number"
+    //   })      
+    //   this.form.querySelector('input#servings').classList.add("is-invalid")
+    // }
   }
 
 
