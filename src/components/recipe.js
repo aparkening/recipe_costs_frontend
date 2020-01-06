@@ -111,8 +111,8 @@ class Recipe{
   }
 
 
-  // Show new and edit recipe form (class method)
-  static recipeForm(recipe = null){
+  // Show new and edit recipe form
+  recipeForm(ingredients){
 
     // Get all ingredients
     // const allIngObj = await this.adapter.getRecipes()
@@ -122,27 +122,25 @@ class Recipe{
     // Render ingredients as select list
 
     return (`
-    <h1>${recipe ? 'Edit' : 'New'} Recipe</h1>
-    <form id="${recipe ? 'edit' : 'new'}-recipe-form">
-        ${recipe ? '<input type="hidden" value="' + recipe.id + '" name="recipe-id">' : '' }
+    <h1>${this.id !== "" ? 'Edit' : 'New'} Recipe</h1>
+    <form id="${this.id !== "" ? 'edit' : 'new'}-recipe-form">
+        ${this.id !== ""  ? '<input type="hidden" value="' + this.id + '" name="recipe-id">' : '' }
 
         <div class="form-group">
           <label for="recipe_name">Name*</label>
-          <input class="form-control" required="required" type="text" value="${recipe ? recipe.name : ''}" name="name" id="recipe_name">
+          <input class="form-control" required="required" type="text" value="${this.id !== ""  ? this.name : ''}" name="name" id="recipe_name">
         </div>
         <div class="form-group">
           <label for="recipe_servings">Servings</label>
-          <input class="form-control" type="text" value="${recipe ? recipe.servings : ''}" name="servings" id="recipe_servings">
+          <input class="form-control" type="text" value="${this.id !== ""  ? this.servings : ''}" name="servings" id="recipe_servings">
         </div>
       
         <div class="form-group">
           <h3>Ingredients</h3>
 
           <div class="form-ingredient">
-            <select name="recipe_ingredients_attributes[0][ingredient_id]" id="recipe_ingredients_attributes_0_ingredient_id"><option value=""></option>
-      <option value="1">seaweed</option>
-      <option value="2">all-purpose flour</option>
-      <option value="3">bread flour</option>
+            <select name="recipe_ingredients_attributes[0][ingredient_id]" id="recipe_ingredients_attributes_0_ingredient_id">
+            ${ingredients.map(ing => this.renderIngOptions(ing)).join('')}
             </select>
       
             <label for="recipe_ingredients_attributes_0_ingredient_amount">Size</label>
@@ -173,7 +171,9 @@ class Recipe{
     </div>
 
         <div class="form-group">
-          <button type="submit" name="commit" class="btn btn-lg btn-primary btn-block">${recipe ? 'Update' : 'Create'} Recipe</button>
+          <button type="submit" name="commit" class="btn btn-lg btn-primary btn-block">${this.id !== ""  ? 'Update' : 'Create'} Recipe</button>
+          &nbsp;&nbsp; 
+          <button type="button" name="cancel" class="btn btn-secondary btn-lg" id="cancel">Cancel</button>
         </div>
       </form>
     `)
@@ -182,6 +182,14 @@ class Recipe{
   // Set instance of recipeForm
   get showFormHTML(){
     return Recipe.recipeForm(this)
+  }
+
+  // Render ingredients as select list
+  renderIngOptions(ingredient){
+    // console.log(this)
+    return (`
+    <option value="${ingredient.id}">${ingredient.name}</option>
+    `)
   }
 
 
