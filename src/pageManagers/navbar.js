@@ -15,7 +15,8 @@ class Navbar extends PageManager{
       e.preventDefault()
       const route = e.target.id.split('-')[0]
 
-      console.log(`Current page is ${this.currentPage()}`)
+      console.log(`Navbar.js current page is ${this.currentPage()}`)
+      console.log(`Navbar redirecting route to ${route}`)
 
       // Only redirect if clicking for new screen
       // if(route !== this.currentPage()) { this.redirect(route) } 
