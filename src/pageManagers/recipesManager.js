@@ -4,6 +4,7 @@ class RecipesPage extends PageManager{
     super(container)
     this.adapter = new RecipeAdapter(adapter)
     this.recipe = null
+    this.ingredients = null
   }
 
   /* ---- Bindings and Event Listeners ---- */
@@ -85,7 +86,7 @@ class RecipesPage extends PageManager{
       this.deleteRecipe(recipeId)
     }
 
-    renderEditForm(recipeId){
+    async renderEditForm(recipeId){
       // console.log(recipeId)
 
       // Place in try catch?
@@ -110,8 +111,15 @@ class RecipesPage extends PageManager{
       if (foundRecipe) {
         console.log("Real recipe!")
         console.log(foundRecipe)
+
+        // Send request for all ingredients
+        const ingAdapter = new IngredientAdapter(new BaseAdapter())
+        const ingObj = await ingAdapter.getIngredients()
+        // Fill this.ingredients with ingredient objects
+        this.ingredients = ingObj.ingredients.map(ing => new Ingredient(ing))
+
         this.recipe = foundRecipe
-        this.container.innerHTML = Recipe.recipeForm(foundRecipe)
+        this.container.innerHTML = foundRecipe.recipeForm(this.ingredients)
         this.recipeFormBindingsAndEventListeners()
       }else{
         // else throw error
