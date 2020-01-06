@@ -7,20 +7,27 @@ class Navbar extends PageManager{
 
   initBindingsAndEventListeners(){
     this.container.addEventListener('click', this.handleClick.bind(this))
+    // console.log("Navbar.js bindings fired")
   }
 
   // Take action on any A tag
   handleClick(e){
+    e.preventDefault()
+    console.log("- Navbar.js click -")
+
     if(e.target.tagName === "A"){
-      e.preventDefault()
       const route = e.target.id.split('-')[0]
 
-      console.log(`Navbar.js current page is ${this.currentPage()}`)
-      console.log(`Navbar redirecting route to ${route}`)
+      // console.log("Navbar.js route set to")
+      // console.log(route)
+      // console.log(`Navbar.js current page is ${this.currentPage()}`)
 
       // Only redirect if clicking for new screen
-      // if(route !== this.currentPage()) { this.redirect(route) } 
-      this.redirect(route)
+      if(route !== this.currentPage()) { 
+        console.log(`>>> Navbar.js redirecting route to ${route}`)
+        return this.redirect(route) 
+      } 
+      // this.redirect(route)
     }
   }
 
