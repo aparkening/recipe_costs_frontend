@@ -56,7 +56,7 @@ class RecipesPage extends PageManager{
           break;
         case 'edit':
           console.log('edit clicked!');
-          this.handleRecipeUpdate(recipeId)
+          this.renderEditForm(recipeId)
           break;
         case 'delete':
           this.deleteRecipe(recipeId)
@@ -74,7 +74,7 @@ class RecipesPage extends PageManager{
       e.preventDefault()
       // Get recipe id and recipe object
       const recipeId = e.target.parentNode.dataset.id
-      this.handleRecipeUpdate(recipeId)
+      this.renderEditForm(recipeId)
     }
 
     // Handle detail recipe delete
@@ -85,7 +85,7 @@ class RecipesPage extends PageManager{
       this.deleteRecipe(recipeId)
     }
 
-    handleRecipeUpdate(recipeId){
+    renderEditForm(recipeId){
       // console.log(recipeId)
 
       // Place in try catch?
