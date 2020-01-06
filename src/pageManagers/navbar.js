@@ -28,11 +28,11 @@ class Navbar extends PageManager{
       // console.log(`Navbar.js current page is ${this.currentPage()}`)
 
       // Only redirect if clicking for new screen
-      if(route !== this.currentPage()) { 
-        console.log(`>>> Navbar.js redirecting route to ${route}`)
-        return this.redirect(route) 
-      } 
-      // this.redirect(route)
+      // if(route !== this.currentPage()) { 
+      //   console.log(`>>> Navbar.js redirecting route to ${route}`)
+      //   return this.redirect(route) 
+      // } 
+      this.redirect(route)
     }
   }
 
