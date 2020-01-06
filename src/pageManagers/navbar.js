@@ -6,8 +6,10 @@ class Navbar extends PageManager{
   }
 
   initBindingsAndEventListeners(){
-    this.container.addEventListener('click', this.handleClick.bind(this))
-    // console.log("Navbar.js bindings fired")
+    // this.container.addEventListener('click', this.handleClick.bind(this))
+
+    // Convert to onclick to avoid multipe loads
+    this.container.onclick = this.handleClick.bind(this)
   }
 
   // Take action on any A tag
@@ -16,6 +18,9 @@ class Navbar extends PageManager{
     console.log("- Navbar.js click -")
 
     if(e.target.tagName === "A"){
+
+      console.log(e.target)
+
       const route = e.target.id.split('-')[0]
 
       // console.log("Navbar.js route set to")
