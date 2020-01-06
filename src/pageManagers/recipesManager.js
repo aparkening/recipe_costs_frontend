@@ -15,8 +15,10 @@ class RecipesPage extends PageManager{
 
     // Bind and listen after all recipes load
     allRecipesBindingsAndEventListeners(){
-      const rTable = this.container.querySelector('table')
-      rTable.addEventListener('click', this.handleTableRecipeClick.bind(this))
+      const newButton = this.container.querySelector('#new-button')
+
+      const table = this.container.querySelector('table')
+      table.addEventListener('click', this.handleTableClick.bind(this))
     }
 
     // Bind and listen after single recipe load
@@ -54,7 +56,7 @@ class RecipesPage extends PageManager{
     }
 
     // Handle show, edit, and delete within recipe table
-    handleTableRecipeClick(e){
+    handleTableClick(e){
       e.preventDefault()
 
       // Get recipe id and recipe object
