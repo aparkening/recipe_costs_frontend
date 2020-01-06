@@ -391,7 +391,7 @@ class RecipesPage extends PageManager{
     renderRecipes(){
       const title = "<h1>Recipes</h1>"
 
-      // const addButton = `<div class="mt-3 mb-3"><a class="btn btn-primary" href="#" role="button" id="new-resource">Add new recipe</a></div>`
+      const addButton = `<div class="mt-3 mb-3" id="new-resource">${this.renderNewBtn()}</div>`
 
       const tableTop = `
       <table class="table table-striped">
@@ -412,7 +412,7 @@ class RecipesPage extends PageManager{
 
       // Stitch together title, button, table, rows
       // this.container.innerHTML = title + addButton + tableTop + recipeRows + tableBottom
-      this.container.innerHTML = title + tableTop + recipeRows + tableBottom
+      this.container.innerHTML = title + addButton + tableTop + recipeRows + tableBottom
 
       // Bind and listen to new html
       this.allRecipesBindingsAndEventListeners()
@@ -428,10 +428,17 @@ class RecipesPage extends PageManager{
     }
 
 
-  /* ---- Helpers ---- */
-    // Grab recipe object from id
-    getRecipeById(id){
-      return this.recipes.find(r => r.id == id)
-    }
+/* ---- Helpers ---- */
+  // Grab recipe object from id
+  getRecipeById(id){
+    return this.recipes.find(r => r.id == id)
+  }
+
+  // Button HTML
+  renderNewBtn(){
+    return (`
+      <a class="btn btn-primary" href="#" role="button" id="new-button">Add new recipe</a>
+    `)
+  }    
 
 }
