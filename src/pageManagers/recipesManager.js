@@ -116,8 +116,8 @@ class RecipesPage extends PageManager{
       }else{
         // else throw error
         this.handleError({
-            type: "404 Not Found",
-            msg: "Recipe was not found"
+          type: "danger",
+          msg: "Recipe was not found"
         })
       }
     }
@@ -187,8 +187,8 @@ class RecipesPage extends PageManager{
       }else{
         // Else show recipt not found
         this.handleError({
-            type: "404 Not Found",
-            msg: "Recipe was not found"
+          type: "danger",
+          msg: "Recipe was not found"
         })
       }
     }
@@ -326,8 +326,8 @@ class RecipesPage extends PageManager{
           this.recipeBindingsAndEventListeners()
       }else{
           this.handleError({
-              type: "404 Not Found",
-              msg: "Dog was not found"
+            type: "danger",
+            msg: "Recipe was not found"
           })
       } 
     }
