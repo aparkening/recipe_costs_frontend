@@ -119,6 +119,19 @@ class RecipesPage extends PageManager{
 
 
 
+    // Render new form
+    async renderNewForm(){
+      const recipe = new Recipe({id:'', name:'', servings:'', total_cost:'', cost_per_serving:''})
+
+      // Send request for all ingredients
+      const ingAdapter = new IngredientAdapter(new BaseAdapter())
+      const ingObj = await ingAdapter.getIngredients()
+      // Fill this.ingredients with ingredient objects
+      this.ingredients = ingObj.ingredients.map(ing => new Ingredient(ing))
+
+      this.container.innerHTML = recipe.recipeForm(this.ingredients)
+      this.recipeFormBindingsAndEventListeners()
+    }
 
     async renderEditForm(recipeId){
       // console.log(recipeId)
