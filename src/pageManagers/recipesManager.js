@@ -15,7 +15,6 @@ class RecipesPage extends PageManager{
 
     // Bind and listen after all recipes load
     allRecipesBindingsAndEventListeners(){
-      // debugger
       const newButton = this.container.querySelector('#new-button')
       const table = this.container.querySelector('table')
 
@@ -121,6 +120,14 @@ class RecipesPage extends PageManager{
       // this.updateRecipe(e)
     }
 
+    // Handle form cancel button
+    handleCancelClick(e){
+      e.preventDefault()
+      // this.newContainer.innerHTML = this.renderNewBtn()
+      // this.indexBindingsAndEventListeners()
+      this.redirect('recipes')
+    }
+
 
 /* ---- Fetchers and Renderers ---- */
 
@@ -135,7 +142,7 @@ class RecipesPage extends PageManager{
       //   this.renderRecipe()
       // } else {
       const recipeObj = await this.adapter.getRecipes()
-      console.log(recipeObj.recipes)
+      // console.log(recipeObj.recipes)
 
       this.recipes = recipeObj.recipes.map(recipe => new Recipe(recipe))
       // console.log(this.recipes)
