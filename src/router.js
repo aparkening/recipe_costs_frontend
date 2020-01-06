@@ -16,9 +16,12 @@ class Router{
       
       // Render nav with each page if it exists
       if(this.navbar){ this.navbar.render() }
+      console.log("Navbar rendered")
 
       // Track currentPage for navbar
       this.currentPage = page
+
+      console.log(`CurrentPage set to ${this.currentPage}`)
   }
   
   // Set callbacks for use in redirects, alerts, etc.
@@ -43,6 +46,10 @@ class Router{
   // Define navbar for each page
   assignNavbar(navbar){
       this.navbar = navbar
+
+      console.log("Navbar assigned")
+      console.log(navbar)
+
       // Track currentPage for navbar manager
       this.navbar.currentPage = () => {
           return this.currentPage
