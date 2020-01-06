@@ -117,7 +117,7 @@ class Recipe{
     // Get all ingredients
     // const allIngObj = await this.adapter.getRecipes()
 
-    console.log(this.fetchAndRenderIngredients())
+    // console.log(this.fetchAndRenderIngredients())
 
     // Render ingredients as select list
 
