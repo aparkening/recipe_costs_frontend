@@ -171,7 +171,7 @@ class Recipe{
     </div>
 
         <div class="form-group">
-          <button type="submit" name="commit" class="btn btn-lg btn-primary btn-block">${this.id !== ""  ? 'Update' : 'Create'} Recipe</button>
+          <button type="submit" name="commit" class="btn btn-lg btn-primary">${this.id !== ""  ? 'Update' : 'Create'} Recipe</button>
           &nbsp;&nbsp; 
           <button type="button" name="cancel" class="btn btn-secondary btn-lg" id="cancel">Cancel</button>
         </div>
