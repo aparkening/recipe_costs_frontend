@@ -15,7 +15,7 @@ class Recipe{
   get showRecipe(){
     let html = `
       <h1>${this.name} (<small class="helper_links" data-id="${this.id}">
-        <!-- <a href="#" id="edit">Edit </a> | -->
+        <a href="#" id="edit">Edit </a> |
         <a data-confirm="Are you sure?" rel="nofollow" href="#" id="delete">Delete</a>
       </small>)</h1>
       <h2>Total Cost: $${this.totalCost}</h2>
@@ -89,7 +89,7 @@ class Recipe{
         &nbsp;</td>
         <td>
           <small>
-            <!-- <a class="text-muted" href="#" id="edit" data-id="${this.id}">Edit</a> | -->
+            <a class="text-muted" href="#" id="edit" data-id="${this.id}">Edit</a> |
             <a class="text-muted" data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="#" id="delete" data-id="${this.id}">Delete</a>
           </small>
         </td>
