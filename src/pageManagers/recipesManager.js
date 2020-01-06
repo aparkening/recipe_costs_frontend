@@ -15,10 +15,11 @@ class RecipesPage extends PageManager{
 
     // Bind and listen after all recipes load
     allRecipesBindingsAndEventListeners(){
+      // debugger
       const newButton = this.container.querySelector('#new-button')
       const table = this.container.querySelector('table')
 
-      newButton.addEventListener('click', this.handleNewClick(e))
+      newButton.addEventListener('click', this.handleNewClick.bind(this))
       table.addEventListener('click', this.handleTableClick.bind(this))
     }
 
@@ -52,7 +53,7 @@ class RecipesPage extends PageManager{
     // Handle new click
     handleNewClick(e){
       e.preventDefault()
-      // console.log('new clicked!');
+      console.log('new clicked!');
       this.renderNewForm()
     }
 
@@ -133,15 +134,17 @@ class RecipesPage extends PageManager{
       //   // // console.log(this.recipe)
       //   this.renderRecipe()
       // } else {
-        const recipeObj = await this.adapter.getRecipes()
-        // console.log(recipeObj.recipes)
+      const recipeObj = await this.adapter.getRecipes()
+      console.log(recipeObj.recipes)
 
-        this.recipes = recipeObj.recipes.map(recipe => new Recipe(recipe))
-        // console.log(this.recipes)
-        
-        this.renderRecipes()
+      this.recipes = recipeObj.recipes.map(recipe => new Recipe(recipe))
+      // console.log(this.recipes)
+
+      // Render table
+      this.renderRecipes()
 
     }catch(err){
+      console.log(err)
       this.handleError(err)
       // console.log(err)
     }
@@ -150,7 +153,7 @@ class RecipesPage extends PageManager{
 
   // Render new form
   async renderNewForm(){
-    const recipe = new Recipe({id:'', name:'', servings:'', total_cost:'', cost_per_serving:''})
+    const recipe = new Recipe({'recipe': {id:'', name:'', servings:'', total_cost:'', cost_per_serving:''}, 'ingredients':[]})
 
     // Get all ingredients for select list
     // Send request for all ingredients
