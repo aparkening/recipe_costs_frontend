@@ -30,7 +30,7 @@ class RecipeAdapter{
   // Create record
   async createRecipe(params){
     // Could pass in recipe obj and make params
-    const { name, servings, recipe_ingredients_attributes, id} = params
+    const { name, servings, recipe_ingredients_attributes } = params
     const url = `${this.baseURL}/recipes`
     const body = {
         recipe: {
