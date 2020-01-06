@@ -433,6 +433,90 @@ get staticHTML(){
       
   }
 
+  // Create new recipe
+  async createRecipe(e){     
+    e.preventDefault()
+
+    // Set params based on input
+    const name = e.target.querySelector('input[name="name"]').value
+    const servings = Number(e.target.querySelector('input[name="servings"]').value)
+
+    // Take action if servings is a number
+    if (!isNaN(servings)){ 
+
+      // Get form ingredients and map to array
+      const formIngArray = Array.from(e.target.querySelectorAll('div.form-ingredient'))
+      let recipeIngredientsAttributes = formIngArray.map(el => {
+        let s = el.querySelector('select')
+        let ingAmount = el.querySelector('input.ingredient_amount').value
+        let ingUnit = el.querySelector('input.ingredient_unit').value
+        //recipeIngredientId
+        return {
+          ingredient_id: s.options[s.selectedIndex].value,
+          ingredient_amount: ingAmount,
+          ingredient_unit: ingUnit,
+          _destroy: 0
+        }
+      })
+      console.log(recipeIngredientsAttributes)
+
+      // recipe_ingredients_attributes: {
+      //   0: {ingredient_id: 13, ingredient_amount:5, ingredient_unit:"lb", _destroy: 1, id: 11}, 
+
+      // Set params
+      const params = { name, servings, recipeIngredientsAttributes }
+      console.log(params)
+
+      // Alert user submitting
+      this.handleAlert({
+        type: "info",
+        msg: "Submitting recipe to server..."
+      }) 
+
+      // Try creating resource
+      try{
+        const resp = await this.adapter.updateRecipe(params)
+
+        // const {name, servings, recipeIngredientsAttributes, id} = await this.adapter.updateRecipe(params)
+        
+        console.log("Successful patch request!")
+        
+        this.recipe = new Recipe(resp)
+        console.log(this.recipe)
+
+        // Add Recipe to this.recipes and sort alphabetically
+        // this.recipes.push(newRecipe)
+        // this.recipes.sort((a, b) => {
+        //   if (a.name < b.name) //sort string ascending
+        //       return -1 
+        //   if (b.name > a.name)
+        //       return 1
+        //   return 0 //default return value (no sorting)
+        // })
+
+        this.renderRecipe()
+
+        // Alert user of success
+        this.handleAlert({
+          type: "success",
+          msg: "Recipe created!"
+        }) 
+
+      }catch(err){
+        // If failure, leave form and give error alert
+        this.handleError(err)
+      }
+    }else{
+      // Display error and highlight field if servings isn't a number
+      this.handleError({
+        type: "danger",
+        msg: "Ensure Servings is a number"
+      })      
+      this.form.querySelector('input#servings').classList.add("is-invalid")
+    }
+  }
+
+
 
 /* ---- Helpers ---- */
   // Grab recipe object from id
