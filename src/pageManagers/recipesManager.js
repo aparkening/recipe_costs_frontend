@@ -7,7 +7,7 @@ class RecipesPage extends PageManager{
     this.ingredients = null
   }
 
-  /* ---- Bindings and Event Listeners ---- */
+/* ---- Bindings and Event Listeners ---- */
     // Don't need initial bindings and listeners
     initBindingsAndEventListeners(){
       return null
@@ -48,7 +48,7 @@ class RecipesPage extends PageManager{
     }
 
 
-  /* ---- Link/Click Handlers ---- */
+/* ---- Link/Click Handlers ---- */
     // Handle new click
     handleNewClick(e){
       e.preventDefault()
@@ -110,21 +110,86 @@ class RecipesPage extends PageManager{
     handleNewSubmitClick(e){
       e.preventDefault()
       console.log("Submitting new recipe.")
-      // this.createIng(e)
+      // this.createRecipe(e)
     }
 
     // Handle form update submit
     handleUpdateSubmitClick(e){
       e.preventDefault()
       console.log("Submitting update.")
-      // this.updateIng(e)
+      // this.updateRecipe(e)
     }
 
 
+/* ---- Fetchers and Renderers ---- */
 
-    // Render new form
-    async renderNewForm(){
-      const recipe = new Recipe({id:'', name:'', servings:'', total_cost:'', cost_per_serving:''})
+  // Fetch recipes and render main recipes page
+  async fetchAndRenderPageResources(){
+    try{
+      // if (this.recipe){
+      //   // const recipeObj = await this.adapter.getRecipe()
+      //   // // console.log(recipeObj)
+      //   // this.recipe = new Recipe(recipeObj)
+      //   // // console.log(this.recipe)
+      //   this.renderRecipe()
+      // } else {
+        const recipeObj = await this.adapter.getRecipes()
+        // console.log(recipeObj.recipes)
+
+        this.recipes = recipeObj.recipes.map(recipe => new Recipe(recipe))
+        // console.log(this.recipes)
+        
+        this.renderRecipes()
+
+    }catch(err){
+      this.handleError(err)
+      // console.log(err)
+    }
+  }
+
+
+  // Render new form
+  async renderNewForm(){
+    const recipe = new Recipe({id:'', name:'', servings:'', total_cost:'', cost_per_serving:''})
+
+    // Get all ingredients for select list
+    // Send request for all ingredients
+    const ingAdapter = new IngredientAdapter(new BaseAdapter())
+    const ingObj = await ingAdapter.getIngredients()
+    // Fill this.ingredients with ingredient objects
+    this.ingredients = ingObj.ingredients.map(ing => new Ingredient(ing))
+
+    // Render form with ingredients
+    this.container.innerHTML = recipe.recipeForm(this.ingredients)
+    this.recipeFormBindingsAndEventListeners()
+  }
+
+  // Render edit form
+  async renderEditForm(recipeId){
+    // console.log(recipeId)
+
+    // Place in try catch?
+    // const foundRecipe = this.recipes.find(r => r.id == recipeId)
+    // const foundRecipe = this.getRecipeById(recipeId)
+    
+    // Set this.recipe to edit
+
+    // console.log(this.recipe.id)
+
+    // console.log(recipeId)
+    // console.log(this.recipe)
+
+  
+    // if id matches this.recipe.id, display edit form
+    // if(foundRecipe && foundRecipe.id === this.recipe.id){
+
+    // Find existing recipe by id
+    const foundRecipe = this.getRecipeById(recipeId)
+
+    // If recipe from id exists, render form and call new bindings and event listeners
+    if (foundRecipe) {
+      console.log("Real recipe!")
+      console.log(foundRecipe)
 
       // Send request for all ingredients
       const ingAdapter = new IngredientAdapter(new BaseAdapter())
@@ -132,53 +197,17 @@ class RecipesPage extends PageManager{
       // Fill this.ingredients with ingredient objects
       this.ingredients = ingObj.ingredients.map(ing => new Ingredient(ing))
 
-      this.container.innerHTML = recipe.recipeForm(this.ingredients)
+      this.recipe = foundRecipe
+      this.container.innerHTML = foundRecipe.recipeForm(this.ingredients)
       this.recipeFormBindingsAndEventListeners()
+    }else{
+      // else throw error
+      this.handleError({
+        type: "danger",
+        msg: "Recipe was not found"
+      })
     }
-
-    async renderEditForm(recipeId){
-      // console.log(recipeId)
-
-      // Place in try catch?
-      // const foundRecipe = this.recipes.find(r => r.id == recipeId)
-      // const foundRecipe = this.getRecipeById(recipeId)
-      
-      // Set this.recipe to edit
-
-      // console.log(this.recipe.id)
-
-      // console.log(recipeId)
-      // console.log(this.recipe)
-
-   
-      // if id matches this.recipe.id, display edit form
-      // if(foundRecipe && foundRecipe.id === this.recipe.id){
-
-      // Find existing recipe by id
-      const foundRecipe = this.getRecipeById(recipeId)
-
-      // If recipe from id exists, render form and call new bindings and event listeners
-      if (foundRecipe) {
-        console.log("Real recipe!")
-        console.log(foundRecipe)
-
-        // Send request for all ingredients
-        const ingAdapter = new IngredientAdapter(new BaseAdapter())
-        const ingObj = await ingAdapter.getIngredients()
-        // Fill this.ingredients with ingredient objects
-        this.ingredients = ingObj.ingredients.map(ing => new Ingredient(ing))
-
-        this.recipe = foundRecipe
-        this.container.innerHTML = foundRecipe.recipeForm(this.ingredients)
-        this.recipeFormBindingsAndEventListeners()
-      }else{
-        // else throw error
-        this.handleError({
-          type: "danger",
-          msg: "Recipe was not found"
-        })
-      }
-    }
+  }
 
     // handleRecipeDelete(recipeId){
     //   // console.log(recipeId)
@@ -191,7 +220,63 @@ class RecipesPage extends PageManager{
     //   this.redirect('edit-recipe')
     // }
 
+// Render single recipe
+renderRecipe(recipe = this.recipe){
+  if(recipe){
+      // console.log(this.recipe)
+      this.recipe = recipe
+      this.container.innerHTML = this.recipe.showRecipe
+      this.recipeBindingsAndEventListeners()
+  }else{
+      this.handleError({
+        type: "danger",
+        msg: "Recipe was not found"
+      })
+  } 
+}
 
+// Render multiple recipes
+renderRecipes(){
+  const title = "<h1>Recipes</h1>"
+
+  const addButton = `<div class="mt-3 mb-3" id="new-resource">${this.renderNewBtn()}</div>`
+
+  const tableTop = `
+  <table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th>Name</th>
+      <th>Cost</th>
+      <th>Links</th>
+    </tr>
+  </thead>
+  <tbody>`
+
+  const tableBottom = `
+    </tbody>
+  </table>
+  `
+  let recipeRows = this.recipes.map(recipe => recipe.showRecipeTr).join('')
+
+  // Stitch together title, button, table, rows
+  // this.container.innerHTML = title + addButton + tableTop + recipeRows + tableBottom
+  this.container.innerHTML = title + addButton + tableTop + recipeRows + tableBottom
+
+  // Bind and listen to new html
+  this.allRecipesBindingsAndEventListeners()
+}
+
+
+// Render initial html. Use "loader" to display loading spinner.
+get staticHTML(){
+  return (`
+    <div class="loader">
+    </div>
+  `)
+}
+
+
+/* ---- Update Database and Display ---- */
     // If real recipe, delete from this.recipes
     async deleteRecipe(id){
       // Find existing recipe by id
@@ -252,7 +337,6 @@ class RecipesPage extends PageManager{
     }
 
 
-
     // cloneObject(obj) {
 	  //   var clone = {};
 	  //   for(var i in obj) {
@@ -266,7 +350,7 @@ class RecipesPage extends PageManager{
 
 
     // Handle form submit
-    async handleUpdateSubmit(e){
+    async updateRecipe(e){
       e.preventDefault()
 
 // console.log(e.target.querySelectorAll('input'))
@@ -348,87 +432,6 @@ class RecipesPage extends PageManager{
       }
       
   }
-
-
-  // Fetch recipes and render main recipes page
-  async fetchAndRenderPageResources(){
-    try{
-      // if (this.recipe){
-      //   // const recipeObj = await this.adapter.getRecipe()
-      //   // // console.log(recipeObj)
-      //   // this.recipe = new Recipe(recipeObj)
-      //   // // console.log(this.recipe)
-      //   this.renderRecipe()
-      // } else {
-        const recipeObj = await this.adapter.getRecipes()
-        // console.log(recipeObj.recipes)
-
-        this.recipes = recipeObj.recipes.map(recipe => new Recipe(recipe))
-        // console.log(this.recipes)
-        
-        this.renderRecipes()
-
-    }catch(err){
-      this.handleError(err)
-      // console.log(err)
-    }
-  }
-
-  /* ---- Renderers ---- */
-    // Render single recipe
-    renderRecipe(recipe = this.recipe){
-      if(recipe){
-          // console.log(this.recipe)
-          this.recipe = recipe
-          this.container.innerHTML = this.recipe.showRecipe
-          this.recipeBindingsAndEventListeners()
-      }else{
-          this.handleError({
-            type: "danger",
-            msg: "Recipe was not found"
-          })
-      } 
-    }
-
-    // Render multiple recipes
-    renderRecipes(){
-      const title = "<h1>Recipes</h1>"
-
-      const addButton = `<div class="mt-3 mb-3" id="new-resource">${this.renderNewBtn()}</div>`
-
-      const tableTop = `
-      <table class="table table-striped">
-      <thead class="thead-dark">
-        <tr>
-          <th>Name</th>
-          <th>Cost</th>
-          <th>Links</th>
-        </tr>
-      </thead>
-      <tbody>`
-
-      const tableBottom = `
-        </tbody>
-      </table>
-      `
-      let recipeRows = this.recipes.map(recipe => recipe.showRecipeTr).join('')
-
-      // Stitch together title, button, table, rows
-      // this.container.innerHTML = title + addButton + tableTop + recipeRows + tableBottom
-      this.container.innerHTML = title + addButton + tableTop + recipeRows + tableBottom
-
-      // Bind and listen to new html
-      this.allRecipesBindingsAndEventListeners()
-    }
-
-
-    // Render initial html. Use "loader" to display loading spinner.
-    get staticHTML(){
-      return (`
-        <div class="loader">
-        </div>
-      `)
-    }
 
 
 /* ---- Helpers ---- */
