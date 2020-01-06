@@ -30,12 +30,29 @@ class RecipesPage extends PageManager{
 
     // Bind and listen after form load
     recipeFormBindingsAndEventListeners(){
-      const form = this.container.querySelector('form')
-      form.addEventListener('submit', this.handleUpdateSubmit.bind(this))
+      this.form = this.container.querySelector('form')
+      const cancelButton = this.container.querySelector('#cancel')
+  
+      // Set listener based on form id
+      if (this.form.id === "new-recipe-form") {   
+        this.form.addEventListener('submit', this.handleNewSubmitClick.bind(this))
+      }else{ 
+        this.form.addEventListener('submit', this.handleUpdateSubmitClick.bind(this))
+      }
+  
+      // this.form.addEventListener('submit', this.handleNewSubmitClick.bind(this))
+      cancelButton.addEventListener('click', this.handleCancelClick.bind(this))
     }
 
 
   /* ---- Link/Click Handlers ---- */
+    // Handle new click
+    handleNewClick(e){
+      e.preventDefault()
+      // console.log('new clicked!');
+      this.renderNewForm()
+    }
+
     // Handle show, edit, and delete within recipe table
     handleTableRecipeClick(e){
       e.preventDefault()
@@ -84,6 +101,36 @@ class RecipesPage extends PageManager{
       // Get recipe id and recipe object
       const recipeId = e.target.parentNode.dataset.id
       this.deleteRecipe(recipeId)
+    }
+
+    // Handle form submit
+    handleNewSubmitClick(e){
+      e.preventDefault()
+      console.log("Submitting new recipe.")
+      // this.createIng(e)
+    }
+
+    // Handle form update submit
+    handleUpdateSubmitClick(e){
+      e.preventDefault()
+      console.log("Submitting update.")
+      // this.updateIng(e)
+    }
+
+
+
+    // Render new form
+    async renderNewForm(){
+      const recipe = new Recipe({id:'', name:'', servings:'', total_cost:'', cost_per_serving:''})
+
+      // Send request for all ingredients
+      const ingAdapter = new IngredientAdapter(new BaseAdapter())
+      const ingObj = await ingAdapter.getIngredients()
+      // Fill this.ingredients with ingredient objects
+      this.ingredients = ingObj.ingredients.map(ing => new Ingredient(ing))
+
+      this.container.innerHTML = recipe.recipeForm(this.ingredients)
+      this.recipeFormBindingsAndEventListeners()
     }
 
     async renderEditForm(recipeId){
