@@ -16,8 +16,9 @@ class RecipesPage extends PageManager{
     // Bind and listen after all recipes load
     allRecipesBindingsAndEventListeners(){
       const newButton = this.container.querySelector('#new-button')
-
       const table = this.container.querySelector('table')
+
+      newButton.addEventListener('click', this.handleNewClick(e))
       table.addEventListener('click', this.handleTableClick.bind(this))
     }
 
