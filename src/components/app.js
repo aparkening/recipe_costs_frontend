@@ -20,6 +20,7 @@ class App{
     // Instantiate and assign Navbar
     const navbar = new Navbar(this.navbarContainer, this.adapter)
     this.router.assignNavbar(navbar)
+    // console.log("App.js navbar router assigned.")
 
     // Assign Alert
     this.router.assignAlertHandler(this.handleAlert.bind(this))
@@ -46,12 +47,14 @@ class App{
 
   // Redirect based on router callback
   pageManagerRedirect(page){
-      this.renderPage(page)
+    // console.log("App.js pageManagerRedirect fired")
+    this.renderPage(page)
   }
 
   // Render page via router
   renderPage(page){
-      this.router.render(page)
+    // console.log("App.js renderPage fired")
+    this.router.render(page)
   }
 
 }
