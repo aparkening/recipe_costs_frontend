@@ -149,7 +149,7 @@ handleDeleteIngFieldsClick(e){
 handleAddIngFieldsClick(e){
   e.preventDefault()
   if(e.target.tagName === "A"){
-    
+
     // Build new div
     let newRow = document.createElement('div')
     newRow.innerHTML = this.recipe.renderIngRow(this.ingredients, this.units)
@@ -488,16 +488,22 @@ get staticHTML(){
 
       // Get form ingredients and map to array
       const formIngArray = Array.from(e.target.querySelectorAll('div.form-ingredient'))
+// debugger
+      
       let recipeIngredientsAttributes = formIngArray.map(el => {
-        let s = el.querySelector('select')
+        // Get ingredient id value from select list
+        let sId = el.querySelector('select[name="ingredient_id"]')
+
+        // Get ingredient amount from input
         let ingAmount = el.querySelector('input.ingredient_amount').value
-        let ingUnit = el.querySelector('input.ingredient_unit').value
-        //recipeIngredientId
+
+        // Get ingredient unit value from select list
+        let sUnit = el.querySelector('select[name="ingredient_unit"]')
+
         return {
-          ingredient_id: s.options[s.selectedIndex].value,
+          ingredient_id: sId.options[sId.selectedIndex].value,
           ingredient_amount: ingAmount,
-          ingredient_unit: ingUnit,
-          _destroy: 0
+          ingredient_unit: sUnit.options[sUnit.selectedIndex].value
         }
       })
       console.log(recipeIngredientsAttributes)
