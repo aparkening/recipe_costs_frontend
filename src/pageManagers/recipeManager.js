@@ -10,6 +10,7 @@ class RecipePage extends PageManager{
     this.adapter = new RecipeAdapter(adapter)
     this.recipe = null
     this.ingredients = null
+    this.currentOjb = null
   }
 
 
@@ -231,6 +232,10 @@ class RecipePage extends PageManager{
 
   // Render initial html. Use "loader" to display loading spinner.
   get staticHTML(){
+
+    this.currentObj
+
+
     return (`
       <div class="loader">
       </div>
