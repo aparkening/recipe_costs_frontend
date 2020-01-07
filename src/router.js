@@ -49,10 +49,7 @@ class Router{
   // Define navbar for each page
   assignNavbar(navbar){
     this.navbar = navbar
-
-    // console.log("Navbar assigned")
-    // console.log(navbar)
-
+    
     // Track currentPage for navbar manager
     this.navbar.currentPage = () => {
         return this.currentPage
