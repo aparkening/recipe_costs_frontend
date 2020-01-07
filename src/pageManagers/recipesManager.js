@@ -34,7 +34,9 @@ class RecipesPage extends PageManager{
     // Bind and listen after form load
     recipeFormBindingsAndEventListeners(){
       this.form = this.container.querySelector('form')
-      const cancelButton = this.container.querySelector('#cancel')
+      this.ingFields = this.form.querySelector('#ingredients')
+      const cancelButton = this.form.querySelector('#cancel')
+      const addBadge = this.form.querySelector('#add-ingredient')
   
       // Set listener based on form id
       if (this.form.id === "new-recipe-form") {   
@@ -44,6 +46,11 @@ class RecipesPage extends PageManager{
       }
   
       // this.form.addEventListener('submit', this.handleNewSubmitClick.bind(this))
+      
+      this.ingFields.addEventListener('click', this.handleDeleteIngFieldsClick.bind(this))
+      
+      addBadge.addEventListener('click', this.handleAddIngFieldsClick.bind(this))
+
       cancelButton.addEventListener('click', this.handleCancelClick.bind(this))
     }
 
@@ -128,6 +135,31 @@ class RecipesPage extends PageManager{
       this.redirect('recipes')
     }
 
+// Handle delete ingredients within recipe form
+handleDeleteIngFieldsClick(e){
+  e.preventDefault()
+
+  // If no recipe_ingredient id, simply remove
+  if(e.target.tagName === "A" && e.target.classList.contains('delete')){
+    console.log("Deleting this")
+    e.target.parentNode.parentNode.remove()
+    // debugger
+  }
+}
+
+// Handle add ingredients within recipe form
+handleAddIngFieldsClick(e){
+  e.preventDefault()
+  if(e.target.tagName === "A"){
+    console.log("Adding ingredient fields")
+    // Build new div
+    let newRow = document.createElement('div')
+    newRow.innerHTML = this.recipe.renderIngRow(this.ingredients, this.units)
+
+    // Append div to ingredient fields container
+    this.ingFields.appendChild(newRow)
+  }
+}
 
 /* ---- Fetchers and Renderers ---- */
 
@@ -160,7 +192,7 @@ class RecipesPage extends PageManager{
 
   // Render new form
   async renderNewForm(){
-    const recipe = new Recipe({'recipe': {id:'', name:'', servings:'', total_cost:'', cost_per_serving:''}, 'ingredients':[]})
+    this.recipe = new Recipe({'recipe': {id:'', name:'', servings:'', total_cost:'', cost_per_serving:''}, 'ingredients':[]})
 
     // Get all ingredients for select list
     // Send request for all ingredients
@@ -171,7 +203,7 @@ class RecipesPage extends PageManager{
     this.units = ingObj.units
 
     // Render form with ingredients
-    this.container.innerHTML = recipe.recipeForm(this.ingredients, this.units)
+    this.container.innerHTML = this.recipe.recipeForm(this.ingredients, this.units)
     this.recipeFormBindingsAndEventListeners()
   }
 
