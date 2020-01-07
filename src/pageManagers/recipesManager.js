@@ -71,7 +71,6 @@ class RecipesPage extends PageManager{
   // Handle new click
   handleNewClick(e){
     e.preventDefault()
-    console.log('new clicked!');
     this.renderNewForm()
   }
 
@@ -84,7 +83,6 @@ class RecipesPage extends PageManager{
     // this.recipe = this.recipes.find(r => r.id == recipeId)
     this.recipe = this.getRecipeById(recipeId)
     
-
     // console.log(recipeId)
     // console.log(this.recipe)
 
@@ -102,7 +100,7 @@ class RecipesPage extends PageManager{
         this.deleteRecipe(recipeId)
         break;
       default:
-        console.log('Invalid item');
+        console.log('Invalid selection');
         break;
     }
 
@@ -219,23 +217,6 @@ class RecipesPage extends PageManager{
 
   // Render edit form
   async renderEditForm(recipeId){
-    // console.log(recipeId)
-
-    // Place in try catch?
-    // const foundRecipe = this.recipes.find(r => r.id == recipeId)
-    // const foundRecipe = this.getRecipeById(recipeId)
-    
-    // Set this.recipe to edit
-
-    // console.log(this.recipe.id)
-
-    // console.log(recipeId)
-    // console.log(this.recipe)
-
-  
-    // if id matches this.recipe.id, display edit form
-    // if(foundRecipe && foundRecipe.id === this.recipe.id){
-
     // Find existing recipe by id
     const foundRecipe = this.getRecipeById(recipeId)
 
