@@ -111,7 +111,7 @@ class Recipe{
   // }
 
 
-  // Show new and edit recipe form
+  // Show new recipe form
   recipeForm(ingredients, units){
 
     return (`
@@ -147,13 +147,46 @@ class Recipe{
     `)
   }
 
+  // Show edit recipe form
+  editRecipeForm(ingredients, units){
+    return (`
+    <h1>Edit Recipe</h1>
+    <form id="edit-recipe-form">
+        ${this.id !== ""  ? '<input type="hidden" value="' + this.id + '" name="recipe-id">' : '' }
+
+        <div class="form-group">
+          <label for="recipe_name">Name*</label>
+          <input class="form-control" required="required" type="text" value="${this.id !== ""  ? this.name : ''}" name="name" id="recipe_name">
+        </div>
+        <div class="form-group">
+          <label for="recipe_servings">Servings</label>
+          <input class="form-control" type="text" value="${this.id !== ""  ? this.servings : ''}" name="servings" id="recipe_servings">
+        </div>
+      
+        <div class="form-group" id="ingredients">
+          <h3>Ingredients</h3>
+          Existing ingredients go here
+        </div>
+
+        <div class="form-group mx-1" id="add-ingredient">
+          <a href="#" class="badge badge-primary">+ Add another ingredient</a>
+        </div>
+
+        <div class="form-group mt-4">
+          <button type="submit" name="commit" class="btn btn-lg btn-primary">${this.id !== ""  ? 'Update' : 'Create'} Recipe</button>
+          &nbsp;&nbsp; 
+          <button type="button" name="cancel" class="btn btn-secondary btn-lg" id="cancel">Cancel</button>
+        </div>
+      </form>
+    `)
+  }
+
   // Set instance of recipeForm
   get showFormHTML(){
     return Recipe.recipeForm(this)
   }
 
   // Render ingredients as select list
-
   renderIngRow(ingredients, units){
     return (`
     <div class="form-row form-group form-ingredient">
@@ -180,6 +213,35 @@ class Recipe{
     </div><!-- / form-ingredient -->
     `)
   }
+
+// Render ingredients as select list
+renderExistingIngRow(units){
+  return (`
+  <div class="form-row form-group form-ingredient">
+    <div class="col-5">
+      ${this.name}
+    </div>
+    <div class="col-1">
+      <input placeholder="1" type="text" name="ingredient_amount" class="ingredient_amount form-control" required="required" value="${this.amountUnit}">
+    </div>
+
+    <!-- How to select existing unit? -->
+    <div class="col-2">
+      <select name="ingredient_unit" class="ingredient_unit custom-select">${units.map(u => this.renderUnitOptions(u)).join('')}
+      </select>
+    </div>
+    <div class="col pt-2 small">
+      <a href="#" class="text-muted delete-existing">Delete</a>
+    </div>
+
+    <!-- <label for="recipe_ingredients_attributes_0_ingredient_unit">Unit</label>
+    <input placeholder="example: lb" type="text" value="lb" name="recipe_ingredients_attributes[0][ingredient_unit]" id="recipe_ingredients_attributes_0_ingredient_unit" class="ingredient_unit">
+
+    <input type="hidden" value="11" name="recipe_ingredients_attributes[0][id]" id="recipe_recipe_ingredients_attributes_0_id" class="ingredient_id"> -->
+  </div><!-- / form-ingredient -->
+  `)
+}
+
 
   renderIngOptions(ingredient){
     // console.log(this)
