@@ -141,9 +141,7 @@ handleDeleteIngFieldsClick(e){
 
   // If no recipe_ingredient id, simply remove
   if(e.target.tagName === "A" && e.target.classList.contains('delete')){
-    console.log("Deleting this")
     e.target.parentNode.parentNode.remove()
-    // debugger
   }
 }
 
@@ -151,7 +149,7 @@ handleDeleteIngFieldsClick(e){
 handleAddIngFieldsClick(e){
   e.preventDefault()
   if(e.target.tagName === "A"){
-    console.log("Adding ingredient fields")
+    
     // Build new div
     let newRow = document.createElement('div')
     newRow.innerHTML = this.recipe.renderIngRow(this.ingredients, this.units)
