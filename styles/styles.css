@@ -49,17 +49,17 @@ a:not([href]):not([tabindex]) {
 }
 
 /* Buttons */
-.btn-primary {
+.btn-primary, .badge-primary {
   color: #fff;
   background-color: #002180;
   border-color: #002180;
 }
-.btn-primary:hover {
+.btn-primary:hover, .badge-primary:hover {
   color: #fff;
   background-color: #00175a;
   border-color: #00144d;
 }
-.btn-primary:focus, .btn-primary.focus {
+.btn-primary:focus, .btn-primary.focus, .badge-primary:focus, .badge-primary.focus {
   box-shadow: 0 0 0 0.2rem rgba(38, 66, 147, 0.5);
 }
 .btn-primary.disabled, .btn-primary:disabled {
