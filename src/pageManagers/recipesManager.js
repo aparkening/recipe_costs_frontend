@@ -245,11 +245,6 @@ class RecipesPage extends PageManager{
     }
   }
 
-    // handleRecipeDelete(recipeId){
-    //   // console.log(recipeId)
-    // }
-
-
     // // Go to edit recipe screen
     // handleEditClick(e){
     //   e.preventDefault()
