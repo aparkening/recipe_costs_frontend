@@ -33,11 +33,11 @@ class RecipeAdapter{
     const { name, servings, recipeIngredientsAttributes } = params
     const url = `${this.baseURL}/recipes`
     const body = {
-        recipe: {
-          name, 
-          servings,
-          recipe_ingredients_attributes: recipeIngredientsAttributes
-        }
+      recipe: {
+        name, 
+        servings,
+        recipe_ingredients_attributes: recipeIngredientsAttributes
+      }
     }
     const res = await fetch(url, {
         method: 'POST',
@@ -72,22 +72,22 @@ class RecipeAdapter{
  @messages={:"recipe_ingredients.ingredient"=>["must exist"]}>
   */
   async updateRecipe(params){
-      const { name, servings, recipeIngredientsAttributes, id} = params
-      const url = `${this.baseURL}/recipes/${id}`
-      const body = {
-          recipe: {
-              name, 
-              servings,
-              recipe_ingredients_attributes: recipeIngredientsAttributes
-          }
+    const { name, servings, recipeIngredientsAttributes, id} = params
+    const url = `${this.baseURL}/recipes/${id}`
+    const body = {
+      recipe: {
+        name, 
+        servings,
+        recipe_ingredients_attributes: recipeIngredientsAttributes
       }
-      const res = await fetch(url, {
-          method: 'PATCH',
-          headers: this.headers,
-          body: JSON.stringify(body)
-      })
-      await this.baseAdapter.checkStatus(res)
-      return await res.json()
+    }
+    const res = await fetch(url, {
+        method: 'PATCH',
+        headers: this.headers,
+        body: JSON.stringify(body)
+    })
+    await this.baseAdapter.checkStatus(res)
+    return await res.json()
   }
 
   // Delete recipe
