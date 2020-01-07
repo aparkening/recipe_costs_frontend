@@ -100,26 +100,19 @@ class Recipe{
 
 
   // Render ingredients as select list
-  renderIngSelect(){
-    return (`
-    <select name="recipe_ingredients_attributes[1][ingredient_id]" id="recipe_ingredients_attributes_01_ingredient_id"><option value=""></option>
-    <option value="1">seaweed</option>
-    <option value="2">all-purpose flour</option>
-    <option value="3">bread flour</option>
-          </select>
-    `)
-  }
+  // renderIngSelect(){
+  //   return (`
+  //   <select name="recipe_ingredients_attributes[1][ingredient_id]" id="recipe_ingredients_attributes_01_ingredient_id"><option value=""></option>
+  //   <option value="1">seaweed</option>
+  //   <option value="2">all-purpose flour</option>
+  //   <option value="3">bread flour</option>
+  //         </select>
+  //   `)
+  // }
 
 
   // Show new and edit recipe form
-  recipeForm(ingredients){
-
-    // Get all ingredients
-    // const allIngObj = await this.adapter.getRecipes()
-
-    // console.log(this.fetchAndRenderIngredients())
-
-    // Render ingredients as select list
+  recipeForm(ingredients, units){
 
     return (`
     <h1>${this.id !== "" ? 'Edit' : 'New'} Recipe</h1>
@@ -137,40 +130,37 @@ class Recipe{
       
         <div class="form-group">
           <h3>Ingredients</h3>
+          <div class="form-row form-ingredient">
+            <div class="col-4">
+              <select name="ingredient_id" class="ingredient_id custom-select">
+              ${ingredients.map(ing => this.renderIngOptions(ing)).join('')}
+              </select>
+            </div>
+            <div class="col-1">
+              <input placeholder="1" type="text" name="ingredient_amount" class="ingredient_amount form-control">
+            </div>
+            <div class="col-2">
+              <select name="ingredient_unit" class="ingredient_unit custom-select">${units.map(u => this.renderUnitOptions(u)).join('')}
+              </select>
+            </div>
+            <div class="col pt-2 small">
+              <a href="#" class="text-muted delete">Delete</a>
+            </div>
 
-          <div class="form-ingredient">
-            <select name="recipe_ingredients_attributes[0][ingredient_id]" id="recipe_ingredients_attributes_0_ingredient_id">
-            ${ingredients.map(ing => this.renderIngOptions(ing)).join('')}
-            </select>
-      
-            <label for="recipe_ingredients_attributes_0_ingredient_amount">Size</label>
-            <input placeholder="example: 5" type="text" value="2.0" name="recipe_ingredients_attributes[0][ingredient_amount]" id="recipe_ingredients_attributes_0_ingredient_amount" class="ingredient_amount">
-            
-            <label for="recipe_ingredients_attributes_0_ingredient_unit">Unit</label>
+            <!-- <label for="recipe_ingredients_attributes_0_ingredient_unit">Unit</label>
             <input placeholder="example: lb" type="text" value="lb" name="recipe_ingredients_attributes[0][ingredient_unit]" id="recipe_ingredients_attributes_0_ingredient_unit" class="ingredient_unit">
 
-            <input type="hidden" value="11" name="recipe_ingredients_attributes[0][id]" id="recipe_recipe_ingredients_attributes_0_id" class="ingredient_id">
+            <input type="hidden" value="11" name="recipe_ingredients_attributes[0][id]" id="recipe_recipe_ingredients_attributes_0_id" class="ingredient_id"> -->
+
           </div><!-- / form-ingredient -->
+          
+          <div class="form-row form-ingredient mx-1 my-2">
+            <a href="#" class="badge badge-primary">+ Add more ingredients</a>
+          </div>
+
         </div>
 
-
-        <div class="form-ingredient">
-        <select name="recipe_ingredients_attributes[1][ingredient_id]" id="recipe_ingredients_attributes_01_ingredient_id"><option value=""></option>
-  <option value="1">seaweed</option>
-  <option value="2">all-purpose flour</option>
-  <option value="3">bread flour</option>
-        </select>
-  
-        <label for="recipe_ingredients_attributes_1_ingredient_amount">Size</label>
-        <input placeholder="example: 5" type="text" value="2.0" name="recipe_ingredients_attributes[1][ingredient_amount]" id="recipe_ingredients_attributes_1_ingredient_amount" class="ingredient_amount">
-        
-        <label for="recipe_ingredients_attributes_1_ingredient_unit">Unit</label>
-        <input placeholder="example: lb" type="text" value="lb" name="recipe_ingredients_attributes[1][ingredient_unit]" id="recipe_ingredients_attributes_1_ingredient_unit" class="ingredient_unit">
-
-      </div><!-- / form-ingredient -->
-    </div>
-
-        <div class="form-group">
+        <div class="form-group mt-5">
           <button type="submit" name="commit" class="btn btn-lg btn-primary">${this.id !== ""  ? 'Update' : 'Create'} Recipe</button>
           &nbsp;&nbsp; 
           <button type="button" name="cancel" class="btn btn-secondary btn-lg" id="cancel">Cancel</button>
@@ -189,6 +179,14 @@ class Recipe{
     // console.log(this)
     return (`
     <option value="${ingredient.id}">${ingredient.name}</option>
+    `)
+  }
+
+  // Render ingredients as select list
+  renderUnitOptions(unit){
+    // console.log(this)
+    return (`
+    <option value="${unit}">${unit}</option>
     `)
   }
 
