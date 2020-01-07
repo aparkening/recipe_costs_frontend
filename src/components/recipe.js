@@ -132,9 +132,10 @@ class Recipe{
           <h3>Ingredients</h3>
           ${this.renderIngRow(ingredients, units)}
           ${this.renderIngRow(ingredients, units)}
-          <div class="form-row form-group form-ingredient mx-1">
-            <a href="#" class="badge badge-primary" id="add-ingredient">+ Add another ingredient</a>
-          </div>
+        </div>
+
+        <div class="form-group mx-1" id="add-ingredient">
+          <a href="#" class="badge badge-primary">+ Add another ingredient</a>
         </div>
 
         <div class="form-group mt-4">
