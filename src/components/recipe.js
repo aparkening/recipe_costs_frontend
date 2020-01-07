@@ -8,7 +8,7 @@ class Recipe{
     this.totalCost = recipe.total_cost
     this.costPerServing = recipe.cost_per_serving
 
-    this.ingredients = ingredients.map(ing => new RecipeIngredient(ing))
+    this.recipeIngredients = ingredients.map(ing => new RecipeIngredient(ing))
   }
 
   // Render single recipe page
@@ -45,7 +45,7 @@ class Recipe{
     `
 
     // Render recipe ingredient rows and join into string
-    let ingRows = this.ingredients.map(ing => ing.showIngTr).join('')
+    let ingRows = this.recipeIngredients.map(ing => ing.showIngTr).join('')
     // let ingRows = this.ingredients.map(ing => console.log(ing))
 
     // Stitch together html, table, rows
