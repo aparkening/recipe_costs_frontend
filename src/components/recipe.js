@@ -128,12 +128,12 @@ class Recipe{
           <input class="form-control" type="text" value="${this.id !== ""  ? this.servings : ''}" name="servings" id="recipe_servings">
         </div>
       
-        <div class="form-group">
+        <div class="form-group" id="ingredients">
           <h3>Ingredients</h3>
           ${this.renderIngRow(ingredients, units)}
           ${this.renderIngRow(ingredients, units)}
           <div class="form-row form-group form-ingredient mx-1">
-            <a href="#" class="badge badge-primary">+ Add another ingredient</a>
+            <a href="#" class="badge badge-primary" id="add-ingredient">+ Add another ingredient</a>
           </div>
         </div>
 
