@@ -31,28 +31,41 @@ class RecipesPage extends PageManager{
       this.recipeDeleteLink.addEventListener('click', this.handleRecipeDeleteClick.bind(this))
     }
 
-    // Bind and listen after form load
-    recipeFormBindingsAndEventListeners(){
+    // Bind and listen after new form load
+    newFormBindingsAndEventListeners(){
       this.form = this.container.querySelector('form')
       this.ingFields = this.form.querySelector('#ingredients')
       const cancelButton = this.form.querySelector('#cancel')
       const addBadge = this.form.querySelector('#add-ingredient')
   
-      // Set listener based on form id
-      if (this.form.id === "new-recipe-form") {   
-        this.form.addEventListener('submit', this.handleNewSubmitClick.bind(this))
-      }else{ 
-        this.form.addEventListener('submit', this.handleUpdateSubmitClick.bind(this))
-      }
+      // Delete and add new ingredients
+      this.ingFields.addEventListener('click', this.handleDeleteIngFieldsClick.bind(this))    
+      addBadge.addEventListener('click', this.handleAddIngFieldsClick.bind(this))
+      
+      // Cancel and submit clicks
+      cancelButton.addEventListener('click', this.handleCancelClick.bind(this))
+      this.form.addEventListener('submit', this.handleNewSubmitClick.bind(this))   
+    }
+
+    // Bind and listen after edit form load
+    editFormBindingsAndEventListeners(){
+      this.form = this.container.querySelector('form')
+      this.ingFields = this.form.querySelector('#ingredients')
+      const cancelButton = this.form.querySelector('#cancel')
+      const addBadge = this.form.querySelector('#add-ingredient')
   
-      // this.form.addEventListener('submit', this.handleNewSubmitClick.bind(this))
-      
+      // Delete existing ingredient
+
+            
+      // Delete and add new ingredients follow existing pattern
       this.ingFields.addEventListener('click', this.handleDeleteIngFieldsClick.bind(this))
-      
       addBadge.addEventListener('click', this.handleAddIngFieldsClick.bind(this))
 
+      // Cancel and submit clicks
       cancelButton.addEventListener('click', this.handleCancelClick.bind(this))
+      this.form.addEventListener('submit', this.handleUpdateSubmitClick.bind(this))
     }
+
 
 
 /* ---- Link/Click Handlers ---- */
@@ -202,7 +215,7 @@ handleAddIngFieldsClick(e){
 
     // Render form with ingredients
     this.container.innerHTML = this.recipe.recipeForm(this.ingredients, this.units)
-    this.recipeFormBindingsAndEventListeners()
+    this.newFormBindingsAndEventListeners()
   }
 
   // Render edit form
@@ -240,7 +253,7 @@ handleAddIngFieldsClick(e){
 
       this.recipe = foundRecipe
       this.container.innerHTML = foundRecipe.recipeForm(this.ingredients)
-      this.recipeFormBindingsAndEventListeners()
+      this.editFormBindingsAndEventListeners()
     }else{
       // else throw error
       this.handleError({
