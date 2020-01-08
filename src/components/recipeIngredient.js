@@ -28,7 +28,7 @@ class RecipeIngredient{
     return (`
     <div class="form-row form-group form-ingredient">
       <input type="hidden" value="${this.ingredient.id}" name="ingredient_id" id="">
-      <input type="hidden" value="${this.id}" name="id" id="">
+      <input type="hidden" value="${this.id}" name="recipe_ingredient_id" id="">
       <div class="col-4">
         ${this.name}
       </div>
