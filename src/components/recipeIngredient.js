@@ -24,8 +24,11 @@ class RecipeIngredient{
 
   // Render existing ingredients in recipe form
   showEditIng(units){
+    console.log(this)
     return (`
     <div class="form-row form-group form-ingredient">
+      <input type="hidden" value="${this.ingredient.id}" name="ingredient_id" id="">
+      <input type="hidden" value="${this.id}" name="id" id="">
       <div class="col-4">
         ${this.name}
       </div>
@@ -39,7 +42,6 @@ class RecipeIngredient{
       <div class="col pt-2 small">
         <a href="#" class="text-muted delete-existing">Delete</a>
       </div>
-      <input type="hidden" value="${this.id}" name="ingredient_id" id="" class="ingredient_id">
     </div><!-- / form-ingredient -->
     `)
   }
