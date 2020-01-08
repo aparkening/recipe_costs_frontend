@@ -49,9 +49,8 @@ class RecipeIngredient{
 
   // Render units as select list
   renderUnitOptions(unit){
-    // console.log(this)
     return (`
-    <option value="${unit}">${unit}</option>
+    <option value="${unit}" ${this.amountUnit == unit ? 'selected = "selected"' : ''}>${unit}</option>
     `)
   }
 
