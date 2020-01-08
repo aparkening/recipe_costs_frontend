@@ -32,8 +32,6 @@ class RecipeIngredient{
       <div class="col-2">
         <input placeholder="1" type="text" name="ingredient_amount" class="ingredient_amount form-control" required="required" value="${this.amount}">
       </div>
-
-      <!-- How to select existing amountUnit? -->
       <div class="col-2">
         <select name="ingredient_unit" class="ingredient_unit custom-select">${units.map(u => this.renderUnitOptions(u)).join('')}
         </select>
@@ -41,7 +39,6 @@ class RecipeIngredient{
       <div class="col pt-2 small">
         <a href="#" class="text-muted delete-existing">Delete</a>
       </div>
-
       <input type="hidden" value="${this.id}" name="ingredient_id" id="" class="ingredient_id">
     </div><!-- / form-ingredient -->
     `)
