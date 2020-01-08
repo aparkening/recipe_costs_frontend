@@ -222,9 +222,6 @@ class RecipesPage extends PageManager{
 
     // If recipe from id exists, render form and call new bindings and event listeners
     if (foundRecipe) {
-      console.log("Real recipe!")
-      console.log(foundRecipe)
-
       // Send request for all ingredients
       const ingAdapter = new IngredientAdapter(new BaseAdapter())
       const ingObj = await ingAdapter.getIngredients()
@@ -384,8 +381,6 @@ get staticHTML(){
   async updateRecipe(e){
     e.preventDefault()
 
-// console.log(e.target.querySelectorAll('input'))
-
     // Set recipe variables for params
     // const [id, name, servings, recipe_ingredients_attributes] = Array.from(e.target.querySelectorAll('input')).map(i => i.value)
 
@@ -397,33 +392,35 @@ get staticHTML(){
     // console.log(name)
     // console.log(servings)
     
-    
-    // query select for tag
-    // query select all for rest
-
     // Get form ingredients and map to array
     const formIngArray = Array.from(e.target.querySelectorAll('div.form-ingredient'))
+
     let recipeIngredientsAttributes = formIngArray.map(el => {
-      let s = el.querySelector('select')
+      let ingId = Number(el.querySelector('input[name="ingredient_id"]').value)
+      let id = Number(el.querySelector('input[name="recipe_ingredient_id"]').value)
+
+      // console.log(`Ingredient id is ${ingId}`)
+      // console.log(`RIngredient id is ${id}`)
+
+      // let s = el.querySelector('select')
       let ingAmount = el.querySelector('input.ingredient_amount').value
-      let ingUnit = el.querySelector('input.ingredient_unit').value
-      //recipeIngredientId
+       // Get ingredient unit value from select list
+      let sUnit = el.querySelector('select[name="ingredient_unit"]')
+
       return {
-        ingredient_id: s.options[s.selectedIndex].value,
+        // ingredient_id: s.options[s.selectedIndex].value,
+        ingredient_id: ingId,
+        id: id,
         ingredient_amount: ingAmount,
-        ingredient_unit: ingUnit,
+        ingredient_unit: sUnit.options[sUnit.selectedIndex].value,
         _destroy: 0
       }
     })
     console.log(recipeIngredientsAttributes)
 
-    // recipe_ingredients_attributes: {
-    //   0: {ingredient_id: 13, ingredient_amount:5, ingredient_unit:"lb", _destroy: 1, id: 11}, 
-
     // Set params
     const params = { name, servings, recipeIngredientsAttributes, id }
     console.log(params)
-
 
     // Establish recipe object and set old data
     // const recipe = this.getRecipeById(id)
@@ -439,27 +436,25 @@ get staticHTML(){
 
     // Send fetch. If error, reset this.recipe to old 
     try{
-        const resp = await this.adapter.updateRecipe(params)
-        // const {name, servings, recipeIngredientsAttributes, id} = await this.adapter.updateRecipe(params)
-        console.log("Successful patch request!")
-        
-        this.recipe = new Recipe(resp)
-        console.log(this.recipe)
-        // this.recipes.This.remove()
+      const resp = await this.adapter.updateRecipe(params)
+      // const {name, servings, recipeIngredientsAttributes, id} = await this.adapter.updateRecipe(params)
+      console.log("Successful patch request!")
+      
+      this.recipe = new Recipe(resp)
+      console.log(this.recipe)
+      // this.recipes.This.remove()
 
-        // let updatedRecipe = this.getRecipeById(id)
-
-
+      // let updatedRecipe = this.getRecipeById(id)
     }catch(err){
-        // this.recipe.name = oldRecipe.name
-        // this.recipe.servings = oldRecipe.servings
-        // this.recipe.totalCost = oldRecipe.totalCost
-        // this.recipe.costPerServing = oldRecipe.costPerServing
-        // this.recipe.ingredients = oldRecipe.ingredients
-        // console.log("Old Recipe!")
-        // console.log(oldRecipe)
-        this.renderRecipe()
-        this.handleError(err)
+      // this.recipe.name = oldRecipe.name
+      // this.recipe.servings = oldRecipe.servings
+      // this.recipe.totalCost = oldRecipe.totalCost
+      // this.recipe.costPerServing = oldRecipe.costPerServing
+      // this.recipe.ingredients = oldRecipe.ingredients
+      // console.log("Old Recipe!")
+      // console.log(oldRecipe)
+      this.renderRecipe()
+      this.handleError(err)
     }  
   }
 
@@ -477,7 +472,6 @@ get staticHTML(){
 
       // Get form ingredients and map to array
       const formIngArray = Array.from(e.target.querySelectorAll('div.form-ingredient'))
-// debugger
       
       let recipeIngredientsAttributes = formIngArray.map(el => {
         // Get ingredient id value from select list
