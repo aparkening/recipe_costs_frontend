@@ -154,8 +154,8 @@ class Recipe{
     <form id="${this.id !== "" ? 'edit' : 'new'}-recipe-form">
         ${this.id !== ""  ? '<input type="hidden" value="' + this.id + '" name="recipe-id">' : '' }
 
-        <div class="form-row">
-          <div class="form-group col-7">
+        <div class="form-row mb-2">
+          <div class="form-group col-6">
             <label for="recipe_name">Name*</label>
             <input class="form-control" required="required" type="text" value="${this.id !== "" ? this.name : ''}" name="name" id="recipe_name">
           </div>
@@ -192,12 +192,12 @@ class Recipe{
   renderIngRow(ingredients, units){
     return (`
     <div class="form-row form-group form-ingredient">
-      <div class="col-5">
+      <div class="col-4">
         <select name="ingredient_id" class="ingredient_id custom-select">
         ${ingredients.map(ing => this.renderIngOptions(ing)).join('')}
         </select>
       </div>
-      <div class="col-1">
+      <div class="col-2">
         <input placeholder="1" type="text" name="ingredient_amount" class="ingredient_amount form-control" required="required">
       </div>
       <div class="col-2">
