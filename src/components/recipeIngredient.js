@@ -26,10 +26,10 @@ class RecipeIngredient{
   showEditIng(units){
     return (`
     <div class="form-row form-group form-ingredient">
-      <div class="col-3">
+      <div class="col-4">
         ${this.name}
       </div>
-      <div class="col-1">
+      <div class="col-2">
         <input placeholder="1" type="text" name="ingredient_amount" class="ingredient_amount form-control" required="required" value="${this.amount}">
       </div>
 
