@@ -154,13 +154,15 @@ class Recipe{
     <form id="${this.id !== "" ? 'edit' : 'new'}-recipe-form">
         ${this.id !== ""  ? '<input type="hidden" value="' + this.id + '" name="recipe-id">' : '' }
 
-        <div class="form-group">
-          <label for="recipe_name">Name*</label>
-          <input class="form-control" required="required" type="text" value="${this.id !== "" ? this.name : ''}" name="name" id="recipe_name">
-        </div>
-        <div class="form-group">
-          <label for="recipe_servings">Servings</label>
-          <input class="form-control" type="text" value="${this.id !== "" ? this.servings : ''}" name="servings" id="recipe_servings">
+        <div class="form-row">
+          <div class="form-group col-7">
+            <label for="recipe_name">Name*</label>
+            <input class="form-control" required="required" type="text" value="${this.id !== "" ? this.name : ''}" name="name" id="recipe_name">
+          </div>
+          <div class="form-group col-2">
+            <label for="recipe_servings">Servings</label>
+            <input class="form-control" type="text" value="${this.id !== "" ? this.servings : ''}" name="servings" id="recipe_servings">
+          </div>
         </div>
       
         <div class="form-group" id="ingredients">
