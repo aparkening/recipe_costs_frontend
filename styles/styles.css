@@ -4,6 +4,7 @@ body {
 h1 {
   margin-bottom: 1rem;  
 }
+.hidden { display: none;}
 
 /* Navbar */
 .navbar-brand {
@@ -88,7 +89,6 @@ a:not([href]):not([tabindex]) {
   height: 120px;
   animation: spin 2s linear infinite;
 }
-
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
