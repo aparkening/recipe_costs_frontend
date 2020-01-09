@@ -381,37 +381,43 @@ get staticHTML(){
   async updateRecipe(e){
     // e.preventDefault()
 
-    // Set recipe variables for params
-    // const [id, name, servings, recipe_ingredients_attributes] = Array.from(e.target.querySelectorAll('input')).map(i => i.value)
-
+    // Set recipe variables for inputs
     const id = e.target.querySelector('input[name="recipe-id"]').value
     const name = e.target.querySelector('input[name="name"]').value
     const servings = e.target.querySelector('input[name="servings"]').value
-
     // console.log(id)
     // console.log(name)
     // console.log(servings)
-    
-    // Get form ingredients and map to array
-    const formIngArray = Array.from(e.target.querySelectorAll('div.form-ingredient'))
 
-    let recipeIngredientsAttributes = formIngArray.map(el => {
-      // Get hidden and text inputs
-      let ingId = Number(el.querySelector('input[name="ingredient_id"]').value)
-      let id = Number(el.querySelector('input[name="recipe_ingredient_id"]').value)
+    // Set recipeIngredientsAttributes from each ingredient input
+    let recipeIngredientsAttributes = Array.from(e.target.querySelectorAll('div.form-ingredient')).map(el => {
+      let ingObj = {}
+      let ingId = ''
+      
+      // If new ingredient, get id from select list. Else get hidden inputs and set extra object properties.
+      if(el.classList.contains("new-ingredient")){
+        // Get id from select list value
+        let sId = el.querySelector('select[name="ingredient_id"]')
+        ingId = sId.options[sId.selectedIndex].value
+      }else{
+        // Get hidden inputs
+        ingId = Number(el.querySelector('input[name="ingredient_id"]').value)
+        let id = Number(el.querySelector('input[name="recipe_ingredient_id"]').value)
+
+        // Set id and destroy
+        ingObj.id = id
+        ingObj['_destroy'] = 0
+      }
+      
       let ingAmount = el.querySelector('input.ingredient_amount').value
-
       // Get ingredient unit value from select list
       let sUnit = el.querySelector('select[name="ingredient_unit"]')
 
-      return {
-        // ingredient_id: s.options[s.selectedIndex].value,
-        ingredient_id: ingId,
-        id: id,
-        ingredient_amount: ingAmount,
-        ingredient_unit: sUnit.options[sUnit.selectedIndex].value,
-        _destroy: 0
-      }
+      // Set and return object properties
+      ingObj.ingredient_id = ingId
+      ingObj.ingredient_amount = ingAmount
+      ingObj.ingredient_unit = sUnit.options[sUnit.selectedIndex].value
+      return ingObj
     })
     console.log("Recipe Ingredients Attributes")
     console.log(recipeIngredientsAttributes)
