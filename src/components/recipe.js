@@ -191,7 +191,7 @@ class Recipe{
   // Render ingredients as select list
   renderIngRow(ingredients, units){
     return (`
-    <div class="form-row form-group form-ingredient">
+    <div class="form-row form-group form-ingredient new-ingredient">
       <div class="col-4">
         <select name="ingredient_id" class="ingredient_id custom-select">
         ${ingredients.map(ing => this.renderIngOptions(ing)).join('')}
