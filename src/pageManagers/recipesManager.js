@@ -379,7 +379,7 @@ get staticHTML(){
 
   // Handle form submit
   async updateRecipe(e){
-    e.preventDefault()
+    // e.preventDefault()
 
     // Set recipe variables for params
     // const [id, name, servings, recipe_ingredients_attributes] = Array.from(e.target.querySelectorAll('input')).map(i => i.value)
@@ -396,15 +396,12 @@ get staticHTML(){
     const formIngArray = Array.from(e.target.querySelectorAll('div.form-ingredient'))
 
     let recipeIngredientsAttributes = formIngArray.map(el => {
+      // Get hidden and text inputs
       let ingId = Number(el.querySelector('input[name="ingredient_id"]').value)
       let id = Number(el.querySelector('input[name="recipe_ingredient_id"]').value)
-
-      // console.log(`Ingredient id is ${ingId}`)
-      // console.log(`RIngredient id is ${id}`)
-
-      // let s = el.querySelector('select')
       let ingAmount = el.querySelector('input.ingredient_amount').value
-       // Get ingredient unit value from select list
+
+      // Get ingredient unit value from select list
       let sUnit = el.querySelector('select[name="ingredient_unit"]')
 
       return {
@@ -416,10 +413,12 @@ get staticHTML(){
         _destroy: 0
       }
     })
+    console.log("Recipe Ingredients Attributes")
     console.log(recipeIngredientsAttributes)
 
     // Set params
     const params = { name, servings, recipeIngredientsAttributes, id }
+    console.log("Params")
     console.log(params)
 
     // Establish recipe object and set old data
@@ -443,6 +442,8 @@ get staticHTML(){
       this.recipe = new Recipe(resp)
       console.log(this.recipe)
       // this.recipes.This.remove()
+
+      this.renderRecipe()
 
       // let updatedRecipe = this.getRecipeById(id)
     }catch(err){
