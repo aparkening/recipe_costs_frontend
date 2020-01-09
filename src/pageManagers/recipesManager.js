@@ -150,8 +150,23 @@ class RecipesPage extends PageManager{
     e.preventDefault()
 
     // If no recipe_ingredient id, simply remove
-    if(e.target.tagName === "A" && e.target.classList.contains('delete')){
-      e.target.parentNode.parentNode.remove()
+    if(e.target.tagName === "A"){ 
+      // If delete on new ingredient, remove node
+      if (e.target.classList.contains('delete')) { e.target.parentNode.parentNode.remove() }
+
+      // If delete on existing ingredient, hide node and set hidden input
+      if (e.target.classList.contains('delete-existing')){
+        let deleteIng = document.createElement('input')
+        deleteIng.type = "hidden"
+        deleteIng.value = 1
+        deleteIng.name = "destroy"
+        e.target.parentNode.parentNode.appendChild(deleteIng)
+
+        //e.target.parentNode.parentNode.remove()
+        e.target.parentNode.parentNode.classList.add("hidden")
+
+        console.log("Destroying existing ingredient")
+      }
     }
   }
 
@@ -403,10 +418,11 @@ get staticHTML(){
         // Get hidden inputs
         ingId = Number(el.querySelector('input[name="ingredient_id"]').value)
         let id = Number(el.querySelector('input[name="recipe_ingredient_id"]').value)
+        let destroy = Number(el.querySelector('input[name="destroy"]').value)
 
         // Set id and destroy
         ingObj.id = id
-        ingObj['_destroy'] = 0
+        ingObj['_destroy'] = destroy
       }
       
       let ingAmount = el.querySelector('input.ingredient_amount').value
