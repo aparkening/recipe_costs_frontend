@@ -80,6 +80,7 @@ class RecipesPage extends PageManager{
 
     // Get recipe id and recipe object
     const recipeId = e.target.dataset.id
+
     // this.recipe = this.recipes.find(r => r.id == recipeId)
     this.recipe = this.getRecipeById(recipeId)
     
@@ -94,7 +95,8 @@ class RecipesPage extends PageManager{
         break;
       case 'edit':
         console.log('edit clicked!');
-        this.renderEditForm(recipeId)
+        // recipeId default set by this.recipe
+        this.renderEditForm()
         break;
       case 'delete':
         this.deleteRecipe(recipeId)
@@ -111,8 +113,10 @@ class RecipesPage extends PageManager{
   handleRecipeEditClick(e){
     e.preventDefault()
     // Get recipe id and recipe object
-    const recipeId = e.target.parentNode.dataset.id
-    this.renderEditForm(recipeId)
+    // const recipeId = e.target.parentNode.dataset.id
+    
+    // recipeId default set by this.recipe
+    this.renderEditForm()
   }
 
   // Handle detail recipe delete
@@ -231,7 +235,7 @@ class RecipesPage extends PageManager{
   }
 
   // Render edit form
-  async renderEditForm(recipeId){
+  async renderEditForm(recipeId = this.recipe.id){
     // Find existing recipe by id
     const foundRecipe = this.getRecipeById(recipeId)
 
@@ -444,40 +448,31 @@ get staticHTML(){
     const params = { name, servings, recipeIngredientsAttributes, id }
     console.log("Params")
     console.log(params)
-
-    // Establish recipe object and set old data
-    // const recipe = this.getRecipeById(id)
-    // const oldRecipe = new Recipe({id, name, servings, totalCost, costPerServing, ingredients})
-    // const oldRecipe = new Recipe({id, name, servings, recipe_ingredients_attributes})
-    // const oldRecipe = this.getRecipeById(id)
-
-    // Set params and optimistically render
-    // recipe.name = name
-    // recipe.servings = servings
-    // recipe.ingredients = recipeIngredientsAttributes
-    // this.renderRecipe(recipe)
-
+    
     // Send fetch. If error, reset this.recipe to old 
     try{
       const resp = await this.adapter.updateRecipe(params)
       // const {name, servings, recipeIngredientsAttributes, id} = await this.adapter.updateRecipe(params)
       console.log("Successful patch request!")
       
+      // Update this.recipe and this.recipes
       this.recipe = new Recipe(resp)
       console.log(this.recipe)
-      // this.recipes.This.remove()
 
+      const updatedRecipe = this.getRecipeById(this.recipe.id)
+      // this.recipes.find(r => r.id == this.recipe.id)
+      updatedRecipe.name = this.recipe.name
+      updatedRecipe.servings = this.recipe.servings
+      updatedRecipe.totalCost = this.recipe.totalCost
+      updatedRecipe.costPerServing = this.recipe.costPerServing
+      updatedRecipe.recipeIngredients = this.recipe.recipeIngredients
+
+      // const newRecipe = () => Object.assign({}, this.recipe, { [key]: value })
+  
+      // Display recipe
       this.renderRecipe()
 
-      // let updatedRecipe = this.getRecipeById(id)
     }catch(err){
-      // this.recipe.name = oldRecipe.name
-      // this.recipe.servings = oldRecipe.servings
-      // this.recipe.totalCost = oldRecipe.totalCost
-      // this.recipe.costPerServing = oldRecipe.costPerServing
-      // this.recipe.ingredients = oldRecipe.ingredients
-      // console.log("Old Recipe!")
-      // console.log(oldRecipe)
       this.renderRecipe()
       this.handleError(err)
     }  
