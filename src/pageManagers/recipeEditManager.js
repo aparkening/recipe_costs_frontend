@@ -126,17 +126,21 @@ class RecipeEditPage extends PageManager{
       this.recipe = new Recipe(resp)
       console.log(this.recipe)
 
-      // Send to recipe display when ready
+      // Alert user of success
+      this.handleAlert({
+        type: "success",
+        msg: "Recipe updated!"
+      }) 
 
 /* Change */      
-      // this.recirect('recipe', this.recipe)
+      // this.redirect('recipe', this.recipe)
       this.redirect('recipes')
 
     }catch(err){
       // this.renderRecipe()
       this.handleError(err)
 /* Change */      
-      // this.recirect('recipe', this.recipe)
+      // this.redirect('recipe', this.recipe)
       this.redirect('recipes')
     }  
   }
