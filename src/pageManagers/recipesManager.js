@@ -93,7 +93,8 @@ class RecipesPage extends PageManager{
       case 'edit':
         console.log('edit clicked!');
         // recipeId default set by this.recipe
-        this.renderEditForm()
+        // this.renderEditForm()
+        this.redirect('recipe-edit', this.recipe)
         break;
       case 'delete':
         this.deleteRecipe(recipeId)
