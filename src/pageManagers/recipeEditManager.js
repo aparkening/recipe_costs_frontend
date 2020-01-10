@@ -131,17 +131,14 @@ class RecipeEditPage extends PageManager{
         type: "success",
         msg: "Recipe updated!"
       }) 
-
-/* Change */      
-      // this.redirect('recipe', this.recipe)
-      this.redirect('recipes')
+      this.redirect('recipe', this.recipe)
+      // this.redirect('recipes')
 
     }catch(err){
       // this.renderRecipe()
-      this.handleError(err)
-/* Change */      
-      // this.redirect('recipe', this.recipe)
-      this.redirect('recipes')
+      this.handleError(err) 
+      this.redirect('recipe', this.recipe)
+      // this.redirect('recipes')
     }  
   }
 
