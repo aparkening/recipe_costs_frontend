@@ -68,7 +68,9 @@ class RecipesPage extends PageManager{
   // Handle new click
   handleNewClick(e){
     e.preventDefault()
-    this.renderNewForm()
+    // this.renderNewForm()
+    
+    this.redirect('recipe-new', this.recipe)
   }
 
   // Handle show, edit, and delete within recipe table
