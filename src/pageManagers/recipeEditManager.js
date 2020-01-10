@@ -51,20 +51,7 @@ class RecipeEditPage extends PageManager{
 
     // Only activate on href click
     if(e.target.tagName === "A"){ 
-      // If delete on new ingredient, remove node
-      if (e.target.classList.contains('delete')) { e.target.parentNode.parentNode.remove() }
-
-      // If delete on existing ingredient, hide node and set hidden input
-      if (e.target.classList.contains('delete-existing')){
-        let deleteIng = document.createElement('input')
-        deleteIng.type = "hidden"
-        deleteIng.value = 1
-        deleteIng.name = "destroy"
-        e.target.parentNode.parentNode.appendChild(deleteIng)
-
-        //e.target.parentNode.parentNode.remove()
-        e.target.parentNode.parentNode.classList.add("hidden")
-      }
+      Ingredient.deleteField(e)
     }
   }
 
