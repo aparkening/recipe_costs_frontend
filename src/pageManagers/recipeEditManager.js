@@ -11,7 +11,6 @@ class RecipeEditPage extends PageManager{
 /* ---- Bindings and Event Listeners ---- */  
   // Don't need initial bindings and listeners
   initBindingsAndEventListeners(){
-
     return null
   }
 
@@ -36,8 +35,6 @@ class RecipeEditPage extends PageManager{
   // Handle form cancel button
   handleCancelClick(e){
     e.preventDefault()
-    // this.newContainer.innerHTML = this.renderNewBtn()
-    // this.indexBindingsAndEventListeners()
     this.redirect('recipes')
   }
 
@@ -52,7 +49,7 @@ class RecipeEditPage extends PageManager{
   handleDeleteIngFieldsClick(e){
     e.preventDefault()
 
-    // If no recipe_ingredient id, simply remove
+    // Only activate on href click
     if(e.target.tagName === "A"){ 
       // If delete on new ingredient, remove node
       if (e.target.classList.contains('delete')) { e.target.parentNode.parentNode.remove() }
@@ -67,8 +64,6 @@ class RecipeEditPage extends PageManager{
 
         //e.target.parentNode.parentNode.remove()
         e.target.parentNode.parentNode.classList.add("hidden")
-
-        console.log("Destroying existing ingredient")
       }
     }
   }
@@ -76,13 +71,13 @@ class RecipeEditPage extends PageManager{
   // Handle add ingredients within recipe form
   handleAddIngFieldsClick(e){
     e.preventDefault()
+
+    // Only activate on href click
     if(e.target.tagName === "A"){
 
-      // Build new div
+      // Build new ingredient div and append to ingredient fields container
       let newRow = document.createElement('div')
       newRow.innerHTML = this.recipe.renderIngRow(this.ingredients, this.units)
-
-      // Append div to ingredient fields container
       this.ingFields.appendChild(newRow)
     }
   }
@@ -98,20 +93,18 @@ class RecipeEditPage extends PageManager{
     const id = e.target.querySelector('input[name="recipe-id"]').value
     const name = e.target.querySelector('input[name="name"]').value
     const servings = e.target.querySelector('input[name="servings"]').value
-    // console.log(id)
-    // console.log(name)
-    // console.log(servings)
 
     // Set recipeIngredientsAttributes from each ingredient input
     let recipeIngredientsAttributes = Array.from(e.target.querySelectorAll('div.form-ingredient')).map(el => {
       let ingObj = {}
       let ingId = ''
       
-      // If new ingredient, get id from select list. Else get hidden inputs and set extra object properties.
+      // If new ingredient, get id from select list. Else look for hidden inputs and set extra new object properties.
       if(el.classList.contains("new-ingredient")){
         // Get id from select list value
         let sId = el.querySelector('select[name="ingredient_id"]')
         ingId = sId.options[sId.selectedIndex].value
+
       }else{
         // Get hidden inputs
         ingId = Number(el.querySelector('input[name="ingredient_id"]').value)
@@ -129,50 +122,37 @@ class RecipeEditPage extends PageManager{
       // Get ingredient unit value from select list
       let sUnit = el.querySelector('select[name="ingredient_unit"]')
 
-      // Set and return object properties
+      // Set and return new object
       ingObj.ingredient_id = ingId
       ingObj.ingredient_amount = ingAmount
       ingObj.ingredient_unit = sUnit.options[sUnit.selectedIndex].value
       return ingObj
     })
-    console.log("Recipe Ingredients Attributes")
-    console.log(recipeIngredientsAttributes)
+    // console.log("Recipe Ingredients Attributes")
+    // console.log(recipeIngredientsAttributes)
 
-    // Set params
+    // Set params for submission
     const params = { name, servings, recipeIngredientsAttributes, id }
-    console.log("Params")
-    console.log(params)
 
     // Send fetch. If error, reset this.recipe to old 
     try{
       const resp = await this.adapter.updateRecipe(params)
-      // const {name, servings, recipeIngredientsAttributes, id} = await this.adapter.updateRecipe(params)
-      // console.log("Successful patch request!")
       
-      // Update this.recipe and this.recipes
+      // Update this.recipe
       this.recipe = new Recipe(resp)
       console.log(this.recipe)
 
-      // const updatedRecipe = this.getRecipeById(this.recipe.id)
-      // // this.recipes.find(r => r.id == this.recipe.id)
-      // updatedRecipe.name = this.recipe.name
-      // updatedRecipe.servings = this.recipe.servings
-      // updatedRecipe.totalCost = this.recipe.totalCost
-      // updatedRecipe.costPerServing = this.recipe.costPerServing
-      // updatedRecipe.recipeIngredients = this.recipe.recipeIngredients
-
-      // const newRecipe = () => Object.assign({}, this.recipe, { [key]: value })
-  
-      // Display recipe
-      // this.renderRecipe()
-
       // Send to recipe display when ready
-      this.redirect('recipes')
 
+/* Change */      
+      // this.recirect('recipe', this.recipe)
+      this.redirect('recipes')
 
     }catch(err){
       // this.renderRecipe()
       this.handleError(err)
+/* Change */      
+      // this.recirect('recipe', this.recipe)
       this.redirect('recipes')
     }  
   }
@@ -180,35 +160,30 @@ class RecipeEditPage extends PageManager{
 
 /* ---- Fetchers and Renderers ---- */  
   async fetchAndRenderPageResources(){
-    
-    console.log("New edit page")
-    this.recipe = this.currentObj
+    // Display if object exists
+    if (this.currentObj){
+      // Set recipe from redirect obj  
+      this.recipe = this.currentObj
 
-    // Find existing recipe by id
-    // const foundRecipe = this.getRecipeById(recipeId)
-
-    // If recipe from id exists, render form and call new bindings and event listeners
-    // if (foundRecipe) {
-      // Send request for all ingredients
+      // Get all ingredients and ingredient units for form fields
       const ingAdapter = new IngredientAdapter(new BaseAdapter())
       const ingObj = await ingAdapter.getIngredients()
+
       // Fill this.ingredients with ingredient objects
       this.ingredients = ingObj.ingredients.map(ing => new Ingredient(ing))
       this.units = ingObj.units
 
       // Render form with ingredients
-      // this.recipe = foundRecipe
       this.container.innerHTML = this.recipe.editRecipeForm(this.ingredients, this.units)
       this.editFormBindingsAndEventListeners()
-    // }else{
-    //   // else throw error
-    //   this.handleError({
-    //     type: "danger",
-    //     msg: "Recipe was not found"
-    //   })
-    // }
+    }else{
+      // else throw error
+      this.handleError({
+        type: "danger",
+        msg: "Recipe was not found"
+      })
+    }
   }
-
 
   // Render initial html. Use "loader" to display loading spinner.
   get staticHTML(){
@@ -217,6 +192,5 @@ class RecipeEditPage extends PageManager{
       </div>
     `)
   }
-
 
 }
