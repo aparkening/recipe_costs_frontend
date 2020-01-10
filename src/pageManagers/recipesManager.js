@@ -367,19 +367,6 @@ get staticHTML(){
     }
   }
 
-
-  // cloneObject(obj) {
-  //   var clone = {};
-  //   for(var i in obj) {
-  //       if(obj[i] != null &&  typeof(obj[i])=="object")
-  //           clone[i] = this.cloneObject(obj[i]);
-  //       else
-  //           clone[i] = obj[i];
-  //   }
-  //   return clone;
-  // }
-
-
   // Handle form submit
   async updateRecipe(e){
     // e.preventDefault()
@@ -437,7 +424,7 @@ get staticHTML(){
     try{
       const resp = await this.adapter.updateRecipe(params)
       // const {name, servings, recipeIngredientsAttributes, id} = await this.adapter.updateRecipe(params)
-      console.log("Successful patch request!")
+      // console.log("Successful patch request!")
       
       // Update this.recipe and this.recipes
       this.recipe = new Recipe(resp)
