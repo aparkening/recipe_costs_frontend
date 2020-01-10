@@ -336,25 +336,9 @@ get staticHTML(){
 
       // Remove recipe and save it, in case error later
       const savedRecipe = this.recipes.splice(recipeIndex, 1)
-      // console.log(savedRecipe)
-
-      // Remove recipe from this.recipes
-      // this.recipes = this.recipes.filter(r => r.id !== foundRecipe.id)
-      console.log("New Recipes")
-      console.log(this.recipes)
-      // set this.recipes
-
-      // console.log("Saved Recipe")
-      // console.log(savedRecipe)
       
       // Optimistically render new recipe list
       this.renderRecipes()
-
-
-    // findByIndex to get index
-    // Use index to save to this.recipes
-    // const oldRecipe = 
-    // Use splice to remove from this.recipes
     
       try{
         const resp = await this.adapter.deleteRecipe(id)
@@ -362,14 +346,14 @@ get staticHTML(){
         // Alert user of success
         this.handleAlert({
           type: "success",
-          msg: "Recipe deleted"
+          msg: `${savedRecipe[0].name} deleted`
         }) 
       }catch(err){
         // If failure, rerender list without db call, keeping recipe in same array location
         this.recipes[recipeIndex] = savedRecipe
         this.recipes = this.recipes.flat()
-        console.log("Old recipe pushed back")
-        console.log(this.recipes)
+        // console.log("Old recipe pushed back")
+        // console.log(this.recipes)
 
         this.renderRecipes()
         this.handleError(err)
@@ -448,7 +432,7 @@ get staticHTML(){
     const params = { name, servings, recipeIngredientsAttributes, id }
     console.log("Params")
     console.log(params)
-    
+
     // Send fetch. If error, reset this.recipe to old 
     try{
       const resp = await this.adapter.updateRecipe(params)
