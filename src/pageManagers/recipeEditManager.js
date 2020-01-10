@@ -73,8 +73,6 @@ class RecipeEditPage extends PageManager{
 /* ---- Update Database and Display ---- */
   // Handle form submit
   async updateRecipe(e){
-    // e.preventDefault()
-
     // Set recipe variables for inputs
     const id = e.target.querySelector('input[name="recipe-id"]').value
     const name = e.target.querySelector('input[name="name"]').value
