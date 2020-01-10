@@ -119,16 +119,13 @@ class RecipeNewPage extends PageManager{
         msg: "Recipe created!"
       }) 
 
-/* Change */      
-      // this.redirect('recipe', this.recipe)
-      this.redirect('recipes')
+      this.redirect('recipe', this.recipe)
+      // this.redirect('recipes')
 
     }catch(err){
-      // this.renderRecipe()
       this.handleError(err)
-/* Change */      
-      // this.redirect('recipe', this.recipe)
-      this.redirect('recipes')
+      this.redirect('recipe', this.recipe)
+      // this.redirect('recipes')
     }  
   }
 
