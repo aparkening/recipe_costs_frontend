@@ -79,7 +79,7 @@ class IngredientPage extends PageManager{
   // Clear ingredient form and load original bindings and event listeners
   handleCancelClick(e){
     e.preventDefault()
-    this.newContainer.innerHTML = this.renderNewBtn()
+    this.newContainer.innerHTML = Ingredient.renderNewBtn()
     this.indexBindingsAndEventListeners()
   }
 
@@ -121,31 +121,7 @@ class IngredientPage extends PageManager{
 
   // Render all ingredients table
   renderIngredients(){
-    const title = "<h1>Ingredients</h1>"
-
-    const addButton = `<div class="mt-3 mb-3" id="new-resource">${this.renderNewBtn()}</div>`
-
-    const tableTop = `
-      <table class="table table-striped">
-        <thead class="thead-dark">
-          <tr>
-            <th>Links</th>
-            <th>Name</th>
-            <th>Cost</th>
-            <th>Cost Size</th>
-            <th>Cost Unit</th>
-          </tr>
-        </thead>
-        <tbody>`
-
-    const tableBottom = `
-        </tbody>
-      </table>
-    `
-    let ingRows = this.ingredients.map(ing => ing.showIngTr).join('')
-
-    // Stitch together title, button, table, rows
-    this.container.innerHTML = title + addButton + tableTop + ingRows + tableBottom
+    this.container.innerHTML = Ingredient.showIngTable(this.ingredients)
 
     // Bind and listen to new html
     this.indexBindingsAndEventListeners()
@@ -388,13 +364,6 @@ class IngredientPage extends PageManager{
   // Grab recipe object from id
   getIngById(id){
     return this.ingredients.find(obj => obj.id == id)
-  }
-
-  // Button HTML
-  renderNewBtn(){
-    return (`
-      <a class="btn btn-primary" href="#" role="button" id="new-button">Add new ingredient</a>
-    `)
   }
 
 }
