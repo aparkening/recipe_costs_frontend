@@ -418,8 +418,10 @@ get staticHTML(){
         // Get hidden inputs
         ingId = Number(el.querySelector('input[name="ingredient_id"]').value)
         let id = Number(el.querySelector('input[name="recipe_ingredient_id"]').value)
-        let destroy = Number(el.querySelector('input[name="destroy"]').value)
 
+        // Set destroy to hidden input value if it exists (if ingredient should be removed from database)
+        let destroy = el.querySelector('input[name="destroy"]') ? Number(el.querySelector('input[name="destroy"]').value) : 0
+      
         // Set id and destroy
         ingObj.id = id
         ingObj['_destroy'] = destroy
