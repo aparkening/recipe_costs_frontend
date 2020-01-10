@@ -20,32 +20,32 @@ class Ingredient{
         </small>
       </th>
       <th scope="row">${this.name}</th>
-      <td>$ ${this.cost}</td>
-      <td>${this.costSize}</td>
-      <td>${this.costUnit}</td>
+      <td>$ ${this.cost} / ${this.costSize} ${this.costUnit}</td>
     </tr> 
     `)
   } 
 
   // Show full table of ingredients
-  showTable(){
-    const tHead = `
+  static showIngTable(ingredients){
+    return (`
+    <h1>Ingredients</h1>
+    <div class="mt-3 mb-3" id="new-resource">${this.renderNewBtn()}</div>
+
     <table class="table table-striped">
       <thead class="thead-dark">
         <tr>
           <th>Links</th>
           <th>Name</th>
           <th>Cost</th>
-          <th>Cost Size</th>
-          <th>Cost Unit</th>
         </tr>
       </thead>
       <tbody>
-    `
-    const tFoot = `
-      </tbody>  
-    </table>`
+        ${ingredients.map(ing => ing.showIngTr).join('')}
+      </tbody>
+    </table>
+    `)
   }
+
     
   // get showIngredients(){
   //   let html = 'ingredients'
@@ -115,6 +115,13 @@ class Ingredient{
     // console.log(this)
     return (`
     <option value="${unit}">${unit}</option>
+    `)
+  }
+
+  // Button HTML
+  static renderNewBtn(){
+    return (`
+      <a class="btn btn-primary" href="#" role="button" id="new-button">Add new ingredient</a>
     `)
   }
 
