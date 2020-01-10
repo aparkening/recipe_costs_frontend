@@ -12,7 +12,7 @@ class App{
     this.router = new Router({
         'welcome': new WelcomePage(this.pageContainer, this.adapter),
         'recipe': new RecipePage(this.pageContainer, this.adapter),
-        'recipe-edit': new RecipePage(this.pageContainer, this.adapter),
+        'recipe-edit': new RecipeEditPage(this.pageContainer, this.adapter),
         'recipe-new': new RecipePage(this.pageContainer, this.adapter),
         'recipes': new RecipesPage(this.pageContainer, this.adapter),
         'ingredients': new IngredientPage(this.pageContainer, this.adapter)
@@ -47,15 +47,15 @@ class App{
   }
 
   // Redirect based on router callback
-  pageManagerRedirect(page){
+  pageManagerRedirect(page, obj){
     // console.log("App.js pageManagerRedirect fired")
-    this.renderPage(page)
+    this.renderPage(page, obj)
   }
 
   // Render page via router
-  renderPage(page){
+  renderPage(page, obj){
     // console.log("App.js renderPage fired")
-    this.router.render(page)
+    this.router.render(page, obj)
   }
 
 }
