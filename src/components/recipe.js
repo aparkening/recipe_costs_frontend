@@ -147,7 +147,7 @@ class Recipe{
   // }
 
   // Show edit recipe form
-  editRecipeForm(ingredients, units){
+  recipeForm(ingredients, units){
     return (`
     <h1>${this.id !== "" ? 'Edit' : 'New'} Recipe</h1>
     <form id="${this.id !== "" ? 'edit' : 'new'}-recipe-form">
