@@ -36,7 +36,7 @@ class Ingredient{
         <tr>
           <th>Links</th>
           <th>Name</th>
-          <th>Cost</th>
+          <th>Base Cost</th>
         </tr>
       </thead>
       <tbody>
