@@ -54,9 +54,6 @@ class RecipesPage extends PageManager{
     const cancelButton = this.form.querySelector('#cancel')
     const addBadge = this.form.querySelector('#add-ingredient')
 
-    // Delete existing ingredient
-
-          
     // Delete and add new ingredients follow existing pattern
     this.ingFields.addEventListener('click', this.handleDeleteIngFieldsClick.bind(this))
     addBadge.addEventListener('click', this.handleAddIngFieldsClick.bind(this))
@@ -112,11 +109,17 @@ class RecipesPage extends PageManager{
   // Handle detail recipe edit
   handleRecipeEditClick(e){
     e.preventDefault()
+    
+    // debugger
+    
     // Get recipe id and recipe object
     // const recipeId = e.target.parentNode.dataset.id
-    
+    // const foundRecipe = this.getRecipeById(recipeId)
+
     // recipeId default set by this.recipe
-    this.renderEditForm()
+    // this.renderEditForm()
+
+    this.redirect('recipe-edit', this.recipe)
   }
 
   // Handle detail recipe delete
