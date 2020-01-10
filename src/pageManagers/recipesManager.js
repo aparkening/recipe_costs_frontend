@@ -69,7 +69,7 @@ class RecipesPage extends PageManager{
   handleNewClick(e){
     e.preventDefault()
     // this.renderNewForm()
-    
+
     this.redirect('recipe-new', this.recipe)
   }
 
@@ -88,9 +88,8 @@ class RecipesPage extends PageManager{
 
     switch (e.target.id) {
       case 'show':
-        // console.log(this.recipe)
-        // this.redirect('recipes')
-        this.renderRecipe()
+        // this.renderRecipe()
+        this.redirect('recipe', this.recipe)
         break;
       case 'edit':
         console.log('edit clicked!');
