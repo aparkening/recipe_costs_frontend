@@ -112,40 +112,39 @@ class Recipe{
 
 
   // Show new recipe form
-  recipeForm(ingredients, units){
+  // recipeForm(ingredients, units){
 
-    return (`
-    <h1>${this.id !== "" ? 'Edit' : 'New'} Recipe</h1>
-    <form id="${this.id !== "" ? 'edit' : 'new'}-recipe-form">
-        ${this.id !== ""  ? '<input type="hidden" value="' + this.id + '" name="recipe-id">' : '' }
+  //   return (`
+  //   <h1>${this.id !== "" ? 'Edit' : 'New'} Recipe</h1>
+  //   <form id="${this.id !== "" ? 'edit' : 'new'}-recipe-form">
+  //       ${this.id !== ""  ? '<input type="hidden" value="' + this.id + '" name="recipe-id">' : '' }
 
-        <div class="form-group">
-          <label for="recipe_name">Name*</label>
-          <input class="form-control" required="required" type="text" value="${this.id !== ""  ? this.name : ''}" name="name" id="recipe_name">
-        </div>
-        <div class="form-group">
-          <label for="recipe_servings">Servings</label>
-          <input class="form-control" type="text" value="${this.id !== ""  ? this.servings : ''}" name="servings" id="recipe_servings">
-        </div>
+  //       <div class="form-group">
+  //         <label for="recipe_name">Name*</label>
+  //         <input class="form-control" required="required" type="text" value="${this.id !== ""  ? this.name : ''}" name="name" id="recipe_name">
+  //       </div>
+  //       <div class="form-group">
+  //         <label for="recipe_servings">Servings</label>
+  //         <input class="form-control" type="text" value="${this.id !== ""  ? this.servings : ''}" name="servings" id="recipe_servings">
+  //       </div>
       
-        <div class="form-group" id="ingredients">
-          <h3>Ingredients</h3>
-          ${this.renderIngRow(ingredients, units)}
-          ${this.renderIngRow(ingredients, units)}
-        </div>
+  //       <div class="form-group" id="ingredients">
+  //         <h3>Ingredients</h3>
+  //         ${this.renderIngRow(ingredients, units)}
+  //       </div>
 
-        <div class="form-group mx-1" id="add-ingredient">
-          <a href="#" class="badge badge-primary">+ Add another ingredient</a>
-        </div>
+  //       <div class="form-group mx-1" id="add-ingredient">
+  //         <a href="#" class="badge badge-primary">+ Add another ingredient</a>
+  //       </div>
 
-        <div class="form-group mt-4">
-          <button type="submit" name="commit" class="btn btn-lg btn-primary">${this.id !== ""  ? 'Update' : 'Create'} Recipe</button>
-          &nbsp;&nbsp; 
-          <button type="button" name="cancel" class="btn btn-secondary btn-lg" id="cancel">Cancel</button>
-        </div>
-      </form>
-    `)
-  }
+  //       <div class="form-group mt-4">
+  //         <button type="submit" name="commit" class="btn btn-lg btn-primary">${this.id !== ""  ? 'Update' : 'Create'} Recipe</button>
+  //         &nbsp;&nbsp; 
+  //         <button type="button" name="cancel" class="btn btn-secondary btn-lg" id="cancel">Cancel</button>
+  //       </div>
+  //     </form>
+  //   `)
+  // }
 
   // Show edit recipe form
   editRecipeForm(ingredients, units){
@@ -166,7 +165,7 @@ class Recipe{
         </div>
       
         <div class="form-group" id="ingredients">
-          <h3>Ingredients</h3>          
+          <h3>Ingredients</h3>      
           ${this.id !== "" ? this.recipeIngredients.map(ing => ing.showEditIng(units)).join('') : this.renderIngRow(ingredients, units)}
         </div>
 
@@ -188,7 +187,7 @@ class Recipe{
     return Recipe.recipeForm(this)
   }
 
-  // Render ingredients as select list
+  // Render ingredient row with select lists
   renderIngRow(ingredients, units){
     return (`
     <div class="form-row form-group form-ingredient new-ingredient">
@@ -207,6 +206,7 @@ class Recipe{
       <div class="col pt-2 small">
         <a href="#" class="text-muted delete">Delete</a>
       </div>
+    </div>
     `)
   }
 
