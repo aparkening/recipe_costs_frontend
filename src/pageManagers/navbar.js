@@ -15,12 +15,10 @@ class Navbar extends PageManager{
   // Take action on any A tag
   handleClick(e){
     e.preventDefault()
-    console.log("- Navbar.js click -")
+    // console.log("- Navbar.js click -")
 
     if(e.target.tagName === "A"){
-
-      console.log(e.target)
-
+      // console.log(e.target)
       const route = e.target.id.split('-')[0]
 
       // console.log("Navbar.js route set to")
