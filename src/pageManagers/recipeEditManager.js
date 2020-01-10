@@ -162,7 +162,7 @@ class RecipeEditPage extends PageManager{
       this.units = ingObj.units
 
       // Render form with ingredients
-      this.container.innerHTML = this.recipe.editRecipeForm(this.ingredients, this.units)
+      this.container.innerHTML = this.recipe.recipeForm(this.ingredients, this.units)
       this.editFormBindingsAndEventListeners()
     }else{
       // else throw error

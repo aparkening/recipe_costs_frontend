@@ -136,6 +136,9 @@ class RecipeNewPage extends PageManager{
 /* ---- Fetchers and Renderers ---- */  
   async fetchAndRenderPageResources(){
 
+    console.log("New page")
+
+
     this.recipe = new Recipe({'recipe': {id:'', name:'', servings:'', total_cost:'', cost_per_serving:''}, 'ingredients':[]})
 
     // Get all ingredients and ingredient units for form fields
