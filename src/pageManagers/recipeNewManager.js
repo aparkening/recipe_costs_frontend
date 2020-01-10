@@ -38,11 +38,10 @@ class RecipeNewPage extends PageManager{
     this.redirect('recipes')
   }
 
-  // Handle form update submit
-  handleUpdateSubmitClick(e){
+  // Handle form submit
+  handleNewSubmitClick(e){
     e.preventDefault()
-    console.log("Submitting update.")
-    this.updateRecipe(e)
+    this.createRecipe(e)
   }
 
   // Handle delete ingredients within recipe form
@@ -73,73 +72,62 @@ class RecipeNewPage extends PageManager{
 
 /* ---- Update Database and Display ---- */
   // Handle form submit
-  async updateRecipe(e){
-    // e.preventDefault()
+  async createRecipe(e){
 
     // Set recipe variables for inputs
-    const id = e.target.querySelector('input[name="recipe-id"]').value
     const name = e.target.querySelector('input[name="name"]').value
     const servings = e.target.querySelector('input[name="servings"]').value
 
     // Set recipeIngredientsAttributes from each ingredient input
     let recipeIngredientsAttributes = Array.from(e.target.querySelectorAll('div.form-ingredient')).map(el => {
-      let ingObj = {}
-      let ingId = ''
       
-      // If new ingredient, get id from select list. Else look for hidden inputs and set extra new object properties.
-      if(el.classList.contains("new-ingredient")){
-        // Get id from select list value
-        let sId = el.querySelector('select[name="ingredient_id"]')
-        ingId = sId.options[sId.selectedIndex].value
-
-      }else{
-        // Get hidden inputs
-        ingId = Number(el.querySelector('input[name="ingredient_id"]').value)
-        let id = Number(el.querySelector('input[name="recipe_ingredient_id"]').value)
-
-        // Set destroy to hidden input value if it exists (if ingredient should be removed from database)
-        let destroy = el.querySelector('input[name="destroy"]') ? Number(el.querySelector('input[name="destroy"]').value) : 0
-      
-        // Set id and destroy
-        ingObj.id = id
-        ingObj['_destroy'] = destroy
-      }
-      
+      // Get values from inputs and select lists
+      let sId = el.querySelector('select[name="ingredient_id"]')
       let ingAmount = el.querySelector('input.ingredient_amount').value
-      // Get ingredient unit value from select list
       let sUnit = el.querySelector('select[name="ingredient_unit"]')
 
       // Set and return new object
-      ingObj.ingredient_id = ingId
-      ingObj.ingredient_amount = ingAmount
-      ingObj.ingredient_unit = sUnit.options[sUnit.selectedIndex].value
-      return ingObj
+      return {
+        ingredient_id: sId.options[sId.selectedIndex].value,
+        ingredient_amount: ingAmount,
+        ingredient_unit: sUnit.options[sUnit.selectedIndex].value
+      }
     })
     // console.log("Recipe Ingredients Attributes")
     // console.log(recipeIngredientsAttributes)
 
     // Set params for submission
-    const params = { name, servings, recipeIngredientsAttributes, id }
+    const params = { name, servings, recipeIngredientsAttributes }
 
-    // Send fetch. If error, reset this.recipe to old 
+    // Pessimistic render. Alert user to submission
+    this.handleAlert({
+      type: "info",
+      msg: "Submitting recipe to server..."
+    }) 
+
+    // Send fetch. If error, display old this.recipe.
     try{
-      const resp = await this.adapter.updateRecipe(params)
+      const resp = await this.adapter.createRecipe(params)
       
       // Update this.recipe
       this.recipe = new Recipe(resp)
       console.log(this.recipe)
 
-      // Send to recipe display when ready
+      // Alert user of success
+      this.handleAlert({
+        type: "success",
+        msg: "Recipe created!"
+      }) 
 
 /* Change */      
-      // this.recirect('recipe', this.recipe)
+      // this.redirect('recipe', this.recipe)
       this.redirect('recipes')
 
     }catch(err){
       // this.renderRecipe()
       this.handleError(err)
 /* Change */      
-      // this.recirect('recipe', this.recipe)
+      // this.redirect('recipe', this.recipe)
       this.redirect('recipes')
     }  
   }
@@ -147,29 +135,20 @@ class RecipeNewPage extends PageManager{
 
 /* ---- Fetchers and Renderers ---- */  
   async fetchAndRenderPageResources(){
-    // Display if object exists
-    if (this.currentObj){
-      // Set recipe from redirect obj  
-      this.recipe = this.currentObj
 
-      // Get all ingredients and ingredient units for form fields
-      const ingAdapter = new IngredientAdapter(new BaseAdapter())
-      const ingObj = await ingAdapter.getIngredients()
+    this.recipe = new Recipe({'recipe': {id:'', name:'', servings:'', total_cost:'', cost_per_serving:''}, 'ingredients':[]})
 
-      // Fill this.ingredients with ingredient objects
-      this.ingredients = ingObj.ingredients.map(ing => new Ingredient(ing))
-      this.units = ingObj.units
+    // Get all ingredients and ingredient units for form fields
+    const ingAdapter = new IngredientAdapter(new BaseAdapter())
+    const ingObj = await ingAdapter.getIngredients()
+    
+    // Fill this.ingredients with ingredient objects
+    this.ingredients = ingObj.ingredients.map(ing => new Ingredient(ing))
+    this.units = ingObj.units
 
-      // Render form with ingredients
-      this.container.innerHTML = this.recipe.editRecipeForm(this.ingredients, this.units)
-      this.editFormBindingsAndEventListeners()
-    }else{
-      // else throw error
-      this.handleError({
-        type: "danger",
-        msg: "Recipe was not found"
-      })
-    }
+    // Render form with ingredients
+    this.container.innerHTML = this.recipe.recipeForm(this.ingredients, this.units)
+    this.newFormBindingsAndEventListeners()
   }
 
   // Render initial html. Use "loader" to display loading spinner.
