@@ -41,7 +41,6 @@ class RecipeEditPage extends PageManager{
   // Handle form update submit
   handleUpdateSubmitClick(e){
     e.preventDefault()
-    console.log("Submitting update.")
     this.updateRecipe(e)
   }
 
