@@ -12,19 +12,16 @@ class Router{
 
   // Render page via the pageManager's render method
   render(page, obj){
+    // If object param, set currentObj before render
+    if(obj){this.routes[page].currentObj = obj}
+
     this.routes[page].render()
     
     // Render nav with each page if it exists
     if(this.navbar){ this.navbar.render() }
-    // console.log("Router.js navbar rendered")
-
-    // If object param, set currentObj
-    if(obj){this.routes[page].currentObj = obj}
 
     // Track currentPage for navbar
     this.currentPage = page
-
-    // console.log(`Router.js currentPage set to ${this.currentPage}`)
   }
   
   // Set callbacks for use in redirects, alerts, etc.
