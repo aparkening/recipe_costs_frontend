@@ -48,29 +48,7 @@ class RecipeAdapter{
     return await res.json()
   }
 
-// Current parameters
-//  {"recipe"=>{"name"=>"White Bread", "servings"=>"8", "recipe_ingredients_attributes"=>[{"ingredient_id"=>"", "ingredient_amount"=>"2.0", "ingredient_unit"=>"lb", "_destroy"=>0}, {"ingredient_id"=>"", "ingredient_amount"=>"2.0", "ingredient_unit"=>"lb", "_destroy"=>0}]}, "controller"=>"api/v1/recipes", "action"=>"update", "id"=>"19"} permitted: false>
-
-// Working parameters
-
-
-
-  // Update recipe
-  /* Stringify this format:
-    name: 'Green Bread',
-    servings: 6,
-    recipe_ingredients_attributes: {
-      0: {ingredient_id: 13, ingredient_amount:5, ingredient_unit:"lb", _destroy: 1, id: 11}, 
-      1: {ingredient_id: 21, ingredient_amount:1, ingredient_unit:"oz", _destroy: 0, id: 12}, 
-      2: {ingredient_id: 16, ingredient_amount:1, ingredient_unit:"lb", _destroy: 0, id: 13}, 
-      3: {ingredient_id: 18, ingredient_amount:12, ingredient_unit:"oz", _destroy: 0, id: 14},
-    }
-  */
-
-  /* Current update error
- @details={:"recipe_ingredients.ingredient"=>[{:error=>:blank}]},
- @messages={:"recipe_ingredients.ingredient"=>["must exist"]}>
-  */
+  // Update record
   async updateRecipe(params){
     const { name, servings, recipeIngredientsAttributes, id} = params
     const url = `${this.baseURL}/recipes/${id}`
