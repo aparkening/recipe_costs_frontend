@@ -8,7 +8,7 @@ class App{
     // Instantiate Alert Manager
     this.alertManager = new Alert(this.alertContainer)
 
-    // Map routes with stringId: pageManager
+    // Instantiate appropriate pageManager as router
     this.router = new Router({
         'welcome': new WelcomePage(this.pageContainer, this.adapter),
         'recipe': new RecipePage(this.pageContainer, this.adapter),
@@ -18,22 +18,22 @@ class App{
         'ingredients': new IngredientPage(this.pageContainer, this.adapter)
     })
 
-    // Instantiate and assign Navbar
+    // Instantiate and assign Navbar to router
     const navbar = new Navbar(this.navbarContainer, this.adapter)
     this.router.assignNavbar(navbar)
     // console.log("App.js navbar router assigned.")
 
-    // Assign Alert
+    // Assign alert to router
     this.router.assignAlertHandler(this.handleAlert.bind(this))
 
-    // Define redirect passed to pageManager
+    // Assign redirect to router
     this.router.assignRedirect(this.pageManagerRedirect.bind(this))
 
     // Render initial screen
     this.renderPage('welcome')
   }
 
-  // Bindings and Listeners
+  // App-wide Bindings and Listeners
   initBindingsandEventListeners(){
     this.container = document.querySelector('#container')
     this.navbarContainer = document.querySelector('#navbar-container')
@@ -52,9 +52,8 @@ class App{
     this.renderPage(page, obj)
   }
 
-  // Render page via router
+  // Render page from router
   renderPage(page, obj){
-    // console.log("App.js renderPage fired")
     this.router.render(page, obj)
   }
 
