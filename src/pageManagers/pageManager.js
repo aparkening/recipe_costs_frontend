@@ -1,11 +1,11 @@
 class PageManager{
 
   constructor(container){
-      this.container = container    
+    this.container = container    
   }
 
   fetchAndRenderPageResources(){
-      return null
+    return null
   }
 
   // Display errors
@@ -15,15 +15,15 @@ class PageManager{
     //     this.handleAlert(err.msg)
     //     this.redirect('welcome')
     // }else{
-      this.handleAlert(err)
+    this.handleAlert(err)
     // }
   }
 
   // Display initial static html, listen for changes, then fetch and render changes
   render(){
-      this.container.innerHTML = this.staticHTML
-      this.initBindingsAndEventListeners()
-      this.fetchAndRenderPageResources()
+    this.container.innerHTML = this.staticHTML
+    this.initBindingsAndEventListeners()
+    this.fetchAndRenderPageResources()
   }
 
 }
