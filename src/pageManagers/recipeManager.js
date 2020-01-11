@@ -39,7 +39,7 @@ class RecipePage extends PageManager{
 
 
 /* ---- Fetchers and Renderers ---- */  
-  async fetchAndRenderPageResources(){
+  fetchAndRenderPageResources(){
     // Display if object exists
     if (this.currentObj){
       // Set recipe from redirect obj  
