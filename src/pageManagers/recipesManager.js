@@ -77,21 +77,29 @@ class RecipesPage extends PageManager{
 
     // Get recipe id and recipe object
     const recipeId = e.target.dataset.id
-    this.recipe = this.getRecipeById(recipeId)
-    
-    switch (e.target.id) {
-      case 'show':
-        this.redirect('recipe', this.recipe)
-        break;
-      case 'edit':
-        this.redirect('recipe-edit', this.recipe)
-        break;
-      case 'delete':
-        this.deleteRecipe(recipeId)
-        break;
-      default:
-        console.log('Invalid selection');
-        break;
+
+    // If recipe, take action
+    if (this.recipe = this.getRecipeById(recipeId)){
+      switch (e.target.id) {
+        case 'show':
+          this.redirect('recipe', this.recipe)
+          break;
+        case 'edit':
+          this.redirect('recipe-edit', this.recipe)
+          break;
+        case 'delete':
+          this.deleteRecipe(recipeId)
+          break;
+        default:
+          console.log('Invalid selection');
+          break;
+      }
+    }else{
+      // else throw error
+      this.handleError({
+        type: "danger",
+        msg: "Recipe was not found"
+      })
     }
   }
 
