@@ -33,8 +33,30 @@ class RecipePage extends PageManager{
   // Handle detail recipe delete
   handleRecipeDeleteClick(e){
     e.preventDefault()
-    // this.deleteRecipe(recipeId)
-    // this.redirect('recipe-edit', this.recipe)
+    this.deleteRecipe()
+  }
+
+
+/* ---- Update Database and Display ---- */  
+  // Delete recipe
+  async deleteRecipe(){    
+    try{
+      const resp = await this.adapter.deleteRecipe(this.recipe.id)
+
+      // Alert success message
+      this.handleAlert({
+        type: "success",
+        msg: `${this.recipe.name} deleted`
+      }) 
+
+      // Recirect to all recipes list
+      this.redirect('recipes')
+    }catch(err){
+      // Show recipe and error message
+      this.container.innerHTML = this.recipe.showRecipe
+      this.handleError(err)
+      this.recipeBindingsAndEventListeners()
+    }
   }
 
 
