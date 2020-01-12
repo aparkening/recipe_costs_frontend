@@ -64,22 +64,6 @@ class Ingredient{
     }
   }
 
-    
-  // get showIngredients(){
-  //   let html = 'ingredients'
-  //   // let html = `
-  //   // <p>${this.name}, </p>
-  //   // <h2>Total Cost: $${this.totalCost}</h2>
-  //   // `
-
-  //   // if (this.servings !== null){
-  //   //     html = html + `<h4>Serves ${this.servings} | Cost per serving: $${this.servings}</h4>`
-  //   // }
-
-  //   return html
-  // }
-
-
   // Show new and edit ingredient form (class method)
   ingForm(units){
     
