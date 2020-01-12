@@ -153,7 +153,6 @@ class IngredientPage extends PageManager{
     }  
   }
 
-
   // Render initial html
   get staticHTML(){
     return (`
@@ -161,7 +160,6 @@ class IngredientPage extends PageManager{
       </div>
     `)
   }
-
 
 
 /* ---- Update Database and Display ---- */
@@ -197,7 +195,7 @@ class IngredientPage extends PageManager{
         // Alert user of success
         this.handleAlert({
           type: "success",
-          msg: "Ingredient deleted"
+          msg: `${savedResource[0].name} deleted`
         }) 
       }catch(err){
         // If failure, rerender list without db call, keeping resource in same array location
@@ -260,7 +258,7 @@ class IngredientPage extends PageManager{
         // Alert user of success
         this.handleAlert({
           type: "success",
-          msg: "Ingredient created!"
+          msg: `${newIng.name} created!`
         }) 
       }catch(err){
         // If failure, leave form and give error alert
