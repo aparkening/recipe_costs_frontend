@@ -36,7 +36,7 @@ class Ingredient{
         <tr>
           <th>Links</th>
           <th>Name</th>
-          <th>Base Cost</th>
+          <th>Cost</th>
         </tr>
       </thead>
       <tbody>
@@ -75,18 +75,18 @@ class Ingredient{
         <div class="form-row mb-2">
           <div class="form-group col-5">
             <label for="name">Name*</label>
-            <input class="form-control" placeholder="Pecans" required="required" type="text" value="${this.id !== "" ? this.name : ''}" name="name" id="name">
+            <input class="form-control" required="required" type="text" value="${this.id !== "" ? this.name : ''}" name="name" id="name">
           </div>
 
         <div class="form-group col-2">
-          <label for="cost">Cost</label>
+          <label for="cost">Cost*</label>
           <input class="form-control" placeholder="0.00" required="required" type="text" value="${this.id !== "" ? this.cost : ''}" name="cost" id="cost">
           <small id="costHelp" class="form-text text-muted">Don't include $</small>
         </div>
 
         <div class="form-group col-2">
-          <label for="cost_size">Size</label>
-          <input class="form-control" placeholder="12.2" required="required" type="text" value="${this.id !== "" ? this.costSize : ''}" name="cost_size" id="cost_size">
+          <label for="cost_size">Size*</label>
+          <input class="form-control" placeholder="5" required="required" type="text" value="${this.id !== "" ? this.costSize : ''}" name="cost_size" id="cost_size">
         </div>        
 
         <div class="form-group col-2">
