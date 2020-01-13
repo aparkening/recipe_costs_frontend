@@ -49,6 +49,11 @@ a:not([href]):not([tabindex]) {
   text-decoration: none;
 }
 
+/* Forms */
+.form-control {
+  color: #000;
+}
+
 /* Buttons */
 .btn-primary, .badge-primary {
   color: #fff;
