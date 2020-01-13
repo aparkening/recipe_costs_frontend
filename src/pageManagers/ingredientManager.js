@@ -61,12 +61,9 @@ class IngredientPage extends PageManager{
       // Take action based on link id
       switch (e.target.id) {
         case 'edit':
-          console.log('edit clicked!');
-          // this.updateIng(e)
           this.renderEditForm(e)
           break;
         case 'delete':
-          // console.log('delete clicked!')
           this.deleteIng(e)
           break;
         default:
