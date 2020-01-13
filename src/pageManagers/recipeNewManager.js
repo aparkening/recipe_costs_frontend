@@ -30,8 +30,8 @@ class RecipeNewPage extends PageManager{
     this.form.addEventListener('submit', this.handleNewSubmitClick.bind(this))   
   }
 
-/* ---- Link/Click Handlers ---- */
 
+/* ---- Link/Click Handlers ---- */
   // Handle form cancel button
   handleCancelClick(e){
     e.preventDefault()
@@ -67,7 +67,6 @@ class RecipeNewPage extends PageManager{
       this.ingFields.appendChild(newRow)
     }
   }
-
 
 
 /* ---- Update Database and Display ---- */
@@ -110,8 +109,7 @@ class RecipeNewPage extends PageManager{
       const resp = await this.adapter.createRecipe(params)
       
       // Update this.recipe
-      this.recipe = new Recipe(resp)
-      console.log(this.recipe)
+      this.recipe = new Recipe(resp)e)
 
       // Alert user of success
       this.handleAlert({
