@@ -1,17 +1,15 @@
 class Recipe{
   constructor(recipeObj){
     const { recipe, ingredients } = recipeObj
-
     this.id = recipe.id
     this.name = recipe.name
     this.servings = recipe.servings
     this.totalCost = recipe.total_cost
     this.costPerServing = recipe.cost_per_serving
-
     this.recipeIngredients = ingredients.map(ing => new RecipeIngredient(ing))
   }
 
-  // Render single recipe page
+  // Show single recipe page
   get showRecipe(){
     let html = `
       <h1>${this.name} (<small class="helper_links" data-id="${this.id}">
@@ -46,7 +44,6 @@ class Recipe{
 
     // Render recipe ingredient rows and join into string
     let ingRows = this.recipeIngredients.map(ing => ing.showIngTr).join('')
-    // let ingRows = this.recipeIngredients.map(ing => console.log(ing))
 
     // Stitch together html, table, rows
     html = html + tableTop + ingRows + tableBottom
@@ -54,19 +51,7 @@ class Recipe{
     return html
   }
 
-  // // Render recipe ingredients row
-  // showIngTr(ing){
-  //   return (`
-  //     <tr data-id="${ing.id}">
-  //       <td>$${ing.totalCost}</td>
-  //       <th scope="row">${ing.name}</th>
-  //       <td>${ing.amount}</td>
-  //       <td>${ing.amountUnit}</td>
-  //     </tr>  
-  //   `)
-  // }
-
-  // Render recipes table row
+  // Show recipes table row
   // Get data-id with .dataset.id
   get showRecipeTr(){
     let html = `
@@ -98,56 +83,8 @@ class Recipe{
     return html
   }
 
-
-  // Render ingredients as select list
-  // renderIngSelect(){
-  //   return (`
-  //   <select name="recipe_ingredients_attributes[1][ingredient_id]" id="recipe_ingredients_attributes_01_ingredient_id"><option value=""></option>
-  //   <option value="1">seaweed</option>
-  //   <option value="2">all-purpose flour</option>
-  //   <option value="3">bread flour</option>
-  //         </select>
-  //   `)
-  // }
-
-
-  // Show new recipe form
-  // recipeForm(ingredients, units){
-
-  //   return (`
-  //   <h1>${this.id !== "" ? 'Edit' : 'New'} Recipe</h1>
-  //   <form id="${this.id !== "" ? 'edit' : 'new'}-recipe-form">
-  //       ${this.id !== ""  ? '<input type="hidden" value="' + this.id + '" name="recipe-id">' : '' }
-
-  //       <div class="form-group">
-  //         <label for="recipe_name">Name*</label>
-  //         <input class="form-control" required="required" type="text" value="${this.id !== ""  ? this.name : ''}" name="name" id="recipe_name">
-  //       </div>
-  //       <div class="form-group">
-  //         <label for="recipe_servings">Servings</label>
-  //         <input class="form-control" type="text" value="${this.id !== ""  ? this.servings : ''}" name="servings" id="recipe_servings">
-  //       </div>
-      
-  //       <div class="form-group" id="ingredients">
-  //         <h3>Ingredients</h3>
-  //         ${this.renderIngRow(ingredients, units)}
-  //       </div>
-
-  //       <div class="form-group mx-1" id="add-ingredient">
-  //         <a href="#" class="badge badge-primary">+ Add another ingredient</a>
-  //       </div>
-
-  //       <div class="form-group mt-4">
-  //         <button type="submit" name="commit" class="btn btn-lg btn-primary">${this.id !== ""  ? 'Update' : 'Create'} Recipe</button>
-  //         &nbsp;&nbsp; 
-  //         <button type="button" name="cancel" class="btn btn-secondary btn-lg" id="cancel">Cancel</button>
-  //       </div>
-  //     </form>
-  //   `)
-  // }
-
-  // Show edit recipe form
-  recipeForm(ingredients, units){
+  // Show new and edit recipe form
+  showRecipeForm(ingredients, units){
     return (`
     <h1>${this.id !== "" ? 'Edit' : 'New'} Recipe</h1>
     <form id="${this.id !== "" ? 'edit' : 'new'}-recipe-form">
@@ -166,7 +103,7 @@ class Recipe{
       
         <div class="form-group" id="ingredients">
           <h3>Ingredients</h3>      
-          ${this.id !== "" ? this.recipeIngredients.map(ing => ing.showEditIng(units)).join('') : this.renderIngRow(ingredients, units)}
+          ${this.id !== "" ? this.recipeIngredients.map(ing => ing.showEditIng(units)).join('') : this.showIngRow(ingredients, units)}
         </div>
 
         <div class="form-group mx-1" id="add-ingredient">
@@ -187,20 +124,20 @@ class Recipe{
     return Recipe.recipeForm(this)
   }
 
-  // Render ingredient row with select lists
-  renderIngRow(ingredients, units){
+  // Show ingredient row with select lists
+  showIngRow(ingredients, units){
     return (`
     <div class="form-row form-group form-ingredient new-ingredient">
       <div class="col-4">
         <select name="ingredient_id" class="ingredient_id custom-select">
-        ${ingredients.map(ing => this.renderIngOptions(ing)).join('')}
+        ${ingredients.map(ing => this.showIngOptions(ing)).join('')}
         </select>
       </div>
       <div class="col-2">
         <input placeholder="1" type="text" name="ingredient_amount" class="ingredient_amount form-control" required="required">
       </div>
       <div class="col-2">
-        <select name="ingredient_unit" class="ingredient_unit custom-select">${units.map(u => this.renderUnitOptions(u)).join('')}
+        <select name="ingredient_unit" class="ingredient_unit custom-select">${units.map(u => this.showUnitOptions(u)).join('')}
         </select>
       </div>
       <div class="col pt-2 small">
@@ -210,15 +147,15 @@ class Recipe{
     `)
   }
 
-  renderIngOptions(ingredient){
+  showIngOptions(ingredient){
     // console.log(this)
     return (`
     <option value="${ingredient.id}">${ingredient.name}</option>
     `)
   }
 
-  // Render ingredients as select list
-  renderUnitOptions(unit){
+  // Show ingredients as select list
+  showUnitOptions(unit){
     // console.log(this)
     return (`
     <option value="${unit}">${unit}</option>
