@@ -6,7 +6,6 @@ class RecipeIngredient{
     this.amount = amount
     this.amountUnit = amount_unit
     this.totalCost = total_cost
-    // this.recipes = recipes.map(r => new Recipe(r))
     this.ingredient = new Ingredient(ingredient)
   }
 
@@ -24,7 +23,6 @@ class RecipeIngredient{
 
   // Render existing ingredients in recipe form
   showEditIng(units){
-    console.log(this)
     return (`
     <div class="form-row form-group form-ingredient">
       <input type="hidden" value="${this.ingredient.id}" name="ingredient_id" id="">
@@ -36,7 +34,7 @@ class RecipeIngredient{
         <input placeholder="1" type="text" name="ingredient_amount" class="ingredient_amount form-control" required="required" value="${this.amount}">
       </div>
       <div class="col-2">
-        <select name="ingredient_unit" class="ingredient_unit custom-select">${units.map(u => this.renderUnitOptions(u)).join('')}
+        <select name="ingredient_unit" class="ingredient_unit custom-select">${units.map(u => this.showUnitOptions(u)).join('')}
         </select>
       </div>
       <div class="col pt-2 small">
@@ -46,8 +44,8 @@ class RecipeIngredient{
     `)
   }
 
-  // Render units as select list
-  renderUnitOptions(unit){
+  // Render units as select list. Highlight unit selected.
+  showUnitOptions(unit){
     return (`
     <option value="${unit}" ${this.amountUnit == unit ? 'selected = "selected"' : ''}>${unit}</option>
     `)
