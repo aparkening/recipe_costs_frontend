@@ -29,7 +29,7 @@ class Ingredient{
   static showIngTable(ingredients){
     return (`
     <h1>Ingredients</h1>
-    <div class="mt-3 mb-3" id="new-resource"><a class="btn btn-primary" href="#" role="button" id="new-button">Add new ingredient</a></div>
+    <div class="mt-3 mb-3" id="new-resource">${this.showNewBtn()}</div>
 
     <table class="table table-striped">
       <thead class="thead-dark">
@@ -72,26 +72,28 @@ class Ingredient{
     <form id="${this.id !== "" ? 'edit' : 'new'}-ingredient-form" method="POST">
         ${this.id !== "" ? '<input type="hidden" value="' + this.id + '" name="ingredient-id">' : '' }
 
-      <div class="form-group">
-        <label for="name">Name*</label>
-        <input class="form-control" placeholder="Pecans" required="required" type="text" value="${this.id !== "" ? this.name : ''}" name="name" id="name">
-      </div>
+        <div class="form-row mb-2">
+          <div class="form-group col-5">
+            <label for="name">Name*</label>
+            <input class="form-control" placeholder="Pecans" required="required" type="text" value="${this.id !== "" ? this.name : ''}" name="name" id="name">
+          </div>
 
-      <div class="form-group">
-        <label for="cost">Cost</label>
-        <input class="form-control" placeholder="0.00" required="required" type="text" value="${this.id !== "" ? this.cost : ''}" name="cost" id="cost">
-        <small id="costHelp" class="form-text text-muted">No need to include $</small>
-      </div>
+        <div class="form-group col-2">
+          <label for="cost">Cost</label>
+          <input class="form-control" placeholder="0.00" required="required" type="text" value="${this.id !== "" ? this.cost : ''}" name="cost" id="cost">
+          <small id="costHelp" class="form-text text-muted">Don't include $</small>
+        </div>
 
-      <div class="form-group">
-        <label for="cost_unit">Unit</label>
-        <select name="cost_unit" id="cost_unit">${units.map(u => this.showIngOptions(u)).join('')}
-        </select>
-      </div>    
+        <div class="form-group col-2">
+          <label for="cost_size">Size</label>
+          <input class="form-control" placeholder="12.2" required="required" type="text" value="${this.id !== "" ? this.costSize : ''}" name="cost_size" id="cost_size">
+        </div>        
 
-      <div class="form-group">
-        <label for="cost_size">Size</label>
-        <input class="form-control" placeholder="12.2" required="required" type="text" value="${this.id !== "" ? this.costSize : ''}" name="cost_size" id="cost_size">
+        <div class="form-group col-2">
+          <label for="cost_unit">Unit</label>
+          <select name="cost_unit" id="cost_unit" class="custom-select">${units.map(u => this.showIngOptions(u)).join('')}
+          </select>
+        </div>    
       </div>
 
       <div class="form-group">
@@ -110,6 +112,13 @@ class Ingredient{
     // console.log(this)
     return (`
     <option value="${unit}" ${this.costUnit == unit ? 'selected = "selected"' : ''}>${unit}</option>
+    `)
+  }
+
+  // Button HTML
+  static showNewBtn(){
+    return (`
+      <a class="btn btn-primary" href="#" role="button" id="new-button">Add new ingredient</a>
     `)
   }
 
