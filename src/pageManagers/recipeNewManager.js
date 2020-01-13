@@ -63,7 +63,7 @@ class RecipeNewPage extends PageManager{
 
       // Build new ingredient div and append to ingredient fields container
       let newRow = document.createElement('div')
-      newRow.innerHTML = this.recipe.renderIngRow(this.ingredients, this.units)
+      newRow.innerHTML = this.recipe.showIngRow(this.ingredients, this.units)
       this.ingFields.appendChild(newRow)
     }
   }
@@ -145,7 +145,7 @@ class RecipeNewPage extends PageManager{
     this.units = ingObj.units
 
     // Render form with ingredients
-    this.container.innerHTML = this.recipe.recipeForm(this.ingredients, this.units)
+    this.container.innerHTML = this.recipe.showRecipeForm(this.ingredients, this.units)
     this.newFormBindingsAndEventListeners()
   }
 
