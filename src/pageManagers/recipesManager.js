@@ -22,47 +22,6 @@ class RecipesPage extends PageManager{
     table.addEventListener('click', this.handleTableClick.bind(this))
   }
 
-  // // Bind and listen after single recipe load
-  // recipeBindingsAndEventListeners(){
-  //   this.recipeEditLink = this.container.querySelector('a#edit')
-  //   this.recipeDeleteLink = this.container.querySelector('a#delete')
-
-  //   this.recipeEditLink.addEventListener('click', this.handleRecipeEditClick.bind(this))
-  //   this.recipeDeleteLink.addEventListener('click', this.handleRecipeDeleteClick.bind(this))
-  // }
-
-  // // Bind and listen after new form load
-  // newFormBindingsAndEventListeners(){
-  //   this.form = this.container.querySelector('form')
-  //   this.ingFields = this.form.querySelector('#ingredients')
-  //   const cancelButton = this.form.querySelector('#cancel')
-  //   const addBadge = this.form.querySelector('#add-ingredient')
-
-  //   // Delete and add new ingredients
-  //   this.ingFields.addEventListener('click', this.handleDeleteIngFieldsClick.bind(this))    
-  //   addBadge.addEventListener('click', this.handleAddIngFieldsClick.bind(this))
-    
-  //   // Cancel and submit clicks
-  //   cancelButton.addEventListener('click', this.handleCancelClick.bind(this))
-  //   this.form.addEventListener('submit', this.handleNewSubmitClick.bind(this))   
-  // }
-
-  // // Bind and listen after edit form load
-  // editFormBindingsAndEventListeners(){
-  //   this.form = this.container.querySelector('form')
-  //   this.ingFields = this.form.querySelector('#ingredients')
-  //   const cancelButton = this.form.querySelector('#cancel')
-  //   const addBadge = this.form.querySelector('#add-ingredient')
-
-  //   // Delete and add new ingredients follow existing pattern
-  //   this.ingFields.addEventListener('click', this.handleDeleteIngFieldsClick.bind(this))
-  //   addBadge.addEventListener('click', this.handleAddIngFieldsClick.bind(this))
-
-  //   // Cancel and submit clicks
-  //   cancelButton.addEventListener('click', this.handleCancelClick.bind(this))
-  //   this.form.addEventListener('submit', this.handleUpdateSubmitClick.bind(this))
-  // }
-
 
 /* ---- Link/Click Handlers ---- */
   // Handle new click
