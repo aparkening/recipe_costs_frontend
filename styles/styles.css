@@ -50,7 +50,7 @@ a:not([href]):not([tabindex]) {
 }
 
 /* Forms */
-.form-control {
+.form-control, .form-group .form-control {
   color: #000;
 }
 
