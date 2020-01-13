@@ -183,26 +183,13 @@ class RecipesPage extends PageManager{
   // Fetch recipes and render main recipes page
   async fetchAndRenderPageResources(){
     try{
-      // if (this.recipe){
-      //   // const recipeObj = await this.adapter.getRecipe()
-      //   // // console.log(recipeObj)
-      //   // this.recipe = new Recipe(recipeObj)
-      //   // // console.log(this.recipe)
-      //   this.renderRecipe()
-      // } else {
       const recipeObj = await this.adapter.getRecipes()
-      // console.log(recipeObj.recipes)
-
       this.recipes = recipeObj.recipes.map(recipe => new Recipe(recipe))
-      // console.log(this.recipes)
-
-      // Render table
+     
       this.renderRecipes()
-
     }catch(err){
       console.log(err)
       this.handleError(err)
-      // console.log(err)
     }
   }
 
