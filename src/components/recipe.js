@@ -120,9 +120,9 @@ class Recipe{
   }
 
   // Set instance of recipeForm
-  get showFormHTML(){
-    return Recipe.recipeForm(this)
-  }
+  // get showFormHTML(){
+  //   return Recipe.recipeForm(this)
+  // }
 
   // Show ingredient row with select lists
   showIngRow(ingredients, units){
@@ -161,6 +161,5 @@ class Recipe{
     <option value="${unit}">${unit}</option>
     `)
   }
-
 
 }
