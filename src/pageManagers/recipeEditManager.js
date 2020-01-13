@@ -124,7 +124,6 @@ class RecipeEditPage extends PageManager{
       
       // Update this.recipe
       this.recipe = new Recipe(resp)
-      console.log(this.recipe)
 
       // Alert user of success
       this.handleAlert({
