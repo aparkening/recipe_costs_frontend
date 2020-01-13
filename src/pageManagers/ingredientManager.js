@@ -130,7 +130,7 @@ class IngredientPage extends PageManager{
   // Render new form
   renderNewForm(){
     const ingredient = new Ingredient({id:'', name:'', cost:'', cost_size:'', cost_unit:''})
-    this.newContainer.innerHTML = ingredient.ingForm(this.units)
+    this.newContainer.innerHTML = ingredient.showIngForm(this.units)
     this.formBindingsAndEventListeners()
   }
 
@@ -143,7 +143,7 @@ class IngredientPage extends PageManager{
     if (foundObj) {
       // Set this.ingredient
       this.ingredient = foundObj
-      this.newContainer.innerHTML = foundObj.ingForm(this.units)
+      this.newContainer.innerHTML = foundObj.showIngForm(this.units)
       this.formBindingsAndEventListeners()
     }else{
       this.handleError({
