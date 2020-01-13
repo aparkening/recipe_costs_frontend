@@ -81,7 +81,7 @@ class Ingredient{
 
       <div class="form-group">
         <label for="name">Name*</label>
-        <input class="form-control" placeholder="Potatoes" required="required" type="text" value="${this.id !== "" ? this.name : ''}" name="name" id="name">
+        <input class="form-control" placeholder="Pecans" required="required" type="text" value="${this.id !== "" ? this.name : ''}" name="name" id="name">
       </div>
 
       <div class="form-group">
@@ -116,7 +116,7 @@ class Ingredient{
   renderIngOptions(unit){
     // console.log(this)
     return (`
-    <option value="${unit}">${unit}</option>
+    <option value="${unit}" ${this.costUnit == unit ? 'selected = "selected"' : ''}>${unit}</option>
     `)
   }
 
