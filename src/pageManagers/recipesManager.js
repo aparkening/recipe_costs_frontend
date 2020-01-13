@@ -14,7 +14,7 @@ class RecipesPage extends PageManager{
   }
 
   // Bind and listen after all recipes load
-  allRecipesBindingsAndEventListeners(){
+  indexRecipesBindingsAndEventListeners(){
     const newButton = this.container.querySelector('#new-button')
     const table = this.container.querySelector('table')
 
@@ -34,31 +34,34 @@ class RecipesPage extends PageManager{
   handleTableClick(e){
     e.preventDefault()
 
-    // Get recipe id and recipe object
-    const recipeId = e.target.dataset.id
+    // If click is on href, take action
+    if(e.target.tagName === "A"){
+      // Get recipe id and recipe object
+      const recipeId = e.target.dataset.id
 
-    // If recipe, take action
-    if (this.recipe = this.getRecipeById(recipeId)){
-      switch (e.target.id) {
-        case 'show':
-          this.redirect('recipe', this.recipe)
-          break;
-        case 'edit':
-          this.redirect('recipe-edit', this.recipe)
-          break;
-        case 'delete':
-          this.deleteRecipe(recipeId)
-          break;
-        default:
-          console.log('Invalid selection');
-          break;
+      // If recipe, take action
+      if (this.recipe = this.getRecipeById(recipeId)){
+        switch (e.target.id) {
+          case 'show':
+            this.redirect('recipe', this.recipe)
+            break;
+          case 'edit':
+            this.redirect('recipe-edit', this.recipe)
+            break;
+          case 'delete':
+            this.deleteRecipe(recipeId)
+            break;
+          default:
+            console.log('Invalid link');
+            break;
+        }
+      }else{
+        // else throw error
+        this.handleError({
+          type: "danger",
+          msg: "Recipe was not found"
+        })
       }
-    }else{
-      // else throw error
-      this.handleError({
-        type: "danger",
-        msg: "Recipe was not found"
-      })
     }
   }
 
@@ -105,7 +108,7 @@ class RecipesPage extends PageManager{
     this.container.innerHTML = title + addButton + tableTop + recipeRows + tableBottom
 
     // Bind and listen to new html
-    this.allRecipesBindingsAndEventListeners()
+    this.indexRecipesBindingsAndEventListeners()
   }
 
   // Render initial html. Use "loader" to display loading spinner.
