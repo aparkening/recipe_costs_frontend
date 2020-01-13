@@ -49,7 +49,7 @@ class RecipePage extends PageManager{
         msg: `${this.recipe.name} deleted`
       }) 
 
-      // Recirect to all recipes list
+      // Redirect to all recipes list
       this.redirect('recipes')
     }catch(err){
       // Show recipe and error message
@@ -67,6 +67,7 @@ class RecipePage extends PageManager{
       // Set recipe from redirect obj  
       this.recipe = this.currentObj
 
+      // Render recipe and bind and listen to new html
       this.container.innerHTML = this.recipe.showRecipe
       this.recipeBindingsAndEventListeners()
     }else{
