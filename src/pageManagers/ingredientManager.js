@@ -40,7 +40,6 @@ class IngredientPage extends PageManager{
 
 
 /* ---- Link/Click Handlers ---- */
-
   // Handle new click
   handleNewClick(e){
     e.preventDefault()
@@ -54,10 +53,6 @@ class IngredientPage extends PageManager{
 
     // If click is on href, take action
     if(e.target.tagName === "A"){
-
-      // Get ingredient id and object
-      // const ingId = e.target.dataset.id
-      
       // Take action based on link id
       switch (e.target.id) {
         case 'edit':
@@ -174,13 +169,6 @@ class IngredientPage extends PageManager{
 
       // Remove recipe and save it, in case error later
       const savedResource = this.ingredients.splice(index, 1)
-      // console.log("Saved Ingredient")
-      // console.log(savedResource)
-
-      // Remove recipe from this.recipes
-      // this.recipes = this.recipes.filter(r => r.id !== foundRecipe.id)
-      // console.log("New Ingredients")
-      // console.log(this.ingredients)
       
       // Optimistically render new list
       this.renderIngredients()
@@ -198,8 +186,6 @@ class IngredientPage extends PageManager{
         // If failure, rerender list without db call, keeping resource in same array location
         this.ingredients[index] = savedResource
         this.ingredients = this.ingredients.flat()        
-        // console.log("Old ingredient pushed back")
-        // console.log(this.ingredients)
 
         this.renderIngredients()
         this.handleError(err)
@@ -251,7 +237,7 @@ class IngredientPage extends PageManager{
 
         // Render new list
         this.renderIngredients()
-        
+
         // Alert user of success
         this.handleAlert({
           type: "success",
@@ -281,8 +267,6 @@ class IngredientPage extends PageManager{
 
       // Save existing ingredient, in case error later
       const savedResource = new Ingredient({id: this.ingredient.id, name: this.ingredient.name, cost: this.ingredient.cost, cost_size: this.ingredient.costSize, cost_unit: this.ingredient.costUnit})
-      // console.log("Saved Ingredient")
-      // console.log(savedResource)
 
       // Set params based on input
       const id = this.ingredient.id
@@ -299,8 +283,6 @@ class IngredientPage extends PageManager{
         this.ingredient.cost = cost
         this.ingredient.costSize = cost_size
         this.ingredient.costUnit = cost_unit
-        // console.log("Updated Ingredient")
-        // console.log(this.ingredient)
 
         // Optimistically render new list
         this.renderIngredients()
@@ -323,7 +305,6 @@ class IngredientPage extends PageManager{
             type: "success",
             msg: `${this.ingredient.name} updated!`
           }) 
-
         }catch(err){
           // If failure, give error alert 
           this.handleError(err)
@@ -352,7 +333,6 @@ class IngredientPage extends PageManager{
       })
     }
   }
-
 
 
 /* ---- Helpers ---- */
