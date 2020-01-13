@@ -79,7 +79,7 @@ class IngredientPage extends PageManager{
   // Clear ingredient form and load original bindings and event listeners
   handleCancelClick(e){
     e.preventDefault()
-    this.newContainer.innerHTML = Ingredient.renderNewBtn()
+    this.newContainer.innerHTML = Ingredient.showNewBtn()
     this.indexBindingsAndEventListeners()
   }
 
