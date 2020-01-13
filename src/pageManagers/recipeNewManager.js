@@ -109,7 +109,7 @@ class RecipeNewPage extends PageManager{
       const resp = await this.adapter.createRecipe(params)
       
       // Update this.recipe
-      this.recipe = new Recipe(resp)e)
+      this.recipe = new Recipe(resp)
 
       // Alert user of success
       this.handleAlert({
