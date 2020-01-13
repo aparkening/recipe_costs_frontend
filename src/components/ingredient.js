@@ -72,7 +72,7 @@ class Ingredient{
     <form id="${this.id !== "" ? 'edit' : 'new'}-ingredient-form" method="POST">
         ${this.id !== "" ? '<input type="hidden" value="' + this.id + '" name="ingredient-id">' : '' }
 
-        <div class="form-row mb-2">
+        <div class="form-row">
           <div class="form-group col-5">
             <label for="name">Name*</label>
             <input class="form-control" required="required" type="text" value="${this.id !== "" ? this.name : ''}" name="name" id="name">
