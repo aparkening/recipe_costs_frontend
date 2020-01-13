@@ -9,7 +9,7 @@ class Ingredient{
     // this.recipes = recipes.map(r => new Recipe(r))
   }
 
-  // Render tr for each ingredient
+  // Show tr for each ingredient
   get showIngTr(){
     return (`
     <tr data-id="${this.id}">
@@ -29,7 +29,7 @@ class Ingredient{
   static showIngTable(ingredients){
     return (`
     <h1>Ingredients</h1>
-    <div class="mt-3 mb-3" id="new-resource">${this.renderNewBtn()}</div>
+    <div class="mt-3 mb-3" id="new-resource"><a class="btn btn-primary" href="#" role="button" id="new-button">Add new ingredient</a></div>
 
     <table class="table table-striped">
       <thead class="thead-dark">
@@ -64,15 +64,8 @@ class Ingredient{
     }
   }
 
-  // Show new and edit ingredient form (class method)
-  ingForm(units){
-    
-    // If new ingredient, set ing to null for easier later logic
-    // this.name === "" ? const ing=null : 
-
-    // // Set units for ingredient class
-    // this.units = units
-
+  // Show new and edit ingredient form
+  showIngForm(units){
     return (`
     <fieldset class="border border-muted rounded px-3 pt-2">
     <h3>${this.id !== "" ? 'Edit' : 'New'} Ingredient</h3>
@@ -92,7 +85,7 @@ class Ingredient{
 
       <div class="form-group">
         <label for="cost_unit">Unit</label>
-        <select name="cost_unit" id="cost_unit">${units.map(u => this.renderIngOptions(u)).join('')}
+        <select name="cost_unit" id="cost_unit">${units.map(u => this.showIngOptions(u)).join('')}
         </select>
       </div>    
 
@@ -112,18 +105,11 @@ class Ingredient{
 
   }
 
-  // Render ingredients as select list
-  renderIngOptions(unit){
+  // Show ingredients as select list
+  showIngOptions(unit){
     // console.log(this)
     return (`
     <option value="${unit}" ${this.costUnit == unit ? 'selected = "selected"' : ''}>${unit}</option>
-    `)
-  }
-
-  // Button HTML
-  static renderNewBtn(){
-    return (`
-      <a class="btn btn-primary" href="#" role="button" id="new-button">Add new ingredient</a>
     `)
   }
 
