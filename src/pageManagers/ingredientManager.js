@@ -84,7 +84,6 @@ class IngredientPage extends PageManager{
   // Handle form update submit
   handleUpdateSubmitClick(e){
     e.preventDefault()
-    console.log("Submitting update.")
     this.updateIng(e)
   }
 
@@ -259,9 +258,6 @@ class IngredientPage extends PageManager{
 
   // Update ingredient
   async updateIng(e){      
-    // console.log(this.ingredient)
-    console.log(e.target)
-
     // If submitted ingredient id matches existing ingredient, take action
     if (this.ingredient.id == parseInt(e.target.querySelector('input[name="ingredient-id"]').value)){
 
