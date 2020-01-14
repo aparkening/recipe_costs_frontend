@@ -92,8 +92,6 @@ class RecipeNewPage extends PageManager{
         ingredient_unit: sUnit.options[sUnit.selectedIndex].value
       }
     })
-    // console.log("Recipe Ingredients Attributes")
-    // console.log(recipeIngredientsAttributes)
 
     // Set params for submission
     const params = { name, servings, recipeIngredientsAttributes }
@@ -117,13 +115,12 @@ class RecipeNewPage extends PageManager{
         msg: "Recipe created!"
       }) 
 
+      // Redirect to recipe
       this.redirect('recipe', this.recipe)
-      // this.redirect('recipes')
-
     }catch(err){
       this.handleError(err)
+      // Redirect to recipe
       this.redirect('recipe', this.recipe)
-      // this.redirect('recipes')
     }  
   }
 
