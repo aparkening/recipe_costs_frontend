@@ -17,7 +17,7 @@ class Alert{
       // If no explicit object, set general error
       if (typeof type === "undefined"){
         type = "danger"
-        msg = "Internal Error"
+        msg = alertObj
       }
 
       const html = `
