@@ -27,7 +27,7 @@ class App{
     this.router.assignAlertHandler(this.handleAlert.bind(this))
 
     // Assign redirect to router
-    this.router.assignRedirect(this.pageManagerRedirect.bind(this))
+    this.router.assignRedirect(this.renderPage.bind(this))
 
     // Render initial screen
     this.renderPage('welcome')
@@ -44,12 +44,6 @@ class App{
   // Render Alerts and set timeout for 10 secondes
   handleAlert(alertObj, timeout = 10000){
     this.alertManager.render(alertObj, timeout)
-  }
-
-  // Redirect based on router callback
-  pageManagerRedirect(page, obj){
-    // console.log("App.js pageManagerRedirect fired")
-    this.renderPage(page, obj)
   }
 
   // Render page from router
