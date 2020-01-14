@@ -30,8 +30,8 @@ class RecipeEditPage extends PageManager{
     this.form.addEventListener('submit', this.handleUpdateSubmitClick.bind(this))
   }
 
-/* ---- Link/Click Handlers ---- */
 
+/* ---- Link/Click Handlers ---- */
   // Handle form cancel button
   handleCancelClick(e){
     e.preventDefault()
@@ -67,7 +67,6 @@ class RecipeEditPage extends PageManager{
       this.ingFields.appendChild(newRow)
     }
   }
-
 
 
 /* ---- Update Database and Display ---- */
