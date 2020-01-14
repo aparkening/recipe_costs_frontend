@@ -92,7 +92,6 @@ class IngredientPage extends PageManager{
   async fetchAndRenderPageResources(){
     try{
       const ingObj = await this.adapter.getIngredients()
-      // console.log(ingObj)
 
       // ingContainer contains ingredients and units
       const ingContainer = ingObj.ingredients
@@ -100,13 +99,11 @@ class IngredientPage extends PageManager{
       // Map ingredients and units
       this.ingredients = ingContainer.map(ing => new Ingredient(ing))
       this.units = ingObj.units
-      // console.log(this.units)
 
       // Render table
       this.renderIngredients()
     }catch(err){
       this.handleError(err)
-      // console.log(err)
     }
   }
 
@@ -161,8 +158,6 @@ class IngredientPage extends PageManager{
     const foundObj = this.getIngById(e.target.dataset.id)
 
     if (foundObj) {
-      // console.log("Ingredient found. Rendering Delete.")
-
       // Find index of recipe to remove
       const index = this.ingredients.findIndex(obj => obj.id === foundObj.id)
 
@@ -185,7 +180,6 @@ class IngredientPage extends PageManager{
         // If failure, rerender list without db call, keeping resource in same array location
         this.ingredients[index] = savedResource
         this.ingredients = this.ingredients.flat()        
-
         this.renderIngredients()
         this.handleError(err)
       }
@@ -208,7 +202,6 @@ class IngredientPage extends PageManager{
 
     // Take action if cost and cost size are numbers
     if (!isNaN(cost) && !isNaN(cost_size)){ 
-      // const cost_unit = e.target.querySelector('input[name="cost_unit"]').value
       const params = { name, cost, cost_size, cost_unit }
 
       // Alert user submitting
