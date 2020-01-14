@@ -21,7 +21,7 @@ class BaseAdapter{
       let errorMsg = msg.error.detail
       if(!errorMsg){ errorMsg = msg.error }
       throw {
-          type: "Fetch Error",
+          type: "danger",
           msg: errorMsg
       }
     }
