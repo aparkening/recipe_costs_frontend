@@ -112,8 +112,6 @@ class RecipeEditPage extends PageManager{
       ingObj.ingredient_unit = sUnit.options[sUnit.selectedIndex].value
       return ingObj
     })
-    // console.log("Recipe Ingredients Attributes")
-    // console.log(recipeIngredientsAttributes)
 
     // Set params for submission
     const params = { name, servings, recipeIngredientsAttributes, id }
@@ -130,14 +128,13 @@ class RecipeEditPage extends PageManager{
         type: "success",
         msg: "Recipe updated!"
       }) 
+      
+      // Redirect to recipe
       this.redirect('recipe', this.recipe)
-      // this.redirect('recipes')
-
     }catch(err){
-      // this.renderRecipe()
       this.handleError(err) 
+      // Redirect to recipe
       this.redirect('recipe', this.recipe)
-      // this.redirect('recipes')
     }  
   }
 
