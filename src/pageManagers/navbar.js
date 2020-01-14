@@ -5,13 +5,19 @@ class Navbar extends PageManager{
     this.adapter = adapter
   }
 
+
+/* ---- Bindings and Event Listeners ---- */  
   initBindingsAndEventListeners(){
-    // this.container.addEventListener('click', this.handleClick.bind(this))
+    // this.searchForm = this.container.querySelector('form#search-form')
+    // console.log(this.searchForm)
+    // this.searchForm.addEventListener('submit', this.handleSubmit.bind(this))
 
     // Use onclick to avoid multipe virtual page loads
     this.container.onclick = this.handleClick.bind(this)
   }
 
+
+/* ---- Link/Click Handlers ---- */  
   // Take action on any A tag
   handleClick(e){
     e.preventDefault()
@@ -27,6 +33,14 @@ class Navbar extends PageManager{
       } 
     }
   }
+
+  // Redirect to recipes on search form submit
+  // handleSubmit(e){
+  //   e.preventDefault()
+  //   // Redirect to recipes with search name
+  //   this.redirect('recipes', e.target.name-of-search-element )
+  // }
+
 
   // Set initial html
   get staticHTML(){
@@ -49,6 +63,12 @@ class Navbar extends PageManager{
               <a class="nav-link" id="ingredients-link" href="#">Ingredients</a>
             </li>       
           </ul>
+
+          <!-- <form class="form-inline my-2 my-lg-0" action="recipes" accept-charset="UTF-8" method="get" id="search-form">
+            <input type="text" name="search" id="search" placeholder="Find Recipes" class="form-control mr-sm-2">  
+            <input type="submit" value="Search" class="btn btn-secondary" data-disable-with="Search">
+          </form> --<
+
         </div>
     `)
   }
