@@ -8,18 +8,18 @@ class Navbar extends PageManager{
 
 /* ---- Bindings and Event Listeners ---- */  
   initBindingsAndEventListeners(){
-    // this.searchForm = this.container.querySelector('form#search-form')
-    // console.log(this.searchForm)
-    // this.searchForm.addEventListener('submit', this.handleSubmit.bind(this))
+    this.searchForm = this.container.querySelector('form#search-form')
+    this.searchForm.addEventListener('submit', this.handleSearchSubmit.bind(this))
 
     // Use onclick to avoid multipe virtual page loads
-    this.container.onclick = this.handleClick.bind(this)
+    this.container.querySelector('a#welcome-link').onclick = this.handleNavClick.bind(this)
+    this.container.querySelector('ul.navbar-nav').onclick = this.handleNavClick.bind(this)
   }
 
 
 /* ---- Link/Click Handlers ---- */  
   // Take action on any A tag
-  handleClick(e){
+  handleNavClick(e){
     e.preventDefault()
 
     if(e.target.tagName === "A"){
@@ -34,12 +34,17 @@ class Navbar extends PageManager{
     }
   }
 
-  // Redirect to recipes on search form submit
-  // handleSubmit(e){
-  //   e.preventDefault()
-  //   // Redirect to recipes with search name
-  //   this.redirect('recipes', e.target.name-of-search-element )
-  // }
+  // Redirect and send query to recipe-search on form submit
+  handleSearchSubmit(e){
+    e.preventDefault()
+    if (e.target.querySelector('#search').value !== ''){
+      //Redirect to recipes with search name
+      this.query = e.target.querySelector('#search').value
+      console.log(this.query)
+      return this.redirect('recipe-search', this.query)
+    }
+
+  }
 
 
   // Set initial html
@@ -64,10 +69,10 @@ class Navbar extends PageManager{
             </li>       
           </ul>
 
-          <!-- <form class="form-inline my-2 my-lg-0" action="recipes" accept-charset="UTF-8" method="get" id="search-form">
+          <form class="form-inline my-2 my-lg-0" action="recipes" accept-charset="UTF-8" method="get" id="search-form">
             <input type="text" name="search" id="search" placeholder="Find Recipes" class="form-control mr-sm-2">  
-            <input type="submit" value="Search" class="btn btn-secondary" data-disable-with="Search">
-          </form> --<
+            <input type="submit" value="Search" class="btn btn-secondary">
+          </form>
 
         </div>
     `)
