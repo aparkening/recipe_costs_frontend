@@ -18,14 +18,15 @@ class RecipeAdapter{
     return await res.json()
   }
 
+  /* No longer needed. Single record passed from this.recipes object. */
   // Get single record
-  async getRecipe(id){
-    const res = await fetch(`${this.baseURL}/recipes/${id}`, {
-      headers: this.headers
-    })
-    await this.baseAdapter.checkStatus(res)
-    return await res.json()
-  }
+  // async getRecipe(id){
+  //   const res = await fetch(`${this.baseURL}/recipes/${id}`, {
+  //     headers: this.headers
+  //   })
+  //   await this.baseAdapter.checkStatus(res)
+  //   return await res.json()
+  // }
 
   // Create record
   async createRecipe(params){
