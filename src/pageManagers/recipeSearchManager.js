@@ -87,7 +87,7 @@ class RecipeSearchPage extends PageManager{
           this.recipes = recipeObj.recipes.map(recipe => new Recipe(recipe))
           this.renderRecipes()
         }
-        
+
       }catch(err){
         console.log(err)
         this.handleError(err)
@@ -172,9 +172,6 @@ class RecipeSearchPage extends PageManager{
         // If failure, rerender list without db call, keeping recipe in same array location
         this.recipes[recipeIndex] = savedRecipe
         this.recipes = this.recipes.flat()
-        // console.log("Old recipe pushed back")
-        // console.log(this.recipes)
-
         this.renderRecipes()
         this.handleError(err)
       }

@@ -40,7 +40,6 @@ class Navbar extends PageManager{
       //Redirect to recipes with search name
       return this.redirect('recipe-search', e.target.querySelector('#search').value)
     }
-
   }
 
   // Set initial html
