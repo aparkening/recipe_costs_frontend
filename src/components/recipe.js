@@ -97,7 +97,7 @@ class Recipe{
           </div>
           <div class="form-group col-2">
             <label for="recipe_servings">Servings</label>
-            <input class="form-control" type="text" value="${this.id !== "" ? this.servings : ''}" name="servings" id="recipe_servings">
+            <input class="form-control" type="text" value="${(this.id !== "") && (this.servings != null ) ? this.servings : ''}" name="servings" id="recipe_servings">
           </div>
         </div>
       
