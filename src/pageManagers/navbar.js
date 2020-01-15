@@ -28,7 +28,6 @@ class Navbar extends PageManager{
 
       // Only redirect if clicking for new screen
       if(route !== this.currentPage()) { 
-        // console.log(`>>> Navbar.js redirecting route to ${route}`)
         return this.redirect(route) 
       } 
     }
@@ -39,13 +38,10 @@ class Navbar extends PageManager{
     e.preventDefault()
     if (e.target.querySelector('#search').value !== ''){
       //Redirect to recipes with search name
-      this.query = e.target.querySelector('#search').value
-      console.log(this.query)
-      return this.redirect('recipe-search', this.query)
+      return this.redirect('recipe-search', e.target.querySelector('#search').value)
     }
 
   }
-
 
   // Set initial html
   get staticHTML(){
