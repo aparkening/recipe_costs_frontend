@@ -6,7 +6,6 @@ class Ingredient{
     this.cost = cost
     this.costSize = cost_size
     this.costUnit = cost_unit
-    // this.recipes = recipes.map(r => new Recipe(r))
   }
 
   // Show tr for each ingredient
@@ -36,7 +35,7 @@ class Ingredient{
         <tr>
           <th>Links</th>
           <th>Name</th>
-          <th>Cost</th>
+          <th>Cost</th>         
         </tr>
       </thead>
       <tbody>
