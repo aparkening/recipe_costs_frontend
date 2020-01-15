@@ -14,6 +14,7 @@ class App{
         'recipe': new RecipePage(this.pageContainer, this.adapter),
         'recipe-edit': new RecipeEditPage(this.pageContainer, this.adapter),
         'recipe-new': new RecipeNewPage(this.pageContainer, this.adapter),
+        'recipe-search': new RecipeSearchPage(this.pageContainer, this.adapter),
         'recipes': new RecipesPage(this.pageContainer, this.adapter),
         'ingredients': new IngredientPage(this.pageContainer, this.adapter)
     })
