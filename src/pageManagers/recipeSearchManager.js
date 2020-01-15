@@ -85,6 +85,11 @@ class RecipeSearchPage extends PageManager{
         }else{
           // const recipeObj = await this.adapter.getRecipes()
           this.recipes = recipeObj.recipes.map(recipe => new Recipe(recipe))
+          // Alert success message
+          this.handleAlert({
+            type: "success",
+            msg: `${this.recipes.length} recipe(s) match '${this.query}'`
+          }) 
           this.renderRecipes()
         }
 
