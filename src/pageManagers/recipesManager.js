@@ -3,8 +3,6 @@ class RecipesPage extends PageManager{
   constructor(container, adapter){
     super(container)
     this.adapter = new RecipeAdapter(adapter)
-    this.recipe = null
-    this.ingredients = null
   }
 
 /* ---- Bindings and Event Listeners ---- */
@@ -70,9 +68,16 @@ class RecipesPage extends PageManager{
   // Fetch recipes and render main recipes page
   async fetchAndRenderPageResources(){
     try{
+      // If search query, set recipeObj to search results. Else set to index results.
+      // const recipeObj = (this.currentObj ? await this.adapter.searchRecipes(this.currentObj) :await this.adapter.getRecipes())
+      
+      // Get recipes
       const recipeObj = await this.adapter.getRecipes()
+
+      // Map recipe JSON to objects
       this.recipes = recipeObj.recipes.map(recipe => new Recipe(recipe))
      
+      // Render recipe list
       this.renderRecipes()
     }catch(err){
       console.log(err)
