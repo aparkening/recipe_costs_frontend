@@ -34,7 +34,6 @@ class IngredientPage extends PageManager{
       this.form.addEventListener('submit', this.handleUpdateSubmitClick.bind(this))
     }
 
-    // this.form.addEventListener('submit', this.handleNewSubmitClick.bind(this))
     cancelButton.addEventListener('click', this.handleCancelClick.bind(this))
   }
 
@@ -61,6 +60,9 @@ class IngredientPage extends PageManager{
         case 'delete':
           this.deleteIng(e)
           break;
+        case 'plus':
+          this.updateLikes(e)
+          break;          
         default:
           console.log('Invalid link');
           break;
@@ -320,6 +322,23 @@ class IngredientPage extends PageManager{
         type: "danger",
         msg: "Ingredient was not found"
       })
+    }
+  }
+
+  // Update like count
+  updateLikes(e){
+    // Find existing ingredient by id
+    const foundObj = this.getIngById(e.target.dataset.id)
+
+    // If found, take action
+    if (foundObj) {
+      // Set this.ingredient and increase likes
+      this.ingredient = foundObj
+      this.ingredient.likes ++
+      
+      // Set container and update HTML total
+      const likesContainer = e.target.parentNode.parentNode.querySelector('span.likes')
+      likesContainer.innerHTML = this.ingredient.likes
     }
   }
 

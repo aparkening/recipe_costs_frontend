@@ -6,6 +6,7 @@ class Ingredient{
     this.cost = cost
     this.costSize = cost_size
     this.costUnit = cost_unit
+    this.likes = 0
   }
 
   // Show tr for each ingredient
@@ -20,6 +21,7 @@ class Ingredient{
       </th>
       <th scope="row">${this.name}</th>
       <td>$ ${this.cost} / ${this.costSize} ${this.costUnit}</td>
+      <td>Total: <span class="likes">${this.likes}</span> |<a href="#" id="plus" data-id="${this.id}">+</a></td>
     </tr> 
     `)
   } 
@@ -35,7 +37,8 @@ class Ingredient{
         <tr>
           <th>Links</th>
           <th>Name</th>
-          <th>Cost</th>         
+          <th>Cost</th>      
+          <th>Likes</th>   
         </tr>
       </thead>
       <tbody>
