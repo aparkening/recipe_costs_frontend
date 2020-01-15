@@ -131,9 +131,8 @@ class RecipeEditPage extends PageManager{
       // Redirect to recipe
       this.redirect('recipe', this.recipe)
     }catch(err){
-      this.handleError(err) 
-      // Redirect to recipe
-      this.redirect('recipe', this.recipe)
+      // If failure, leave form and give error alert
+      this.handleError(err)
     }  
   }
 
