@@ -49,6 +49,11 @@ a:not([href]):not([tabindex]) {
   text-decoration: none;
 }
 
+/* Alerts */
+div.alert::first-letter {
+  text-transform: capitalize;
+}
+
 /* Forms */
 .form-control, .form-group .form-control {
   color: #000;
