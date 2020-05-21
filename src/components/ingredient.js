@@ -79,13 +79,13 @@ class Ingredient{
 
         <div class="form-group col-2">
           <label for="cost">Cost*</label>
-          <input class="form-control" placeholder="0.00" required="required" type="text" value="${this.id !== "" ? this.cost : ''}" name="cost" id="cost">
+          <input class="form-control" placeholder="ex: 12.00" required="required" type="text" value="${this.id !== "" ? this.cost : ''}" name="cost" id="cost">
           <small id="costHelp" class="form-text text-muted">Don't include $</small>
         </div>
 
         <div class="form-group col-2">
           <label for="cost_size">Size*</label>
-          <input class="form-control" placeholder="5" required="required" type="text" value="${this.id !== "" ? this.costSize : ''}" name="cost_size" id="cost_size">
+          <input class="form-control" placeholder="ex: 5" required="required" type="text" value="${this.id !== "" ? this.costSize : ''}" name="cost_size" id="cost_size">
         </div>        
 
         <div class="form-group col-2">

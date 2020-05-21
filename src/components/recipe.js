@@ -134,7 +134,7 @@ class Recipe{
         </select>
       </div>
       <div class="col-2">
-        <input placeholder="1" type="text" name="ingredient_amount" class="ingredient_amount form-control" required="required">
+        <input placeholder="ex: 1" type="text" name="ingredient_amount" class="ingredient_amount form-control" required="required">
       </div>
       <div class="col-2">
         <select name="ingredient_unit" class="ingredient_unit custom-select">${units.map(u => this.showUnitOptions(u)).join('')}

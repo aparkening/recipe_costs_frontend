@@ -31,7 +31,7 @@ class RecipeIngredient{
         ${this.name}
       </div>
       <div class="col-2">
-        <input placeholder="1" type="text" name="ingredient_amount" class="ingredient_amount form-control" required="required" value="${this.amount}">
+        <input placeholder="ex: 1" type="text" name="ingredient_amount" class="ingredient_amount form-control" required="required" value="${this.amount}">
       </div>
       <div class="col-2">
         <select name="ingredient_unit" class="ingredient_unit custom-select">${units.map(u => this.showUnitOptions(u)).join('')}
