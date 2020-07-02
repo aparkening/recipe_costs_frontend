@@ -5,7 +5,7 @@ h1 {
 
 /* Navbar */
 #navbar-container {
-  padding-bottom: 2rem;
+  margin-bottom: 2rem;
 }
 .navbar-brand {
   margin-right: 0;
