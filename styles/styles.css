@@ -4,6 +4,9 @@ h1 {
 .hidden { display: none;}
 
 /* Navbar */
+#navbar-container {
+  padding-bottom: 2rem;
+}
 .navbar-brand {
   margin-right: 0;
 }
