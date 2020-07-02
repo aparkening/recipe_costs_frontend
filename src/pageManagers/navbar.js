@@ -45,7 +45,7 @@ class Navbar extends PageManager{
   // Set initial html
   get staticHTML(){
     return (`
-      <nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top" id="navbar-container">
+      <nav class="navbar navbar-expand-md navbar-light bg-light" id="navbar-container">
         <a class="navbar-brand" href="#" aria-label="Home" title="Home" id="welcome-link">
           <img src="images/open-iconic/svg/spreadsheet.svg" alt="Home"> Recipe Costs
         </a>
